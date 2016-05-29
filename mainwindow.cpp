@@ -22,6 +22,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->boutonAjoutRecette->setLayoutDirection(Qt::RightToLeft);
     connect(ui->boutonAjoutRecette, SIGNAL(clicked(bool)), this, SLOT(ouvrirFenetreAjoutRecette()));
 
+    //Test
+    for(int i=0;i<20;++i)
+     ajoutIngredient();
 
 
     /*QPixmap pixmap("20160115_151045.jpg");
@@ -87,7 +90,7 @@ void MainWindow::ouvrirFenetreAjoutRecette()
 
 void MainWindow::ajoutIngredient()
 {
-    Ingredient *nouvelIngredient = new Ingredient("Tomate", 2, "L", new QDate(2015,5,31), ":/Images/tomate.jpg", this);
+    Ingredient *nouvelIngredient = new Ingredient("Tomate Bite", 2, "L", new QDate(2015,5,31), ":/Images/tomate.jpg", this);
     nouvelIngredient->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
     //nouvelIngredient->setFrameStyle(1);
     nouvelIngredient->setMinimumWidth(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX);

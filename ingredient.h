@@ -8,6 +8,7 @@
 #include <QPushButton>
 #include <QPixmap>
 #include <QVBoxLayout>
+#include <QFile>
 
 class Ingredient : public QWidget
 {

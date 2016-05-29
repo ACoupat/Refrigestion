@@ -26,3 +26,8 @@
 *.exe
 *.out
 *.app
+/Makefile
+/Makefile.Debug
+/Makefile.Release
+/Projet_GL40_Refrigestion.pro.user.2e8f77f
+/ui_mainwindow.h
