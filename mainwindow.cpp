@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->boutonAjoutRecette->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
     ui->boutonAjoutRecette->setLayoutDirection(Qt::RightToLeft);
     connect(ui->boutonAjoutRecette, SIGNAL(clicked(bool)), this, SLOT(ouvrirFenetreAjoutRecette()));
-
+    fenAI = new FenetreAjoutIngredient(this);
     //Test
     for(int i=0;i<20;++i)
      ajoutIngredient();
@@ -46,7 +46,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::ouvrirFenetreAjoutIngredient()
 {
-    QDialog *fenetreAjoutIngredient = new QDialog(this);
+
+    /*QDialog *fenetreAjoutIngredient = new QDialog(this);
     fenetreAjoutIngredient->setModal(true);
     fenetreAjoutIngredient->setWindowFlags(Qt::SplashScreen);
     QPalette pal(palette());
@@ -62,8 +63,8 @@ void MainWindow::ouvrirFenetreAjoutIngredient()
     connect(valider, SIGNAL(clicked(bool)), fenetreAjoutIngredient, SLOT(close()));
     connect(valider, SIGNAL(clicked(bool)), this, SLOT(ajoutIngredient()));
     layout->addWidget(annuler);
-    layout->addWidget(valider);
-    fenetreAjoutIngredient->show();
+    layout->addWidget(valider);*/
+    fenAI->show();
 }
 
 void MainWindow::ouvrirFenetreAjoutRecette()

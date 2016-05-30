@@ -10,6 +10,7 @@
 #include <QPushButton>
 #include <ingredient.h>
 #include <recette.h>
+#include <fenetreajoutingredient.h>
 
 namespace Ui {
 class MainWindow;
@@ -30,6 +31,7 @@ private:
     QList<Ingredient*> ingredients;
     int screenWidth;
     int screenHeight;
+    FenetreAjoutIngredient* fenAI;
 
 public slots:
     void ouvrirFenetreAjoutIngredient();

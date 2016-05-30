@@ -15,13 +15,16 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     ingredient.cpp \
-    recette.cpp
+    recette.cpp \
+    fenetreajoutingredient.cpp
 
 HEADERS  += mainwindow.h \
     ingredient.h \
-    recette.h
+    recette.h \
+    fenetreajoutingredient.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    fenetreajoutingredient.ui
 
 DISTFILES +=
 
