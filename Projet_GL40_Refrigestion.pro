@@ -16,15 +16,21 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     ingredient.cpp \
     recette.cpp \
-    fenetreajoutingredient.cpp
+    fenetreajoutingredient.cpp \
+    fenetreajoutrecette.cpp \
+    vignetteingredient.cpp
 
 HEADERS  += mainwindow.h \
     ingredient.h \
     recette.h \
-    fenetreajoutingredient.h
+    fenetreajoutingredient.h \
+    fenetreajoutrecette.h \
+    vignetteingredient.h
 
 FORMS    += mainwindow.ui \
-    fenetreajoutingredient.ui
+    fenetreajoutingredient.ui \
+    fenetreajoutrecette.ui \
+    vignetteingredient.ui
 
 DISTFILES +=
 

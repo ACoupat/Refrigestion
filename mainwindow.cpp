@@ -22,9 +22,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->boutonAjoutRecette->setLayoutDirection(Qt::RightToLeft);
     connect(ui->boutonAjoutRecette, SIGNAL(clicked(bool)), this, SLOT(ouvrirFenetreAjoutRecette()));
     fenAI = new FenetreAjoutIngredient(this);
+    fenAR = new FenetreAjoutRecette(this);
     //Test
-    for(int i=0;i<20;++i)
-     ajoutIngredient();
+   /* for(int i=0;i<3;++i)
+     ajoutIngredient();*/
 
 
     /*QPixmap pixmap("20160115_151045.jpg");
@@ -69,7 +70,7 @@ void MainWindow::ouvrirFenetreAjoutIngredient()
 
 void MainWindow::ouvrirFenetreAjoutRecette()
 {
-    QDialog *fenetreAjoutRecette = new QDialog(this);
+    /*QDialog *fenetreAjoutRecette = new QDialog(this);
     fenetreAjoutRecette->setModal(true);
     fenetreAjoutRecette->setWindowFlags(Qt::SplashScreen);
     QPalette pal(palette());
@@ -85,18 +86,23 @@ void MainWindow::ouvrirFenetreAjoutRecette()
     connect(valider, SIGNAL(clicked(bool)), fenetreAjoutRecette, SLOT(close()));
     connect(valider, SIGNAL(clicked(bool)), this, SLOT(ajoutRecette()));
     layout->addWidget(annuler);
-    layout->addWidget(valider);
-    fenetreAjoutRecette->show();
+    layout->addWidget(valider);*/
+    fenAR->show();
 }
 
 void MainWindow::ajoutIngredient()
 {
-    Ingredient *nouvelIngredient = new Ingredient("Tomate Bite", 2, "L", new QDate(2015,5,31), ":/Images/tomate.jpg", this);
+    /*Ingredient *nouvelIngredient = new Ingredient("Tomate Bite", 2, "L", new QDate(2015,5,31), ":/Images/tomate.jpg", this);
     nouvelIngredient->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
-    //nouvelIngredient->setFrameStyle(1);
+    nouvelIngredient->setFrameStyle(1);
     nouvelIngredient->setMinimumWidth(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX);
-    nouvelIngredient->setMinimumHeight(nouvelIngredient->minimumWidth());
-    ui->grilleIngredients->addWidget(nouvelIngredient, ingredients.size() / NB_COLONNE_MAX, ingredients.size() % NB_COLONNE_MAX);
+    nouvelIngredient->setMinimumHeight(nouvelIngredient->minimumWidth());*/
+    //Ingredient *nouvelIngredient = new Ingredient("Tomate",6,"",QDate(2016,12,21),":/Images/tomate.jpg");
+    Ingredient* nouvelIngredient = fenAI->creerIngredient();
+
+    VignetteIngredient *newVignetteIngredient = new VignetteIngredient(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX,nouvelIngredient,this);
+
+    ui->grilleIngredients->addWidget(newVignetteIngredient, ingredients.size() / NB_COLONNE_MAX, ingredients.size() % NB_COLONNE_MAX);
     ingredients << nouvelIngredient;
 }
 

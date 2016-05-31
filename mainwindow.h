@@ -8,9 +8,12 @@
 #include <QList>
 #include <QDialog>
 #include <QPushButton>
+#include <QDebug>
 #include <ingredient.h>
 #include <recette.h>
 #include <fenetreajoutingredient.h>
+#include <fenetreajoutrecette.h>
+#include <vignetteingredient.h>
 
 namespace Ui {
 class MainWindow;
@@ -29,9 +32,11 @@ private:
     //QList<QLabel*> ingredients;
     QList<QLabel*> recettes;
     QList<Ingredient*> ingredients;
+    //QList <VignetteIngredient*> ingredients;
     int screenWidth;
     int screenHeight;
     FenetreAjoutIngredient* fenAI;
+    FenetreAjoutRecette* fenAR;
 
 public slots:
     void ouvrirFenetreAjoutIngredient();

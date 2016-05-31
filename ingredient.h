@@ -10,24 +10,29 @@
 #include <QVBoxLayout>
 #include <QFile>
 
-class Ingredient : public QWidget
+class Ingredient //: public QWidget
 {
 public:
-    explicit Ingredient(QString nom, int quantite, QString unite, QDate *datePeremption, QString cheminImage, QWidget *parent = nullptr);
+    explicit Ingredient(QString nom, double quantite, QString unite, QDate datePeremption, QString cheminImage/*, QWidget *parent = nullptr*/);
     ~Ingredient();
+    QString getNom();
+    QString getUnite();
+    double getQuantite();
+    QString getDesc();
+    QDate getDate();
 
 private:
-    int quantite;
+    double quantite;
     QString nom;
     QString unite;
-    QDate *datePeremption;
-    QLabel *image;
+    QDate datePeremption;
+   /* QLabel *image;
     QPushButton boutonGauche;
     QPushButton boutonDroite;
     QLabel *labelNom;
     QLabel *labelQuantite;
     QVBoxLayout *layout;
-    void initInterface(QString);
+    void initInterface(QString);*/
 };
 
 #endif // INGREDIENT_H

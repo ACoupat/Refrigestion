@@ -2,6 +2,7 @@
 #define FENETREAJOUTINGREDIENT_H
 
 #include <QDialog>
+#include <ingredient.h>
 
 namespace Ui {
 class FenetreAjoutIngredient;
@@ -14,9 +15,13 @@ class FenetreAjoutIngredient : public QDialog
 public:
     explicit FenetreAjoutIngredient(QWidget *parent = 0);
     ~FenetreAjoutIngredient();
+    Ingredient* creerIngredient();
 
 private:
     Ui::FenetreAjoutIngredient *ui;
+
+public slots:
+
 };
 
 #endif // FENETREAJOUTINGREDIENT_H
