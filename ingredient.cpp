@@ -15,6 +15,10 @@ Ingredient::Ingredient(QString nom, double quantite, QString unite, QDate datePe
 
 }
 
+void Ingredient::setQuantite(double quantite) {
+    this->quantite = quantite;
+}
+
 QString Ingredient::getNom()
 {
     return nom;

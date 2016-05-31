@@ -13,8 +13,10 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -25,10 +27,10 @@ class Ui_VignetteIngredient
 public:
     QVBoxLayout *verticalLayout_2;
     QLabel *imageLabel;
-    QVBoxLayout *verticalLayout;
-    QLabel *nomLabel;
-    QLabel *dateLabel;
-    QLabel *qteLabel;
+    QHBoxLayout *horizontalLayout;
+    QPushButton *pushButton;
+    QLabel *label;
+    QPushButton *pushButton_2;
 
     void setupUi(QWidget *VignetteIngredient)
     {
@@ -37,7 +39,7 @@ public:
         VignetteIngredient->setEnabled(true);
         VignetteIngredient->resize(333, 305);
         VignetteIngredient->setWindowOpacity(1);
-        VignetteIngredient->setAutoFillBackground(true);
+        VignetteIngredient->setAutoFillBackground(false);
         VignetteIngredient->setStyleSheet(QLatin1String("QWidget#VignetteIngredient\n"
 "{\n"
 "	border: 5px solid black;\n"
@@ -54,37 +56,63 @@ public:
         imageLabel = new QLabel(VignetteIngredient);
         imageLabel->setObjectName(QStringLiteral("imageLabel"));
         imageLabel->setEnabled(true);
-        imageLabel->setMinimumSize(QSize(0, 69));
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(imageLabel->sizePolicy().hasHeightForWidth());
+        imageLabel->setSizePolicy(sizePolicy);
+        imageLabel->setMinimumSize(QSize(0, 225));
         imageLabel->setAutoFillBackground(false);
         imageLabel->setStyleSheet(QLatin1String("QLabel#imageLabel\n"
 "{\n"
-"	/*background-image:url(:/Images/tomate.jpg)*/\n"
 "	border-image: url(:/Images/tomate.jpg) 0 0 0 0 stretch stretch;\n"
-"	background-size :auto;\n"
 "}"));
         imageLabel->setScaledContents(true);
 
         verticalLayout_2->addWidget(imageLabel);
 
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        nomLabel = new QLabel(VignetteIngredient);
-        nomLabel->setObjectName(QStringLiteral("nomLabel"));
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        pushButton = new QPushButton(VignetteIngredient);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+        QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(pushButton->sizePolicy().hasHeightForWidth());
+        pushButton->setSizePolicy(sizePolicy1);
+        pushButton->setMinimumSize(QSize(0, 0));
+        pushButton->setMaximumSize(QSize(40, 40));
+        QFont font;
+        font.setPointSize(20);
+        pushButton->setFont(font);
+        pushButton->setStyleSheet(QStringLiteral(""));
 
-        verticalLayout->addWidget(nomLabel);
+        horizontalLayout->addWidget(pushButton);
 
-        dateLabel = new QLabel(VignetteIngredient);
-        dateLabel->setObjectName(QStringLiteral("dateLabel"));
+        label = new QLabel(VignetteIngredient);
+        label->setObjectName(QStringLiteral("label"));
+        QSizePolicy sizePolicy2(QSizePolicy::Fixed, QSizePolicy::Preferred);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
+        label->setSizePolicy(sizePolicy2);
+        label->setMinimumSize(QSize(100, 0));
+        label->setAlignment(Qt::AlignCenter);
 
-        verticalLayout->addWidget(dateLabel);
+        horizontalLayout->addWidget(label);
 
-        qteLabel = new QLabel(VignetteIngredient);
-        qteLabel->setObjectName(QStringLiteral("qteLabel"));
+        pushButton_2 = new QPushButton(VignetteIngredient);
+        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+        sizePolicy1.setHeightForWidth(pushButton_2->sizePolicy().hasHeightForWidth());
+        pushButton_2->setSizePolicy(sizePolicy1);
+        pushButton_2->setMaximumSize(QSize(40, 40));
+        pushButton_2->setFont(font);
+        pushButton_2->setStyleSheet(QStringLiteral(""));
 
-        verticalLayout->addWidget(qteLabel);
+        horizontalLayout->addWidget(pushButton_2);
 
 
-        verticalLayout_2->addLayout(verticalLayout);
+        verticalLayout_2->addLayout(horizontalLayout);
 
 
         retranslateUi(VignetteIngredient);
@@ -96,9 +124,9 @@ public:
     {
         VignetteIngredient->setWindowTitle(QApplication::translate("VignetteIngredient", "Form", 0));
         imageLabel->setText(QString());
-        nomLabel->setText(QApplication::translate("VignetteIngredient", "Nom:", 0));
-        dateLabel->setText(QApplication::translate("VignetteIngredient", "A consommer avant le :", 0));
-        qteLabel->setText(QApplication::translate("VignetteIngredient", "Quantit\303\251 :", 0));
+        pushButton->setText(QApplication::translate("VignetteIngredient", "-", 0));
+        label->setText(QApplication::translate("VignetteIngredient", "0", 0));
+        pushButton_2->setText(QApplication::translate("VignetteIngredient", "+", 0));
     } // retranslateUi
 
 };

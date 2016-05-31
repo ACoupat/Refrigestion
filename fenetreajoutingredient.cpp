@@ -6,6 +6,7 @@ FenetreAjoutIngredient::FenetreAjoutIngredient(QWidget *parent) :
     ui(new Ui::FenetreAjoutIngredient)
 {
     ui->setupUi(this);
+    this->setWindowFlags(Qt::SplashScreen);
     this->setModal(true);
     this->setWindowTitle("Ajouter un ingrédient");
 

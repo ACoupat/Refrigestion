@@ -6,6 +6,7 @@ FenetreAjoutRecette::FenetreAjoutRecette(QWidget *parent) :
     ui(new Ui::FenetreAjoutRecette)
 {
     ui->setupUi(this);
+    this->setWindowFlags(Qt::SplashScreen);
 }
 
 FenetreAjoutRecette::~FenetreAjoutRecette()

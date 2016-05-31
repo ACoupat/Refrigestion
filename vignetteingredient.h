@@ -24,6 +24,10 @@ private:
     void paintEvent(QPaintEvent *pe);
 
     void initLabels(int width);
+
+public slots:
+    void ajoutQuantite();
+    void retraitQuantite();
 };
 
 #endif // VIGNETTEINGREDIENT_H

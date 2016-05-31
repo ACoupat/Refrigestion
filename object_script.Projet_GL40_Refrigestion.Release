@@ -1,0 +1,14 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\ingredient.o
+./release\recette.o
+./release\fenetreajoutingredient.o
+./release\fenetreajoutrecette.o
+./release\vignetteingredient.o
+./release\qrc_ressources.o
+./release\moc_mainwindow.o
+./release\moc_fenetreajoutingredient.o
+./release\moc_fenetreajoutrecette.o
+./release\moc_vignetteingredient.o
+);

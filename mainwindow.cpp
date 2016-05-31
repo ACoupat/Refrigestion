@@ -47,46 +47,11 @@ MainWindow::~MainWindow()
 
 void MainWindow::ouvrirFenetreAjoutIngredient()
 {
-
-    /*QDialog *fenetreAjoutIngredient = new QDialog(this);
-    fenetreAjoutIngredient->setModal(true);
-    fenetreAjoutIngredient->setWindowFlags(Qt::SplashScreen);
-    QPalette pal(palette());
-    pal.setColor(QPalette::Background, Qt::darkCyan);
-    fenetreAjoutIngredient->setAutoFillBackground(true);
-    fenetreAjoutIngredient->setPalette(pal);
-    QHBoxLayout *layout = new QHBoxLayout(fenetreAjoutIngredient);
-    QPushButton *annuler = new QPushButton(fenetreAjoutIngredient);
-    annuler->setText("Annuler");
-    connect(annuler, SIGNAL(clicked(bool)), fenetreAjoutIngredient, SLOT(close()));
-    QPushButton *valider = new QPushButton(fenetreAjoutIngredient);
-    valider->setText("Valider");
-    connect(valider, SIGNAL(clicked(bool)), fenetreAjoutIngredient, SLOT(close()));
-    connect(valider, SIGNAL(clicked(bool)), this, SLOT(ajoutIngredient()));
-    layout->addWidget(annuler);
-    layout->addWidget(valider);*/
     fenAI->show();
 }
 
 void MainWindow::ouvrirFenetreAjoutRecette()
 {
-    /*QDialog *fenetreAjoutRecette = new QDialog(this);
-    fenetreAjoutRecette->setModal(true);
-    fenetreAjoutRecette->setWindowFlags(Qt::SplashScreen);
-    QPalette pal(palette());
-    pal.setColor(QPalette::Background, Qt::darkCyan);
-    fenetreAjoutRecette->setAutoFillBackground(true);
-    fenetreAjoutRecette->setPalette(pal);
-    QHBoxLayout *layout = new QHBoxLayout(fenetreAjoutRecette);
-    QPushButton *annuler = new QPushButton(fenetreAjoutRecette);
-    annuler->setText("Annuler");
-    connect(annuler, SIGNAL(clicked(bool)), fenetreAjoutRecette, SLOT(close()));
-    QPushButton *valider = new QPushButton(fenetreAjoutRecette);
-    valider->setText("Valider");
-    connect(valider, SIGNAL(clicked(bool)), fenetreAjoutRecette, SLOT(close()));
-    connect(valider, SIGNAL(clicked(bool)), this, SLOT(ajoutRecette()));
-    layout->addWidget(annuler);
-    layout->addWidget(valider);*/
     fenAR->show();
 }
 
