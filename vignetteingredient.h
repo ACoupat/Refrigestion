@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <ingredient.h>
 #include <QDebug>
-
+#include <QPainter>
 namespace Ui {
 class VignetteIngredient;
 }
@@ -21,8 +21,9 @@ public:
 private:
     Ui::VignetteIngredient *ui;
     Ingredient* ingredientModel;
+    void paintEvent(QPaintEvent *pe);
 
-    void initLabels();
+    void initLabels(int width);
 };
 
 #endif // VIGNETTEINGREDIENT_H

@@ -24,20 +24,21 @@ class Ui_VignetteIngredient
 {
 public:
     QVBoxLayout *verticalLayout_2;
-    QVBoxLayout *verticalLayout;
     QLabel *imageLabel;
+    QVBoxLayout *verticalLayout;
     QLabel *nomLabel;
-    QLabel *qteLabel;
     QLabel *dateLabel;
+    QLabel *qteLabel;
 
     void setupUi(QWidget *VignetteIngredient)
     {
         if (VignetteIngredient->objectName().isEmpty())
             VignetteIngredient->setObjectName(QStringLiteral("VignetteIngredient"));
         VignetteIngredient->setEnabled(true);
-        VignetteIngredient->resize(400, 313);
+        VignetteIngredient->resize(333, 305);
         VignetteIngredient->setWindowOpacity(1);
-        VignetteIngredient->setStyleSheet(QLatin1String("QWidget\n"
+        VignetteIngredient->setAutoFillBackground(true);
+        VignetteIngredient->setStyleSheet(QLatin1String("QWidget#VignetteIngredient\n"
 "{\n"
 "	border: 5px solid black;\n"
 "	background-color : yellow;\n"
@@ -45,34 +46,42 @@ public:
 "}\n"
 "QLabel\n"
 "{\n"
-"	font: bold italic 18px;\n"
+"	font: bold 18px;\n"
 "}\n"
 "                       "));
         verticalLayout_2 = new QVBoxLayout(VignetteIngredient);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         imageLabel = new QLabel(VignetteIngredient);
         imageLabel->setObjectName(QStringLiteral("imageLabel"));
         imageLabel->setEnabled(true);
         imageLabel->setMinimumSize(QSize(0, 69));
+        imageLabel->setAutoFillBackground(false);
+        imageLabel->setStyleSheet(QLatin1String("QLabel#imageLabel\n"
+"{\n"
+"	/*background-image:url(:/Images/tomate.jpg)*/\n"
+"	border-image: url(:/Images/tomate.jpg) 0 0 0 0 stretch stretch;\n"
+"	background-size :auto;\n"
+"}"));
+        imageLabel->setScaledContents(true);
 
-        verticalLayout->addWidget(imageLabel);
+        verticalLayout_2->addWidget(imageLabel);
 
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         nomLabel = new QLabel(VignetteIngredient);
         nomLabel->setObjectName(QStringLiteral("nomLabel"));
 
         verticalLayout->addWidget(nomLabel);
 
-        qteLabel = new QLabel(VignetteIngredient);
-        qteLabel->setObjectName(QStringLiteral("qteLabel"));
-
-        verticalLayout->addWidget(qteLabel);
-
         dateLabel = new QLabel(VignetteIngredient);
         dateLabel->setObjectName(QStringLiteral("dateLabel"));
 
         verticalLayout->addWidget(dateLabel);
+
+        qteLabel = new QLabel(VignetteIngredient);
+        qteLabel->setObjectName(QStringLiteral("qteLabel"));
+
+        verticalLayout->addWidget(qteLabel);
 
 
         verticalLayout_2->addLayout(verticalLayout);
@@ -86,10 +95,10 @@ public:
     void retranslateUi(QWidget *VignetteIngredient)
     {
         VignetteIngredient->setWindowTitle(QApplication::translate("VignetteIngredient", "Form", 0));
-        imageLabel->setText(QApplication::translate("VignetteIngredient", "TextLabel", 0));
+        imageLabel->setText(QString());
         nomLabel->setText(QApplication::translate("VignetteIngredient", "Nom:", 0));
-        qteLabel->setText(QApplication::translate("VignetteIngredient", "Quantit\303\251 :", 0));
         dateLabel->setText(QApplication::translate("VignetteIngredient", "A consommer avant le :", 0));
+        qteLabel->setText(QApplication::translate("VignetteIngredient", "Quantit\303\251 :", 0));
     } // retranslateUi
 
 };
