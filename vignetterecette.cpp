@@ -1,6 +1,6 @@
 #include "vignetterecette.h"
 #include "ui_vignetterecette.h"
-
+#include <QDebug>
 VignetteRecette::VignetteRecette(int width,Recette* recette, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::VignetteRecette)
@@ -21,6 +21,9 @@ void VignetteRecette::initLabels()
 {
     ui->labelNom->setText(recette->getNom());
     ui->labelDureePrep->setText((recette->getDureePreparation()));
+    ui->labelImage->setStyleSheet("QLabel#labelImage{ border-image: url("+recette->getCheminImage()+") 0 0 0 0 stretch stretch; }");
+    qDebug()<<recette->getCheminImage();
+    repaint();
 }
 
 //Utile pour que l'affichage se fasse correctement

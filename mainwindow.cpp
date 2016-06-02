@@ -24,11 +24,11 @@ MainWindow::MainWindow(QWidget *parent) :
     fenAI = new FenetreAjoutIngredient(this);
     fenAR = new FenetreAjoutRecette(this);
     //Test
-    for(int i=0;i<3;++i)
+  /*  for(int i=0;i<3;++i)
     {
         ajoutIngredient();
         ajoutRecette();
-    }
+    }*/
 }
 
 MainWindow::~MainWindow()

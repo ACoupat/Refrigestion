@@ -27,7 +27,7 @@ class Ui_VignetteIngredient
 public:
     QVBoxLayout *verticalLayout_2;
     QLabel *label_nom;
-    QLabel *imageLabel;
+    QLabel *labelImage;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label;
     QLabel *label_2;
@@ -46,7 +46,7 @@ public:
         VignetteIngredient->setAutoFillBackground(false);
         VignetteIngredient->setStyleSheet(QLatin1String("QWidget#VignetteIngredient\n"
 "{\n"
-"	border: 5px solid black;\n"
+"	border: 3px solid black;\n"
 "	background-color : yellow;\n"
 "	border-radius:20px;\n"
 "}\n"
@@ -63,22 +63,22 @@ public:
 
         verticalLayout_2->addWidget(label_nom);
 
-        imageLabel = new QLabel(VignetteIngredient);
-        imageLabel->setObjectName(QStringLiteral("imageLabel"));
-        imageLabel->setEnabled(true);
+        labelImage = new QLabel(VignetteIngredient);
+        labelImage->setObjectName(QStringLiteral("labelImage"));
+        labelImage->setEnabled(true);
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(imageLabel->sizePolicy().hasHeightForWidth());
-        imageLabel->setSizePolicy(sizePolicy);
-        imageLabel->setAutoFillBackground(false);
-        imageLabel->setStyleSheet(QLatin1String("QLabel#imageLabel\n"
+        sizePolicy.setHeightForWidth(labelImage->sizePolicy().hasHeightForWidth());
+        labelImage->setSizePolicy(sizePolicy);
+        labelImage->setAutoFillBackground(false);
+        labelImage->setStyleSheet(QLatin1String("QLabel#imageLabel\n"
 "{\n"
 "	border-image: url(:/Images/Images/tomate.jpg) 0 0 0 0 stretch stretch;\n"
 "}"));
-        imageLabel->setScaledContents(true);
+        labelImage->setScaledContents(true);
 
-        verticalLayout_2->addWidget(imageLabel);
+        verticalLayout_2->addWidget(labelImage);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
@@ -148,7 +148,7 @@ public:
     {
         VignetteIngredient->setWindowTitle(QApplication::translate("VignetteIngredient", "Form", 0));
         label_nom->setText(QApplication::translate("VignetteIngredient", "Nom", 0));
-        imageLabel->setText(QString());
+        labelImage->setText(QString());
         label->setText(QApplication::translate("VignetteIngredient", "DLC :", 0));
         label_2->setText(QApplication::translate("VignetteIngredient", "01/01/2000", 0));
         pushButton->setText(QApplication::translate("VignetteIngredient", "-", 0));

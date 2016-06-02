@@ -2,5 +2,8 @@
     <qresource prefix="/Images">
         <file>Images/gateauChocolat.jpg</file>
         <file>Images/tomate.jpg</file>
+        <file>Images/aspic.jpg</file>
+        <file>Images/pouletRoti.jpg</file>
+        <file>Images/tacos.jpg</file>
     </qresource>
 </RCC>

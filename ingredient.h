@@ -20,12 +20,15 @@ public:
     double getQuantite();
     QString getUnite();
     QDate getDate();
+    QString getCheminImage();
 
 private:
     double quantite;
     QString nom;
     QString unite;
     QDate datePeremption;
+    QString cheminImage;
+
 };
 
 #endif // INGREDIENT_H

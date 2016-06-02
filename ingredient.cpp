@@ -6,6 +6,7 @@ Ingredient::Ingredient(QString nom, double quantite, QString unite, QDate datePe
     this->datePeremption = datePeremption;
     this->unite = unite;
     this->quantite = quantite;
+    this->cheminImage = cheminImage;
 }
 
 void Ingredient::setQuantite(double quantite) {
@@ -32,24 +33,13 @@ QDate Ingredient::getDate()
     return datePeremption;
 }
 
+QString Ingredient::getCheminImage()
+{
+    return cheminImage;
+}
+
 Ingredient::~Ingredient()
 {
 
 }
 
-/*void Ingredient::initInterface(QString cheminImage)
-{
-    layout = new QVBoxLayout(this);
-    this->setLayout(layout);
-    //Image
-    image = new QLabel(this);
-    image->setPixmap(QPixmap(cheminImage));
-    image->setFixedSize(325, 200);
-    image->setScaledContents(true);
-    //Labels
-    labelNom = new QLabel(nom+"\n\nQuantité :\n\nA consommer avant:", this);
-    //Ajouts au layout
-    layout->addWidget(image);
-    layout->addWidget(labelNom);
-
-}*/

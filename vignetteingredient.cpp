@@ -13,7 +13,7 @@ VignetteIngredient::VignetteIngredient(int width,Ingredient* ingredient, QWidget
     this->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
     this->setMaximumWidth(width);
     this->setMaximumHeight(width);
-    ui->imageLabel->setMinimumHeight(width * 0.5);
+    ui->labelImage->setMinimumHeight(width * 0.5);
     QPolygon forme;
     forme << QPoint(0, 20) << QPoint(40, 0) << QPoint(40, 40);
     ui->pushButton->setMask(QRegion(forme));
@@ -40,6 +40,7 @@ void VignetteIngredient::initLabels()
     ui->label_quantite->setText(QString::number(ingredient->getQuantite()) + " " + ingredient->getUnite());
     ui->label_nom->setText(ingredient->getNom());
     ui->label_2->setText(ingredient->getDate().toString("dd.MM.yyyy"));
+    ui->labelImage->setStyleSheet("QLabel#labelImage{ border-image: url("+ingredient->getCheminImage()+") 0 0 0 0 stretch stretch; }");
 }
 
 //Utile pour que l'affichage se fasse correctement

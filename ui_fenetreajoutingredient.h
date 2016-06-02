@@ -141,11 +141,6 @@ public:
         label->setText(QApplication::translate("FenetreAjoutIngredient", "Nom :", 0));
         label_3->setText(QApplication::translate("FenetreAjoutIngredient", "A consommer avant le :", 0));
         label_2->setText(QApplication::translate("FenetreAjoutIngredient", "Quantit\303\251 :", 0));
-        cb_image->clear();
-        cb_image->insertItems(0, QStringList()
-         << QApplication::translate("FenetreAjoutIngredient", "Nouvel \303\251l\303\251ment", 0)
-         << QApplication::translate("FenetreAjoutIngredient", "Tomates", 0)
-        );
         label_5->setText(QApplication::translate("FenetreAjoutIngredient", "Image :", 0));
         lineEdit->setText(QApplication::translate("FenetreAjoutIngredient", "0", 0));
         comboBox->clear();

@@ -41,7 +41,7 @@ public:
         VignetteRecette->resize(405, 330);
         VignetteRecette->setStyleSheet(QLatin1String("QWidget#VignetteRecette\n"
 "{\n"
-"	border: 5px solid black;\n"
+"	border: 3px solid black;\n"
 "	background-color :lightgreen;\n"
 "	border-radius:20px;\n"
 "}\n"
