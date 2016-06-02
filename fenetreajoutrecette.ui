@@ -145,7 +145,6 @@
     </layout>
    </item>
   </layout>
-  <zorder>gridLayoutWidget</zorder>
   <zorder>label_2</zorder>
  </widget>
  <resources/>

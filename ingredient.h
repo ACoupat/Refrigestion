@@ -17,9 +17,8 @@ public:
     ~Ingredient();
     void setQuantite(double);
     QString getNom();
-    QString getUnite();
     double getQuantite();
-    QString getDesc();
+    QString getUnite();
     QDate getDate();
 
 private:
@@ -27,13 +26,6 @@ private:
     QString nom;
     QString unite;
     QDate datePeremption;
-   /* QLabel *image;
-    QPushButton boutonGauche;
-    QPushButton boutonDroite;
-    QLabel *labelNom;
-    QLabel *labelQuantite;
-    QVBoxLayout *layout;
-    void initInterface(QString);*/
 };
 
 #endif // INGREDIENT_H

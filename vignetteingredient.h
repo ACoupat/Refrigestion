@@ -20,10 +20,10 @@ public:
 
 private:
     Ui::VignetteIngredient *ui;
-    Ingredient* ingredientModel;
+    Ingredient* ingredient;
     void paintEvent(QPaintEvent *pe);
 
-    void initLabels(int width);
+    void initLabels();
 
 public slots:
     void ajoutQuantite();

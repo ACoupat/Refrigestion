@@ -26,10 +26,14 @@ class Ui_VignetteIngredient
 {
 public:
     QVBoxLayout *verticalLayout_2;
+    QLabel *label_nom;
     QLabel *imageLabel;
+    QHBoxLayout *horizontalLayout_2;
+    QLabel *label;
+    QLabel *label_2;
     QHBoxLayout *horizontalLayout;
     QPushButton *pushButton;
-    QLabel *label;
+    QLabel *label_quantite;
     QPushButton *pushButton_2;
 
     void setupUi(QWidget *VignetteIngredient)
@@ -37,7 +41,7 @@ public:
         if (VignetteIngredient->objectName().isEmpty())
             VignetteIngredient->setObjectName(QStringLiteral("VignetteIngredient"));
         VignetteIngredient->setEnabled(true);
-        VignetteIngredient->resize(333, 305);
+        VignetteIngredient->resize(300, 305);
         VignetteIngredient->setWindowOpacity(1);
         VignetteIngredient->setAutoFillBackground(false);
         VignetteIngredient->setStyleSheet(QLatin1String("QWidget#VignetteIngredient\n"
@@ -53,15 +57,20 @@ public:
 "                       "));
         verticalLayout_2 = new QVBoxLayout(VignetteIngredient);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        label_nom = new QLabel(VignetteIngredient);
+        label_nom->setObjectName(QStringLiteral("label_nom"));
+        label_nom->setAlignment(Qt::AlignCenter);
+
+        verticalLayout_2->addWidget(label_nom);
+
         imageLabel = new QLabel(VignetteIngredient);
         imageLabel->setObjectName(QStringLiteral("imageLabel"));
         imageLabel->setEnabled(true);
-        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(imageLabel->sizePolicy().hasHeightForWidth());
         imageLabel->setSizePolicy(sizePolicy);
-        imageLabel->setMinimumSize(QSize(0, 225));
         imageLabel->setAutoFillBackground(false);
         imageLabel->setStyleSheet(QLatin1String("QLabel#imageLabel\n"
 "{\n"
@@ -70,6 +79,21 @@ public:
         imageLabel->setScaledContents(true);
 
         verticalLayout_2->addWidget(imageLabel);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        label = new QLabel(VignetteIngredient);
+        label->setObjectName(QStringLiteral("label"));
+
+        horizontalLayout_2->addWidget(label);
+
+        label_2 = new QLabel(VignetteIngredient);
+        label_2->setObjectName(QStringLiteral("label_2"));
+
+        horizontalLayout_2->addWidget(label_2);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_2);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
@@ -89,17 +113,17 @@ public:
 
         horizontalLayout->addWidget(pushButton);
 
-        label = new QLabel(VignetteIngredient);
-        label->setObjectName(QStringLiteral("label"));
+        label_quantite = new QLabel(VignetteIngredient);
+        label_quantite->setObjectName(QStringLiteral("label_quantite"));
         QSizePolicy sizePolicy2(QSizePolicy::Fixed, QSizePolicy::Preferred);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
-        label->setSizePolicy(sizePolicy2);
-        label->setMinimumSize(QSize(100, 0));
-        label->setAlignment(Qt::AlignCenter);
+        sizePolicy2.setHeightForWidth(label_quantite->sizePolicy().hasHeightForWidth());
+        label_quantite->setSizePolicy(sizePolicy2);
+        label_quantite->setMinimumSize(QSize(100, 0));
+        label_quantite->setAlignment(Qt::AlignCenter);
 
-        horizontalLayout->addWidget(label);
+        horizontalLayout->addWidget(label_quantite);
 
         pushButton_2 = new QPushButton(VignetteIngredient);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
@@ -123,9 +147,12 @@ public:
     void retranslateUi(QWidget *VignetteIngredient)
     {
         VignetteIngredient->setWindowTitle(QApplication::translate("VignetteIngredient", "Form", 0));
+        label_nom->setText(QApplication::translate("VignetteIngredient", "Nom", 0));
         imageLabel->setText(QString());
+        label->setText(QApplication::translate("VignetteIngredient", "DLC :", 0));
+        label_2->setText(QApplication::translate("VignetteIngredient", "01/01/2000", 0));
         pushButton->setText(QApplication::translate("VignetteIngredient", "-", 0));
-        label->setText(QApplication::translate("VignetteIngredient", "0", 0));
+        label_quantite->setText(QApplication::translate("VignetteIngredient", "0", 0));
         pushButton_2->setText(QApplication::translate("VignetteIngredient", "+", 0));
     } // retranslateUi
 

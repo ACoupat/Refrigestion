@@ -1,5 +1,4 @@
 #include "ingredient.h"
-#include <QDebug>
 
 Ingredient::Ingredient(QString nom, double quantite, QString unite, QDate datePeremption, QString cheminImage/*, QWidget *parent*/) //:
     //QWidget(parent)
@@ -33,14 +32,10 @@ double Ingredient::getQuantite()
 {
     return quantite;
 }
-QString Ingredient::getDesc()
-{
-
-}
 
 QDate Ingredient::getDate()
 {
-
+    return datePeremption;
 }
 
 Ingredient::~Ingredient()

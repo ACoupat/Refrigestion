@@ -17,12 +17,11 @@
 #include <QtWidgets/QDateEdit>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
-#include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QTextEdit>
 
 QT_BEGIN_NAMESPACE
 
@@ -34,19 +33,20 @@ public:
     QLabel *label;
     QLabel *label_3;
     QLabel *label_2;
-    QLabel *label_4;
-    QDateEdit *de_date;
     QLineEdit *le_nom;
-    QTextEdit *te_desc;
+    QDateEdit *de_date;
+    QDialogButtonBox *buttonBox;
     QComboBox *cb_image;
     QLabel *label_5;
-    QDialogButtonBox *buttonBox;
-    QDoubleSpinBox *dsp_qte;
+    QHBoxLayout *horizontalLayout;
+    QLineEdit *lineEdit;
+    QComboBox *comboBox;
 
     void setupUi(QDialog *FenetreAjoutIngredient)
     {
         if (FenetreAjoutIngredient->objectName().isEmpty())
             FenetreAjoutIngredient->setObjectName(QStringLiteral("FenetreAjoutIngredient"));
+        FenetreAjoutIngredient->resize(413, 214);
         gridLayout_3 = new QGridLayout(FenetreAjoutIngredient);
         gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
         gridLayout = new QGridLayout();
@@ -65,50 +65,56 @@ public:
 
         label_2 = new QLabel(FenetreAjoutIngredient);
         label_2->setObjectName(QStringLiteral("label_2"));
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
+        label_2->setSizePolicy(sizePolicy);
+        label_2->setMinimumSize(QSize(0, 30));
 
         gridLayout->addWidget(label_2, 1, 1, 1, 1);
-
-        label_4 = new QLabel(FenetreAjoutIngredient);
-        label_4->setObjectName(QStringLiteral("label_4"));
-
-        gridLayout->addWidget(label_4, 4, 1, 1, 1);
-
-        de_date = new QDateEdit(FenetreAjoutIngredient);
-        de_date->setObjectName(QStringLiteral("de_date"));
-
-        gridLayout->addWidget(de_date, 2, 3, 1, 1);
 
         le_nom = new QLineEdit(FenetreAjoutIngredient);
         le_nom->setObjectName(QStringLiteral("le_nom"));
 
         gridLayout->addWidget(le_nom, 0, 3, 1, 1);
 
-        te_desc = new QTextEdit(FenetreAjoutIngredient);
-        te_desc->setObjectName(QStringLiteral("te_desc"));
+        de_date = new QDateEdit(FenetreAjoutIngredient);
+        de_date->setObjectName(QStringLiteral("de_date"));
 
-        gridLayout->addWidget(te_desc, 4, 3, 1, 1);
-
-        cb_image = new QComboBox(FenetreAjoutIngredient);
-        cb_image->setObjectName(QStringLiteral("cb_image"));
-
-        gridLayout->addWidget(cb_image, 5, 3, 1, 1);
-
-        label_5 = new QLabel(FenetreAjoutIngredient);
-        label_5->setObjectName(QStringLiteral("label_5"));
-
-        gridLayout->addWidget(label_5, 5, 1, 1, 1);
+        gridLayout->addWidget(de_date, 2, 3, 1, 1);
 
         buttonBox = new QDialogButtonBox(FenetreAjoutIngredient);
         buttonBox->setObjectName(QStringLiteral("buttonBox"));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
 
-        gridLayout->addWidget(buttonBox, 6, 3, 1, 1);
+        gridLayout->addWidget(buttonBox, 5, 3, 1, 1);
 
-        dsp_qte = new QDoubleSpinBox(FenetreAjoutIngredient);
-        dsp_qte->setObjectName(QStringLiteral("dsp_qte"));
+        cb_image = new QComboBox(FenetreAjoutIngredient);
+        cb_image->setObjectName(QStringLiteral("cb_image"));
 
-        gridLayout->addWidget(dsp_qte, 1, 3, 1, 1);
+        gridLayout->addWidget(cb_image, 4, 3, 1, 1);
+
+        label_5 = new QLabel(FenetreAjoutIngredient);
+        label_5->setObjectName(QStringLiteral("label_5"));
+
+        gridLayout->addWidget(label_5, 4, 1, 1, 1);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        lineEdit = new QLineEdit(FenetreAjoutIngredient);
+        lineEdit->setObjectName(QStringLiteral("lineEdit"));
+
+        horizontalLayout->addWidget(lineEdit);
+
+        comboBox = new QComboBox(FenetreAjoutIngredient);
+        comboBox->setObjectName(QStringLiteral("comboBox"));
+
+        horizontalLayout->addWidget(comboBox);
+
+
+        gridLayout->addLayout(horizontalLayout, 1, 3, 1, 1);
 
 
         gridLayout_3->addLayout(gridLayout, 0, 0, 1, 1);
@@ -127,13 +133,21 @@ public:
         label->setText(QApplication::translate("FenetreAjoutIngredient", "Nom :", 0));
         label_3->setText(QApplication::translate("FenetreAjoutIngredient", "A consommer avant le :", 0));
         label_2->setText(QApplication::translate("FenetreAjoutIngredient", "Quantit\303\251 :", 0));
-        label_4->setText(QApplication::translate("FenetreAjoutIngredient", "Description :", 0));
         cb_image->clear();
         cb_image->insertItems(0, QStringList()
          << QApplication::translate("FenetreAjoutIngredient", "Nouvel \303\251l\303\251ment", 0)
          << QApplication::translate("FenetreAjoutIngredient", "Tomates", 0)
         );
         label_5->setText(QApplication::translate("FenetreAjoutIngredient", "Image :", 0));
+        lineEdit->setText(QApplication::translate("FenetreAjoutIngredient", "0", 0));
+        comboBox->clear();
+        comboBox->insertItems(0, QStringList()
+         << QString()
+         << QApplication::translate("FenetreAjoutIngredient", "mL", 0)
+         << QApplication::translate("FenetreAjoutIngredient", "L", 0)
+         << QApplication::translate("FenetreAjoutIngredient", "g", 0)
+         << QApplication::translate("FenetreAjoutIngredient", "kg", 0)
+        );
     } // retranslateUi
 
 };
