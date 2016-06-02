@@ -26,7 +26,7 @@ VignetteIngredient::VignetteIngredient(int width,Ingredient* ingredient, QWidget
 
 void VignetteIngredient::ajoutQuantite() {
     ingredient->setQuantite(ingredient->getQuantite() + 1);
-    ui->label_quantite->setText(QString::number(ingredient->getQuantite()));
+    ui->label_quantite->setText(QString::number(ingredient->getQuantite()) + " " + ingredient->getUnite());
 
 }
 
