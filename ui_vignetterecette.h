@@ -108,7 +108,7 @@ public:
     {
         VignetteRecette->setWindowTitle(QApplication::translate("VignetteRecette", "Form", 0));
         labelNom->setText(QApplication::translate("VignetteRecette", "Gateau au chocolat", 0));
-        labelImage->setText(QApplication::translate("VignetteRecette", "Nom", 0));
+        labelImage->setText(QString());
         label->setText(QApplication::translate("VignetteRecette", "Dur\303\251e de pr\303\251paration :", 0));
         labelDureePrep->setText(QApplication::translate("VignetteRecette", "30 min", 0));
         label_2->setText(QApplication::translate("VignetteRecette", "R\303\251alisable :", 0));

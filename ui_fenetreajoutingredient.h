@@ -47,6 +47,10 @@ public:
         if (FenetreAjoutIngredient->objectName().isEmpty())
             FenetreAjoutIngredient->setObjectName(QStringLiteral("FenetreAjoutIngredient"));
         FenetreAjoutIngredient->resize(413, 214);
+        FenetreAjoutIngredient->setStyleSheet(QLatin1String("QDialog\n"
+"{\n"
+"	background-color: darkgray;\n"
+"}"));
         gridLayout_3 = new QGridLayout(FenetreAjoutIngredient);
         gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
         gridLayout = new QGridLayout();
@@ -119,6 +123,10 @@ public:
 
         gridLayout_3->addLayout(gridLayout, 0, 0, 1, 1);
 
+        QWidget::setTabOrder(le_nom, lineEdit);
+        QWidget::setTabOrder(lineEdit, comboBox);
+        QWidget::setTabOrder(comboBox, de_date);
+        QWidget::setTabOrder(de_date, cb_image);
 
         retranslateUi(FenetreAjoutIngredient);
         QObject::connect(buttonBox, SIGNAL(accepted()), FenetreAjoutIngredient, SLOT(accept()));

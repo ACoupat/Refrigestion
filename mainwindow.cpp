@@ -25,7 +25,10 @@ MainWindow::MainWindow(QWidget *parent) :
     fenAR = new FenetreAjoutRecette(this);
     //Test
     for(int i=0;i<3;++i)
-     ajoutIngredient();
+    {
+        ajoutIngredient();
+        ajoutRecette();
+    }
 }
 
 MainWindow::~MainWindow()

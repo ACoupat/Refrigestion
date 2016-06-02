@@ -13,6 +13,7 @@ VignetteRecette::VignetteRecette(int width,Recette* recette, QWidget *parent) :
     this->setMaximumHeight(width);
     ui->labelImage->setMinimumHeight(width * 0.5);
     initLabels();
+
     this->show();
 }
 
@@ -20,7 +21,6 @@ void VignetteRecette::initLabels()
 {
     ui->labelNom->setText(recette->getNom());
     ui->labelDureePrep->setText((recette->getDureePreparation()));
-
 }
 
 //Utile pour que l'affichage se fasse correctement

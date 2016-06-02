@@ -13,6 +13,12 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog
+{
+	background-color: darkgray;
+}</string>
+  </property>
   <layout class="QGridLayout" name="gridLayout_3">
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout">
@@ -145,6 +151,13 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>le_nom</tabstop>
+  <tabstop>lineEdit</tabstop>
+  <tabstop>comboBox</tabstop>
+  <tabstop>de_date</tabstop>
+  <tabstop>cb_image</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

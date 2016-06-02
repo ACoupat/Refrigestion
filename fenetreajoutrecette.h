@@ -19,6 +19,11 @@ public:
 
 private:
     Ui::FenetreAjoutRecette *ui;
+
+private slots:
+    void ajouterLigneTableIng();
+    void retirerLigneTableIng();
+
 };
 
 #endif // FENETREAJOUTRECETTE_H
