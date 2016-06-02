@@ -1,17 +1,11 @@
 #include "ingredient.h"
 
-Ingredient::Ingredient(QString nom, double quantite, QString unite, QDate datePeremption, QString cheminImage/*, QWidget *parent*/) //:
-    //QWidget(parent)
+Ingredient::Ingredient(QString nom, double quantite, QString unite, QDate datePeremption, QString cheminImage)
 {
     this->nom = nom;
     this->datePeremption = datePeremption;
     this->unite = unite;
     this->quantite = quantite;
-
-    //this->setObjectName("vignetteIngredient");
-    //initInterface(cheminImage);
-    //this->show();
-
 }
 
 void Ingredient::setQuantite(double quantite) {

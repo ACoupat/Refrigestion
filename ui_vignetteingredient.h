@@ -74,7 +74,7 @@ public:
         imageLabel->setAutoFillBackground(false);
         imageLabel->setStyleSheet(QLatin1String("QLabel#imageLabel\n"
 "{\n"
-"	border-image: url(:/Images/tomate.jpg) 0 0 0 0 stretch stretch;\n"
+"	border-image: url(:/Images/Images/tomate.jpg) 0 0 0 0 stretch stretch;\n"
 "}"));
         imageLabel->setScaledContents(true);
 

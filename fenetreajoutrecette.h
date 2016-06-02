@@ -2,6 +2,7 @@
 #define FENETREAJOUTRECETTE_H
 
 #include <QDialog>
+#include <recette.h>
 
 namespace Ui {
 class FenetreAjoutRecette;
@@ -14,6 +15,7 @@ class FenetreAjoutRecette : public QDialog
 public:
     explicit FenetreAjoutRecette(QWidget *parent = 0);
     ~FenetreAjoutRecette();
+    Recette* creerRecette();
 
 private:
     Ui::FenetreAjoutRecette *ui;

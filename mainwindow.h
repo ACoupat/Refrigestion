@@ -14,6 +14,7 @@
 #include <fenetreajoutingredient.h>
 #include <fenetreajoutrecette.h>
 #include <vignetteingredient.h>
+#include <vignetterecette.h>
 
 namespace Ui {
 class MainWindow;
@@ -30,7 +31,7 @@ public:
 private:
     Ui::MainWindow *ui;
     //QList<QLabel*> ingredients;
-    QList<QLabel*> recettes;
+    QList<Recette*> recettes;
     QList<Ingredient*> ingredients;
     //QList <VignetteIngredient*> ingredients;
     int screenWidth;

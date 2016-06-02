@@ -18,19 +18,22 @@ SOURCES += main.cpp\
     recette.cpp \
     fenetreajoutingredient.cpp \
     fenetreajoutrecette.cpp \
-    vignetteingredient.cpp
+    vignetteingredient.cpp \
+    vignetterecette.cpp
 
 HEADERS  += mainwindow.h \
     ingredient.h \
     recette.h \
     fenetreajoutingredient.h \
     fenetreajoutrecette.h \
-    vignetteingredient.h
+    vignetteingredient.h \
+    vignetterecette.h
 
 FORMS    += mainwindow.ui \
     fenetreajoutingredient.ui \
     fenetreajoutrecette.ui \
-    vignetteingredient.ui
+    vignetteingredient.ui \
+    vignetterecette.ui
 
 DISTFILES +=
 

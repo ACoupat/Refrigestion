@@ -63,7 +63,7 @@ QLabel
      <property name="styleSheet">
       <string notr="true">QLabel#imageLabel
 {
-	border-image: url(:/Images/tomate.jpg) 0 0 0 0 stretch stretch;
+	border-image: url(:/Images/Images/tomate.jpg) 0 0 0 0 stretch stretch;
 }</string>
      </property>
      <property name="text">

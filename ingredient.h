@@ -13,7 +13,7 @@
 class Ingredient //: public QWidget
 {
 public:
-    explicit Ingredient(QString nom, double quantite, QString unite, QDate datePeremption, QString cheminImage/*, QWidget *parent = nullptr*/);
+    explicit Ingredient(QString nom, double quantite, QString unite, QDate datePeremption, QString cheminImage);
     ~Ingredient();
     void setQuantite(double);
     QString getNom();

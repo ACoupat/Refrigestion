@@ -6,9 +6,11 @@ INPUT(
 ./debug\fenetreajoutingredient.o
 ./debug\fenetreajoutrecette.o
 ./debug\vignetteingredient.o
+./debug\vignetterecette.o
 ./debug\qrc_ressources.o
 ./debug\moc_mainwindow.o
 ./debug\moc_fenetreajoutingredient.o
 ./debug\moc_fenetreajoutrecette.o
 ./debug\moc_vignetteingredient.o
+./debug\moc_vignetterecette.o
 );
