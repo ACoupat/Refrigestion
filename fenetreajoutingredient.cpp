@@ -18,17 +18,19 @@ FenetreAjoutIngredient::FenetreAjoutIngredient(QWidget *parent) :
     ui->cb_image->addItem("Tacos",QVariant(":/Images/Images/tacos.jpg"));
     ui->cb_image->addItem("Aspic",QVariant(":/Images/Images/aspic.jpg"));
 
-    connect(ui->buttonBox,SIGNAL(accepted()),parent,SLOT(ajoutIngredient()));
-    connect(ui->buttonBox,SIGNAL(rejected()),this,SLOT(close()));
+    connect(ui->okButton,SIGNAL(clicked()),parent,SLOT(ajoutIngredient()));
+    connect(ui->cancelButton,SIGNAL(clicked()),this,SLOT(close()));
 }
 
 Ingredient* FenetreAjoutIngredient::creerIngredient()
 {
-    Ingredient* ingTemp = new Ingredient(ui->le_nom->text(),ui->lineEdit->text().toDouble(),ui->comboBox->currentText(),ui->de_date->date(),ui->cb_image->currentData().toString());
+    Ingredient* ingTemp = new Ingredient(ui->le_nom->text(), ui->cb_type->currentIndex(), ui->sb_quantite->value(),ui->comboBox->currentText(),ui->de_date->date(),ui->cb_image->currentData().toString());
     return ingTemp;
+
 }
 
 FenetreAjoutIngredient::~FenetreAjoutIngredient()
 {
     delete ui;
 }
+

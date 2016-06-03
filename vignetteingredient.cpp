@@ -20,19 +20,22 @@ VignetteIngredient::VignetteIngredient(int width,Ingredient* ingredient, QWidget
     forme.clear();
     forme << QPoint(0, 0) << QPoint(40, 20) << QPoint(0, 40);
     ui->pushButton_2->setMask(QRegion(forme));
+    QString color = ingredient->getTypeColor();
+    this->setStyleSheet("QWidget#VignetteIngredient{border: 3px solid black;background-color : " + color + ";border-radius:20px;}QLabel{font: bold 18px;}");
     initLabels();
     this->show();
 }
 
 void VignetteIngredient::ajoutQuantite() {
-    ingredient->setQuantite(ingredient->getQuantite() + 1);
+    ingredient->setQuantite(+1);
     ui->label_quantite->setText(QString::number(ingredient->getQuantite()) + " " + ingredient->getUnite());
 
 }
 
 void VignetteIngredient::retraitQuantite() {
-    ingredient->setQuantite(ingredient->getQuantite() - 1);
+    ingredient->setQuantite(-1);
     ui->label_quantite->setText(QString::number(ingredient->getQuantite()) + " " + ingredient->getUnite());
+    if(ingredient->getQuantite() == 0) this->deleteLater();
 }
 
 void VignetteIngredient::initLabels()

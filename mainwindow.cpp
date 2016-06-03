@@ -48,12 +48,23 @@ void MainWindow::ouvrirFenetreAjoutRecette()
 
 void MainWindow::ajoutIngredient()
 {
+
     Ingredient* nouvelIngredient = fenAI->creerIngredient();
+    if(nouvelIngredient->getNom() == "")
+    {
+            QMessageBox msgBox;
+            msgBox.setWindowFlags(Qt::Popup);
+            msgBox.setText("Erreur. Veuillez renseigner le champ 'Nom'.");
+            msgBox.exec();
+    }
+    else {
+        fenAI->close();
+        fenAI = new FenetreAjoutIngredient(this);
+        VignetteIngredient *newVignetteIngredient = new VignetteIngredient(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX,nouvelIngredient,this);
 
-    VignetteIngredient *newVignetteIngredient = new VignetteIngredient(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX,nouvelIngredient,this);
-
-    ui->grilleIngredients->addWidget(newVignetteIngredient, ingredients.size() / NB_COLONNE_MAX, ingredients.size() % NB_COLONNE_MAX);
-    ingredients << nouvelIngredient;
+        ui->grilleIngredients->addWidget(newVignetteIngredient, ingredients.size() / NB_COLONNE_MAX, ingredients.size() % NB_COLONNE_MAX);
+        ingredients << nouvelIngredient;
+    }
 }
 
 void MainWindow::ajoutRecette()

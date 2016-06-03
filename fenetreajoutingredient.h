@@ -20,8 +20,7 @@ public:
 private:
     Ui::FenetreAjoutIngredient *ui;
 
-public slots:
+#endif // FENETREAJOUTINGREDIENT_H
 
 };
 
-#endif // FENETREAJOUTINGREDIENT_H

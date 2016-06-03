@@ -13,7 +13,7 @@
 class Ingredient //: public QWidget
 {
 public:
-    explicit Ingredient(QString nom, double quantite, QString unite, QDate datePeremption, QString cheminImage);
+    explicit Ingredient(QString nom, int type, double quantite, QString unite, QDate datePeremption, QString cheminImage);
     ~Ingredient();
     void setQuantite(double);
     QString getNom();
@@ -21,6 +21,7 @@ public:
     QString getUnite();
     QDate getDate();
     QString getCheminImage();
+    QString getTypeColor();
 
 private:
     double quantite;
@@ -28,7 +29,9 @@ private:
     QString unite;
     QDate datePeremption;
     QString cheminImage;
+    int type;
 
 };
 
 #endif // INGREDIENT_H
+
