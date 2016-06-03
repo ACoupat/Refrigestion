@@ -7,6 +7,7 @@ INPUT(
 ./debug\fenetreajoutrecette.o
 ./debug\vignetteingredient.o
 ./debug\vignetterecette.o
+./debug\gestiondefichiers.o
 ./debug\qrc_ressources.o
 ./debug\moc_mainwindow.o
 ./debug\moc_fenetreajoutingredient.o

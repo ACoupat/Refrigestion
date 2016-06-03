@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     fenetreajoutingredient.cpp \
     fenetreajoutrecette.cpp \
     vignetteingredient.cpp \
-    vignetterecette.cpp
+    vignetterecette.cpp \
+    gestiondefichiers.cpp
 
 HEADERS  += mainwindow.h \
     ingredient.h \
@@ -27,7 +28,8 @@ HEADERS  += mainwindow.h \
     fenetreajoutingredient.h \
     fenetreajoutrecette.h \
     vignetteingredient.h \
-    vignetterecette.h
+    vignetterecette.h \
+    gestiondefichiers.h
 
 FORMS    += mainwindow.ui \
     fenetreajoutingredient.ui \

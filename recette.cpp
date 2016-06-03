@@ -22,3 +22,8 @@ QString Recette::getCheminImage()
 {
     return cheminImage;
 }
+
+void Recette::creerFichierRecette()
+{
+
+}

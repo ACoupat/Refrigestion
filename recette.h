@@ -11,6 +11,7 @@ public:
     QString getNom();
     QString getDureePreparation();
     QString getCheminImage();
+    void creerFichierRecette();
     ~Recette();
 private :
     QString nom;
