@@ -10,9 +10,9 @@ class GestionDeFichiers
 public:
     GestionDeFichiers();
     void ControleEspace(QString );
-    int ajoutFichier(Recette* recette, Ingredient *ing);
-    QString creerLigneIngredient(Ingredient* ing);
-    QString creerStringRecette(Recette* recette);
+    static int ajoutFichier(Recette* recette, Ingredient *ing);
+    static QString creerLigneIngredient(Ingredient* ing);
+    static QString creerStringRecette(Recette* recette);
 };
 
 #endif // GESTIONDEFICHIERS_H

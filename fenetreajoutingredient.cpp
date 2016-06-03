@@ -1,6 +1,7 @@
 #include "fenetreajoutingredient.h"
 #include "ui_fenetreajoutingredient.h"
 #include <QDebug>
+#include <gestiondefichiers.h>
 
 FenetreAjoutIngredient::FenetreAjoutIngredient(QWidget *parent) :
     QDialog(parent),
@@ -25,6 +26,7 @@ FenetreAjoutIngredient::FenetreAjoutIngredient(QWidget *parent) :
 Ingredient* FenetreAjoutIngredient::creerIngredient()
 {
     Ingredient* ingTemp = new Ingredient(ui->le_nom->text(), ui->cb_type->currentIndex(), ui->sb_quantite->value(),ui->comboBox->currentText(),ui->de_date->date(),ui->cb_image->currentData().toString());
+    GestionDeFichiers::ajoutFichier(NULL,ingTemp);
     return ingTemp;
 
 }

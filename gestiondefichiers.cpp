@@ -15,7 +15,7 @@ GestionDeFichiers::GestionDeFichiers()
     //qDebug()<< "Salut je suis un Lutiné";
     /*cout << "Salut je suis un Lutiné" << endl;
     ControleEspace("Salut je suis un Lutiné");*/
-    ajoutFichier(NULL,new Ingredient("TomateBite",12,"3",QDate(2018,8,8),"Coucou.tamere"));
+    ajoutFichier(NULL,new Ingredient("TomateBite",1,12,"3",QDate(2018,8,8),"Coucou.tamere"));
     qDebug() << ajoutFichier(new Recette("duhubvoqidufbaep","10 min mais 30 min",QList<Ingredient>(),"Mettre des trucs dans le tacos","Alarache","tacos.jpg"),NULL);
 
 }
@@ -36,6 +36,7 @@ int GestionDeFichiers::ajoutFichier(Recette* recette, Ingredient* ing)//Static ?
         if(fichier.open(QIODevice::ReadWrite | QIODevice::Append))
         {
             //fichier.write();
+            qDebug() << "Fichier créé";
             QTextStream flux(&fichier);
             flux << creerLigneIngredient(ing);
             fichier.close();
