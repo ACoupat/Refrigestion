@@ -1,5 +1,6 @@
 #include "fenetreajoutrecette.h"
 #include "ui_fenetreajoutrecette.h"
+#include "gestiondefichiers.h"
 
 FenetreAjoutRecette::FenetreAjoutRecette(QWidget *parent) :
     QDialog(parent),
@@ -28,8 +29,9 @@ FenetreAjoutRecette::FenetreAjoutRecette(QWidget *parent) :
 
 Recette* FenetreAjoutRecette::creerRecette()
 {
-    Recette* RecetteTemp = new Recette(ui->le_nom->text(),ui->le_duree->text(),QList<Ingredient>(),ui->te_etapes->toPlainText(),ui->le_type->text(),ui->cb_image->currentData().toString());
-    return RecetteTemp;
+    Recette* recetteTemp = new Recette(ui->le_nom->text(),ui->le_duree->text(),QList<Ingredient>(),ui->te_etapes->toPlainText(),ui->le_type->text(),ui->cb_image->currentData().toString());
+    GestionDeFichiers::ajoutFichier(recetteTemp,NULL);
+    return recetteTemp;
 }
 
 void FenetreAjoutRecette::ajouterLigneTableIng()
