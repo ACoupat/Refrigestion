@@ -223,8 +223,9 @@ public:
          << QApplication::translate("FenetreAjoutRecette", "Viande", 0)
          << QApplication::translate("FenetreAjoutRecette", "Poisson", 0)
          << QApplication::translate("FenetreAjoutRecette", "Fromage", 0)
-         << QApplication::translate("FenetreAjoutRecette", "Dessert", 0)
+         << QApplication::translate("FenetreAjoutRecette", "Entr\303\251e", 0)
          << QApplication::translate("FenetreAjoutRecette", "Plat", 0)
+         << QApplication::translate("FenetreAjoutRecette", "Dessert", 0)
         );
     } // retranslateUi
 

@@ -219,12 +219,17 @@
        </item>
        <item>
         <property name="text">
-         <string>Dessert</string>
+         <string>Entrée</string>
         </property>
        </item>
        <item>
         <property name="text">
          <string>Plat</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Dessert</string>
         </property>
        </item>
       </widget>

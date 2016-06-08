@@ -199,8 +199,9 @@ public:
          << QApplication::translate("FenetreAjoutIngredient", "Viande", 0)
          << QApplication::translate("FenetreAjoutIngredient", "Poisson", 0)
          << QApplication::translate("FenetreAjoutIngredient", "Fromage", 0)
-         << QApplication::translate("FenetreAjoutIngredient", "Dessert", 0)
+         << QApplication::translate("FenetreAjoutIngredient", "Entr\303\251e", 0)
          << QApplication::translate("FenetreAjoutIngredient", "Plat", 0)
+         << QApplication::translate("FenetreAjoutIngredient", "Dessert", 0)
         );
         label_4->setText(QApplication::translate("FenetreAjoutIngredient", "Type :", 0));
         label->setText(QApplication::translate("FenetreAjoutIngredient", "Nom :", 0));
