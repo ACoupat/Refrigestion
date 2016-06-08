@@ -14,6 +14,7 @@ public:
     static QString creerLigneIngredient(Ingredient* ing);
     static QString creerStringRecette(Recette* recette);
     static Ingredient *creerIngredient(QString ligneFichier);
+    static QList<Ingredient*> listeIngredientsFichier();
 };
 
 #endif // GESTIONDEFICHIERS_H

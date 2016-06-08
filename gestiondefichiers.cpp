@@ -64,6 +64,7 @@ int GestionDeFichiers::ajoutFichier(Recette* recette, Ingredient* ing)//Static ?
         else
         {
             cout << "Erreur d'ouverture de fichier" << endl;
+            return 1;
         }
     }
     else
@@ -184,6 +185,24 @@ Ingredient* GestionDeFichiers::creerIngredient(QString ligneFichier)
 
     Ingredient* nouvelIngredient = new Ingredient(nom,type.toInt(),quantite.toDouble(),unite,datePeremption,cheminImage);
     return nouvelIngredient;
+}
+
+QList<Ingredient*> GestionDeFichiers::listeIngredientsFichier()
+{
+    QList<Ingredient*> listIng;
+    QFile fichier("listeIngredients.rfg");
+    if(fichier.open(QIODevice::ReadOnly))
+    {
+        qDebug() << "Fichier Ingredients ouvert";
+        QTextStream flux(&fichier);
+        while(!flux.atEnd())
+        {
+
+            QString ligne = flux.readLine();
+            listIng << creerIngredient(ligne);
+        }
+    }
+     return listIng;
 }
 
 void GestionDeFichiers::ControleEspace(QString Nom)

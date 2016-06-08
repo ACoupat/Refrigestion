@@ -39,6 +39,8 @@ private:
     FenetreAjoutIngredient* fenAI;
     FenetreAjoutRecette* fenAR;
 
+    void creerVignettesDemarrage();
+
 public slots:
     void ouvrirFenetreAjoutIngredient();
     void ajoutIngredient();

@@ -23,9 +23,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->boutonAjoutRecette, SIGNAL(clicked(bool)), this, SLOT(ouvrirFenetreAjoutRecette()));
     fenAI = new FenetreAjoutIngredient(this);
     fenAR = new FenetreAjoutRecette(this);
-    GestionDeFichiers::creerIngredient("Tomates;11.06.2016;3;L;4;:/Images/Images/tomate.jpg;");
+    creerVignettesDemarrage();
     //Test
-  /*  for(int i=0;i<3;++i)
+    /*for(int i=0;i<3;++i)
     {
         ajoutIngredient();
         ajoutRecette();
@@ -76,4 +76,27 @@ void MainWindow::ajoutRecette()
 
     ui->grilleRecettes->addWidget(newVignetteRecette, recettes.size() / NB_COLONNE_MAX, recettes.size() % NB_COLONNE_MAX);
     recettes << nouvelleRecette;
+}
+
+void MainWindow::creerVignettesDemarrage()
+{
+    QList<Ingredient*> listIng = GestionDeFichiers::listeIngredientsFichier();
+    if (listIng.size() == 0)
+    {
+        QMessageBox msgBox;
+        msgBox.setWindowFlags(Qt::Popup);
+        msgBox.setText("Erreur de chargement du fichier Ingredients");
+        msgBox.exec();
+    }
+    else
+    {
+        foreach (Ingredient* ing, listIng)
+        {
+            VignetteIngredient *newVignetteIngredient = new VignetteIngredient(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX,ing,this);
+            ui->grilleIngredients->addWidget(newVignetteIngredient, ingredients.size() / NB_COLONNE_MAX, ingredients.size() % NB_COLONNE_MAX);
+            ingredients << ing;
+        }
+
+    }
+
 }
