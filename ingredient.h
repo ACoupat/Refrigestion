@@ -21,6 +21,7 @@ public:
     QString getUnite();
     QDate getDate();
     QString getCheminImage();
+    int getType();
     QString getTypeColor();
 
 private:

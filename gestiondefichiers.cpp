@@ -49,7 +49,6 @@ int GestionDeFichiers::ajoutFichier(Recette* recette, Ingredient* ing)//Static ?
     }
     else if(recette != NULL && ing == NULL)
     {
-           qDebug() << "bleh";
            QString nomFichier = "Recettes/"+recette->getNom()+".rfg";
            qDebug() << nomFichier;
         QFile fichier(nomFichier);
@@ -80,7 +79,7 @@ int GestionDeFichiers::ajoutFichier(Recette* recette, Ingredient* ing)//Static ?
 QString GestionDeFichiers::creerLigneIngredient(Ingredient *ing)
 {
     QString ligne(ing->getNom());
-    ligne +=  ";" + ing->getDate().toString() + ";" + QString::number(ing->getQuantite()) + ";" + ing->getUnite() + "\n" ;
+    ligne +=  ";" + ing->getDate().toString() + ";" + QString::number(ing->getQuantite()) + ";" + ing->getUnite() + ";" + QString::number(ing->getType()) +";" + ing->getCheminImage()+";\n" ;
     return ligne;
 }
 

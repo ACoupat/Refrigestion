@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'fenetreajoutingredient.ui'
 **
-** Created by: Qt User Interface Compiler version 5.4.0
+** Created by: Qt User Interface Compiler version 5.6.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -144,6 +144,7 @@ public:
         sizePolicy2.setHeightForWidth(cancelButton->sizePolicy().hasHeightForWidth());
         cancelButton->setSizePolicy(sizePolicy2);
         cancelButton->setMinimumSize(QSize(20, 20));
+        cancelButton->setAutoDefault(false);
 
         horizontalLayout_2->addWidget(cancelButton);
 
@@ -164,9 +165,13 @@ public:
 
         gridLayout_3->addLayout(gridLayout, 0, 0, 1, 1);
 
-        QWidget::setTabOrder(le_nom, comboBox);
+        QWidget::setTabOrder(le_nom, cb_type);
+        QWidget::setTabOrder(cb_type, sb_quantite);
+        QWidget::setTabOrder(sb_quantite, comboBox);
         QWidget::setTabOrder(comboBox, de_date);
         QWidget::setTabOrder(de_date, cb_image);
+        QWidget::setTabOrder(cb_image, cancelButton);
+        QWidget::setTabOrder(cancelButton, okButton);
 
         retranslateUi(FenetreAjoutIngredient);
 

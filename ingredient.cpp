@@ -40,6 +40,11 @@ QString Ingredient::getCheminImage()
     return cheminImage;
 }
 
+int Ingredient::getType()
+{
+    return type;
+}
+
 QString Ingredient::getTypeColor() {
     static const QString colors[] = {"rgba(200, 200, 200, 0.5);", // Autre
                                      "rgba(0, 255, 255, 0.5);", // Boisson
