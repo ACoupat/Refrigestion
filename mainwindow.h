@@ -16,6 +16,7 @@
 #include <vignetteingredient.h>
 #include <vignetterecette.h>
 #include <QMessageBox>
+#include <gestiondefichiers.h>
 
 namespace Ui {
 class MainWindow;

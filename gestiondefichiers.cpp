@@ -79,7 +79,7 @@ int GestionDeFichiers::ajoutFichier(Recette* recette, Ingredient* ing)//Static ?
 QString GestionDeFichiers::creerLigneIngredient(Ingredient *ing)
 {
     QString ligne(ing->getNom());
-    ligne +=  ";" + ing->getDate().toString() + ";" + QString::number(ing->getQuantite()) + ";" + ing->getUnite() + ";" + QString::number(ing->getType()) +";" + ing->getCheminImage()+";\n" ;
+    ligne +=  ";" + ing->getDate().toString("dd.MM.yyyy") + ";" + QString::number(ing->getQuantite()) + ";" + ing->getUnite() + ";" + QString::number(ing->getType()) +";" + ing->getCheminImage()+";\n" ;
     return ligne;
 }
 
@@ -88,6 +88,102 @@ QString GestionDeFichiers::creerStringRecette(Recette* recette)
     QString ligne(recette->getNom());
     ligne += "\n"+ recette->getDureePreparation() +"\n"+ recette->getCheminImage()+"\n" ;//à compléter
     return ligne;
+}
+
+Ingredient* GestionDeFichiers::creerIngredient(QString ligneFichier)
+{
+    QString nom;
+    QString dateTab[3];
+    //QDate datePeremption;
+    QString quantite;
+    QString unite;
+    QString type;
+    QString cheminImage;
+    int jour, mois, annee;
+    int i=0;
+
+    //Recupération du nom
+    QChar c = ligneFichier[i];
+    while(c != ';')
+    {
+        nom = nom + c;
+        i++;
+        c = ligneFichier[i];
+
+    }
+    qDebug() << nom;
+    i++;
+    //Récupération de la date
+    for(int j=0; j<2; ++j)
+    {
+        c = ligneFichier[i];
+
+        while(c != '.')
+        {
+            dateTab[j] = dateTab[j] + c;
+            i++;
+            c = ligneFichier[i];
+        }
+        i++;
+    }
+    c = ligneFichier[i];
+    while(c != ';')
+    {
+        dateTab[2] = dateTab[2] + c;
+        i++;
+        c = ligneFichier[i];
+    }
+    jour = dateTab[0].toInt(); //je sais c'est pas opti mais
+    mois = dateTab[1].toInt(); //sinon ça marche pas . . .
+    annee = dateTab[2].toInt();
+
+    QDate datePeremption(annee,mois,jour);
+    qDebug() << datePeremption.toString("dd.MM.yyyy");
+    //Récupération de la quantité
+    i++;
+    c = ligneFichier[i];
+    while(c != ';')
+    {
+        quantite = quantite + c;
+        i++;
+        c = ligneFichier[i];
+        qDebug() << c;
+    }
+    qDebug() << quantite;
+    i++;
+    c = ligneFichier[i];
+    //Récupération de l'unité
+    while(c != ';')
+    {
+        unite = unite + c;
+        i++;
+        c = ligneFichier[i];
+    }
+    qDebug() << unite;
+    i++;
+    c = ligneFichier[i];
+    //Récupération du type
+    while(c != ';')
+    {
+        type = type + c;
+        i++;
+        c = ligneFichier[i];
+    }
+    i++;
+    c = ligneFichier[i];
+    qDebug() << type;
+    //Récupération du chemin de l'image
+    while(c != ';')
+    {
+        cheminImage = cheminImage + c;
+        i++;
+        c = ligneFichier[i];
+    }
+    qDebug() << cheminImage;
+
+
+    Ingredient* nouvelIngredient = new Ingredient(nom,type.toInt(),quantite.toDouble(),unite,datePeremption,cheminImage);
+    return nouvelIngredient;
 }
 
 void GestionDeFichiers::ControleEspace(QString Nom)

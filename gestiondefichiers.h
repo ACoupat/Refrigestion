@@ -13,6 +13,7 @@ public:
     static int ajoutFichier(Recette* recette, Ingredient *ing);
     static QString creerLigneIngredient(Ingredient* ing);
     static QString creerStringRecette(Recette* recette);
+    static Ingredient *creerIngredient(QString ligneFichier);
 };
 
 #endif // GESTIONDEFICHIERS_H

@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->boutonAjoutRecette, SIGNAL(clicked(bool)), this, SLOT(ouvrirFenetreAjoutRecette()));
     fenAI = new FenetreAjoutIngredient(this);
     fenAR = new FenetreAjoutRecette(this);
+    GestionDeFichiers::creerIngredient("Tomates;11.06.2016;3;L;4;:/Images/Images/tomate.jpg;");
     //Test
   /*  for(int i=0;i<3;++i)
     {
