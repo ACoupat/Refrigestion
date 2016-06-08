@@ -17,6 +17,7 @@
 #include <vignetterecette.h>
 #include <QMessageBox>
 #include <gestiondefichiers.h>
+#include <QDir>
 
 namespace Ui {
 class MainWindow;
@@ -39,7 +40,8 @@ private:
     FenetreAjoutIngredient* fenAI;
     FenetreAjoutRecette* fenAR;
 
-    void creerVignettesDemarrage();
+    void creerVignettesIngredientDemarrage();
+    void creerVignettesRecettesDemarrage();
 
 public slots:
     void ouvrirFenetreAjoutIngredient();

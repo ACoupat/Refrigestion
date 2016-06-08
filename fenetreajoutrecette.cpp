@@ -1,6 +1,6 @@
 #include "fenetreajoutrecette.h"
 #include "ui_fenetreajoutrecette.h"
-#include "gestiondefichiers.h"
+
 
 FenetreAjoutRecette::FenetreAjoutRecette(QWidget *parent) :
     QDialog(parent),
@@ -11,7 +11,7 @@ FenetreAjoutRecette::FenetreAjoutRecette(QWidget *parent) :
     this->setModal(true);
     this->setWindowTitle("Ajouter une recette");
 
-    ui->tableIngredients->setColumnCount(2);
+    ui->tableIngredients->setColumnCount(3);
     ui->tableIngredients->setRowCount(1);
     ui->tableIngredients->horizontalHeader()->setStretchLastSection(true);
     ui->tableIngredients->verticalHeader()->setVisible(false);
@@ -29,7 +29,7 @@ FenetreAjoutRecette::FenetreAjoutRecette(QWidget *parent) :
 
 Recette* FenetreAjoutRecette::creerRecette()
 {
-    Recette* recetteTemp = new Recette(ui->le_nom->text(),ui->le_duree->text(),QList<Ingredient>(),ui->te_etapes->toPlainText(),ui->le_type->text(),ui->cb_image->currentData().toString());
+    Recette* recetteTemp = new Recette(ui->le_nom->text(),ui->le_duree->text(),creerListeIngredients(),ui->te_etapes->toPlainText(),ui->cb_type->currentText(),ui->cb_image->currentData().toString());
     GestionDeFichiers::ajoutFichier(recetteTemp,NULL);
     return recetteTemp;
 }
@@ -45,6 +45,24 @@ void FenetreAjoutRecette::retirerLigneTableIng()
 {
     ui->tableIngredients->setRowCount(ui->tableIngredients->rowCount()-1);
     //essayer de trouver comment supprimer la ligne sélectionnée plutôt que la dernière
+}
+
+QList<QString> FenetreAjoutRecette::creerListeIngredients()
+{
+    QList<QString> liste;
+    int nbIngredients = ui->tableIngredients->rowCount();
+
+    for(int i=0; i<nbIngredients; i++)
+    {
+        QVariant varTemp0 = ui->tableIngredients->item(i,0)->data(0);
+        QVariant varTemp1 = ui->tableIngredients->item(i,1)->data(0);
+        QVariant varTemp2 = ui->tableIngredients->item(i,2)->data(0);
+        QString strTemp;
+
+        strTemp = strTemp + varTemp0.toString() + " (" + varTemp1.toString() + varTemp2.toString() +")" ;
+        liste << strTemp;
+    }
+    return liste;
 }
 
 FenetreAjoutRecette::~FenetreAjoutRecette()

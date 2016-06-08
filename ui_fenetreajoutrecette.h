@@ -37,7 +37,6 @@ public:
     QLabel *label_6;
     QLabel *label_2;
     QTextEdit *te_etapes;
-    QLineEdit *le_type;
     QComboBox *cb_image;
     QLabel *label_4;
     QDialogButtonBox *buttonBox;
@@ -50,12 +49,13 @@ public:
     QHBoxLayout *horizontalLayout;
     QToolButton *tbRetirerIng;
     QToolButton *tbAjouterIng;
+    QComboBox *cb_type;
 
     void setupUi(QDialog *FenetreAjoutRecette)
     {
         if (FenetreAjoutRecette->objectName().isEmpty())
             FenetreAjoutRecette->setObjectName(QStringLiteral("FenetreAjoutRecette"));
-        FenetreAjoutRecette->resize(423, 580);
+        FenetreAjoutRecette->resize(490, 580);
         FenetreAjoutRecette->setStyleSheet(QLatin1String("QDialog\n"
 "{\n"
 "	background-color: darkgray;\n"
@@ -85,11 +85,6 @@ public:
         te_etapes->setObjectName(QStringLiteral("te_etapes"));
 
         gridLayout->addWidget(te_etapes, 5, 3, 1, 1);
-
-        le_type = new QLineEdit(FenetreAjoutRecette);
-        le_type->setObjectName(QStringLiteral("le_type"));
-
-        gridLayout->addWidget(le_type, 1, 3, 1, 1);
 
         cb_image = new QComboBox(FenetreAjoutRecette);
         cb_image->setObjectName(QStringLiteral("cb_image"));
@@ -131,12 +126,14 @@ public:
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         tableIngredients = new QTableWidget(FenetreAjoutRecette);
-        if (tableIngredients->columnCount() < 2)
-            tableIngredients->setColumnCount(2);
+        if (tableIngredients->columnCount() < 3)
+            tableIngredients->setColumnCount(3);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
         tableIngredients->setHorizontalHeaderItem(0, __qtablewidgetitem);
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
         tableIngredients->setHorizontalHeaderItem(1, __qtablewidgetitem1);
+        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+        tableIngredients->setHorizontalHeaderItem(2, __qtablewidgetitem2);
         if (tableIngredients->rowCount() < 1)
             tableIngredients->setRowCount(1);
         tableIngredients->setObjectName(QStringLiteral("tableIngredients"));
@@ -178,11 +175,15 @@ public:
 
         gridLayout->addLayout(verticalLayout, 2, 3, 1, 1);
 
+        cb_type = new QComboBox(FenetreAjoutRecette);
+        cb_type->setObjectName(QStringLiteral("cb_type"));
+
+        gridLayout->addWidget(cb_type, 1, 3, 1, 1);
+
 
         gridLayout_2->addLayout(gridLayout, 0, 0, 1, 1);
 
-        QWidget::setTabOrder(le_nom, le_type);
-        QWidget::setTabOrder(le_type, tableIngredients);
+        QWidget::setTabOrder(le_nom, tableIngredients);
         QWidget::setTabOrder(tableIngredients, tbRetirerIng);
         QWidget::setTabOrder(tbRetirerIng, tbAjouterIng);
         QWidget::setTabOrder(tbAjouterIng, le_duree);
@@ -209,8 +210,22 @@ public:
         ___qtablewidgetitem->setText(QApplication::translate("FenetreAjoutRecette", "Ingr\303\251dients", 0));
         QTableWidgetItem *___qtablewidgetitem1 = tableIngredients->horizontalHeaderItem(1);
         ___qtablewidgetitem1->setText(QApplication::translate("FenetreAjoutRecette", "Quantit\303\251s", 0));
+        QTableWidgetItem *___qtablewidgetitem2 = tableIngredients->horizontalHeaderItem(2);
+        ___qtablewidgetitem2->setText(QApplication::translate("FenetreAjoutRecette", "Unit\303\251", 0));
         tbRetirerIng->setText(QApplication::translate("FenetreAjoutRecette", " - ", 0));
         tbAjouterIng->setText(QApplication::translate("FenetreAjoutRecette", " + ", 0));
+        cb_type->clear();
+        cb_type->insertItems(0, QStringList()
+         << QApplication::translate("FenetreAjoutRecette", "Autre", 0)
+         << QApplication::translate("FenetreAjoutRecette", "Boisson", 0)
+         << QApplication::translate("FenetreAjoutRecette", "L\303\251gume", 0)
+         << QApplication::translate("FenetreAjoutRecette", "Fruit", 0)
+         << QApplication::translate("FenetreAjoutRecette", "Viande", 0)
+         << QApplication::translate("FenetreAjoutRecette", "Poisson", 0)
+         << QApplication::translate("FenetreAjoutRecette", "Fromage", 0)
+         << QApplication::translate("FenetreAjoutRecette", "Dessert", 0)
+         << QApplication::translate("FenetreAjoutRecette", "Plat", 0)
+        );
     } // retranslateUi
 
 };

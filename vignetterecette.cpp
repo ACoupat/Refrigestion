@@ -12,6 +12,7 @@ VignetteRecette::VignetteRecette(int width,Recette* recette, QWidget *parent) :
     this->setMaximumWidth(width);
     this->setMaximumHeight(width);
     ui->labelImage->setMinimumHeight(width * 0.5);
+
     initLabels();
 
     this->show();

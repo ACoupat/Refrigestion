@@ -1,6 +1,6 @@
 #include "recette.h"
 
-Recette::Recette(QString nom, QString dureePrep, QList<Ingredient> listeIng,QString etapesPrep,QString typeRecette,QString cheminImage)
+Recette::Recette(QString nom, QString dureePrep, QList<QString> listeIng,QString etapesPrep,QString typeRecette,QString cheminImage)
 {
     this->nom = nom;
     this->dureePreparation = dureePrep;
@@ -23,7 +23,17 @@ QString Recette::getCheminImage()
     return cheminImage;
 }
 
-void Recette::creerFichierRecette()
+QList<QString> Recette::getListIngredients()
 {
+    return listeIngredients;
+}
 
+QString Recette::getEtapesPreparation()
+{
+    return etapesPreparation;
+}
+
+QString Recette::getTypeRecette()
+{
+    return typeRecette;
 }

@@ -14,12 +14,14 @@ VignetteIngredient::VignetteIngredient(int width,Ingredient* ingredient, QWidget
     this->setMaximumWidth(width);
     this->setMaximumHeight(width);
     ui->labelImage->setMinimumHeight(width * 0.5);
+
     QPolygon forme;
     forme << QPoint(0, 20) << QPoint(40, 0) << QPoint(40, 40);
     ui->pushButton->setMask(QRegion(forme));
     forme.clear();
     forme << QPoint(0, 0) << QPoint(40, 20) << QPoint(0, 40);
     ui->pushButton_2->setMask(QRegion(forme));
+
     QString color = ingredient->getTypeColor();
     this->setStyleSheet("QWidget#VignetteIngredient{border: 3px solid black;background-color : " + color + ";border-radius:20px;}QLabel{font: bold 18px;}");
     initLabels();

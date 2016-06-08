@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>423</width>
+    <width>490</width>
     <height>580</height>
    </rect>
   </property>
@@ -56,9 +56,6 @@
      </item>
      <item row="5" column="3">
       <widget class="QTextEdit" name="te_etapes"/>
-     </item>
-     <item row="1" column="3">
-      <widget class="QLineEdit" name="le_type"/>
      </item>
      <item row="6" column="3">
       <widget class="QComboBox" name="cb_image"/>
@@ -156,6 +153,11 @@
            <string>Quantités</string>
           </property>
          </column>
+         <column>
+          <property name="text">
+           <string>Unité</string>
+          </property>
+         </column>
         </widget>
        </item>
        <item>
@@ -178,13 +180,61 @@
        </item>
       </layout>
      </item>
+     <item row="1" column="3">
+      <widget class="QComboBox" name="cb_type">
+       <item>
+        <property name="text">
+         <string>Autre</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Boisson</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Légume</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Fruit</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Viande</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Poisson</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Fromage</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Dessert</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Plat</string>
+        </property>
+       </item>
+      </widget>
+     </item>
     </layout>
    </item>
   </layout>
  </widget>
  <tabstops>
   <tabstop>le_nom</tabstop>
-  <tabstop>le_type</tabstop>
   <tabstop>tableIngredients</tabstop>
   <tabstop>tbRetirerIng</tabstop>
   <tabstop>tbAjouterIng</tabstop>

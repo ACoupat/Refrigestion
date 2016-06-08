@@ -31,6 +31,7 @@ Ingredient* FenetreAjoutIngredient::creerIngredient()
 
 }
 
+
 FenetreAjoutIngredient::~FenetreAjoutIngredient()
 {
     delete ui;

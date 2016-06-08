@@ -23,7 +23,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->boutonAjoutRecette, SIGNAL(clicked(bool)), this, SLOT(ouvrirFenetreAjoutRecette()));
     fenAI = new FenetreAjoutIngredient(this);
     fenAR = new FenetreAjoutRecette(this);
-    creerVignettesDemarrage();
+    creerVignettesIngredientDemarrage();
+    creerVignettesRecettesDemarrage();
+    GestionDeFichiers::creerRecette("recette.rfg");
     //Test
     /*for(int i=0;i<3;++i)
     {
@@ -78,7 +80,7 @@ void MainWindow::ajoutRecette()
     recettes << nouvelleRecette;
 }
 
-void MainWindow::creerVignettesDemarrage()
+void MainWindow::creerVignettesIngredientDemarrage()
 {
     QList<Ingredient*> listIng = GestionDeFichiers::listeIngredientsFichier();
     if (listIng.size() == 0)
@@ -99,4 +101,26 @@ void MainWindow::creerVignettesDemarrage()
 
     }
 
+}
+
+void MainWindow::creerVignettesRecettesDemarrage()
+{
+    QDir rep("Recettes");
+    QStringList filters;
+    filters << "*.rfg";
+    QStringList listeRep = rep.entryList(filters);
+    if(listeRep.size()!=0)
+    {
+        foreach(QString chemin, listeRep)
+        {
+            Recette* nouvelleRecette = GestionDeFichiers::creerRecette(chemin);
+            VignetteRecette *newVignetteRecette = new VignetteRecette(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX,nouvelleRecette,this);
+            ui->grilleRecettes->addWidget(newVignetteRecette, recettes.size() / NB_COLONNE_MAX, recettes.size() % NB_COLONNE_MAX);
+            recettes << nouvelleRecette;
+        }
+    }
+    else
+    {
+        qDebug()<< "liste Vide";
+    }
 }

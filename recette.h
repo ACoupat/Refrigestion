@@ -7,16 +7,19 @@
 class Recette
 {
 public:
-    explicit Recette(QString nom, QString dureePrep, QList<Ingredient> listeIng,QString etapesPrep,QString typeRecette, QString cheminImage);
+    explicit Recette(QString nom, QString dureePrep, QList<QString> listeIng,QString etapesPrep,QString typeRecette, QString cheminImage);
     QString getNom();
     QString getDureePreparation();
     QString getCheminImage();
+    QString getEtapesPreparation();
     void creerFichierRecette();
+    QList<QString> getListIngredients();
+    QString getTypeRecette();
     ~Recette();
 private :
     QString nom;
     QString dureePreparation;
-    QList<Ingredient> listeIngredients;
+    QList<QString> listeIngredients;
     QString etapesPreparation;
     QString typeRecette;
     QString cheminImage;

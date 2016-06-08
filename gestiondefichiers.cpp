@@ -12,11 +12,6 @@ using namespace std;
 
 GestionDeFichiers::GestionDeFichiers()
 {
-    //qDebug()<< "Salut je suis un Lutiné";
-    /*cout << "Salut je suis un Lutiné" << endl;
-    ControleEspace("Salut je suis un Lutiné");*/
-    ajoutFichier(NULL,new Ingredient("TomateBite",1,12,"3",QDate(2018,8,8),"Coucou.tamere"));
-    qDebug() << ajoutFichier(new Recette("duhubvoqidufbaep","10 min mais 30 min",QList<Ingredient>(),"Mettre des trucs dans le tacos","Alarache","tacos.jpg"),NULL);
 
 }
 /*
@@ -49,8 +44,8 @@ int GestionDeFichiers::ajoutFichier(Recette* recette, Ingredient* ing)//Static ?
     }
     else if(recette != NULL && ing == NULL)
     {
-           QString nomFichier = "Recettes/"+recette->getNom()+".rfg";
-           qDebug() << nomFichier;
+        QString nomFichier = "Recettes/"+recette->getNom()+".rfg";
+
         QFile fichier(nomFichier);
 
         if(fichier.open(QIODevice::ReadWrite | QIODevice::Append))
@@ -71,10 +66,6 @@ int GestionDeFichiers::ajoutFichier(Recette* recette, Ingredient* ing)//Static ?
     {
         return 1;
     }
-
-
-
-
 }
 
 QString GestionDeFichiers::creerLigneIngredient(Ingredient *ing)
@@ -86,8 +77,17 @@ QString GestionDeFichiers::creerLigneIngredient(Ingredient *ing)
 
 QString GestionDeFichiers::creerStringRecette(Recette* recette)
 {
+    //Vérifier que le fichier n'existe pas déjà
     QString ligne(recette->getNom());
-    ligne += "\n"+ recette->getDureePreparation() +"\n"+ recette->getCheminImage()+"\n" ;//à compléter
+    ligne += "\n"+ recette->getDureePreparation();
+    ligne += "\n"+ recette->getTypeRecette()+"\n;\n";
+    int nbIngredients = recette->getListIngredients().size();
+    for(int i = 0; i<nbIngredients; i++)
+    {
+        ligne += "\n"+recette->getListIngredients().at(i);
+    }
+    ligne += "\n;\n" + recette->getEtapesPreparation();
+    ligne += "\n;\n" + recette->getCheminImage()+"\n" ;
     return ligne;
 }
 
@@ -112,7 +112,7 @@ Ingredient* GestionDeFichiers::creerIngredient(QString ligneFichier)
         c = ligneFichier[i];
 
     }
-    qDebug() << nom;
+
     i++;
     //Récupération de la date
     for(int j=0; j<2; ++j)
@@ -139,7 +139,7 @@ Ingredient* GestionDeFichiers::creerIngredient(QString ligneFichier)
     annee = dateTab[2].toInt();
 
     QDate datePeremption(annee,mois,jour);
-    qDebug() << datePeremption.toString("dd.MM.yyyy");
+
     //Récupération de la quantité
     i++;
     c = ligneFichier[i];
@@ -148,9 +148,8 @@ Ingredient* GestionDeFichiers::creerIngredient(QString ligneFichier)
         quantite = quantite + c;
         i++;
         c = ligneFichier[i];
-        qDebug() << c;
     }
-    qDebug() << quantite;
+
     i++;
     c = ligneFichier[i];
     //Récupération de l'unité
@@ -160,7 +159,7 @@ Ingredient* GestionDeFichiers::creerIngredient(QString ligneFichier)
         i++;
         c = ligneFichier[i];
     }
-    qDebug() << unite;
+
     i++;
     c = ligneFichier[i];
     //Récupération du type
@@ -172,7 +171,7 @@ Ingredient* GestionDeFichiers::creerIngredient(QString ligneFichier)
     }
     i++;
     c = ligneFichier[i];
-    qDebug() << type;
+
     //Récupération du chemin de l'image
     while(c != ';')
     {
@@ -180,11 +179,55 @@ Ingredient* GestionDeFichiers::creerIngredient(QString ligneFichier)
         i++;
         c = ligneFichier[i];
     }
-    qDebug() << cheminImage;
-
 
     Ingredient* nouvelIngredient = new Ingredient(nom,type.toInt(),quantite.toDouble(),unite,datePeremption,cheminImage);
     return nouvelIngredient;
+}
+
+Recette* GestionDeFichiers::creerRecette(QString nomFichier)
+{
+    QString nom;
+    QString dureePrep;
+    QList<QString> listIng;
+    QString etapesPrep;
+    QString type;
+    QString cheminImage;
+    QString strTemp;
+
+    QFile fichier("Recettes/"+nomFichier);
+    if(fichier.open(QIODevice::ReadOnly))
+    {
+        QTextStream flux(&fichier);
+        while(!flux.atEnd())
+        {
+            nom = flux.readLine();
+            dureePrep = flux.readLine();
+            type = flux.readLine();
+            flux.readLine();
+            strTemp = flux.readLine();
+            while(strTemp != ";")
+            {
+                listIng << strTemp;
+                strTemp = flux.readLine();
+            }
+            strTemp = flux.readLine();
+            while(strTemp != ";")
+            {
+                etapesPrep += strTemp+"\n";
+                strTemp = flux.readLine();
+            }
+            cheminImage = flux.readLine();
+        }
+    }
+    qDebug() << "là";
+    qDebug() << nom;
+    qDebug() << dureePrep;
+    qDebug() << listIng;
+    qDebug() << etapesPrep;
+    qDebug() << type;
+    qDebug() << cheminImage;
+    Recette* recette = new Recette(nom,dureePrep,listIng,etapesPrep,type,cheminImage);
+    return recette;
 }
 
 QList<Ingredient*> GestionDeFichiers::listeIngredientsFichier()

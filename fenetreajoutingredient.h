@@ -19,6 +19,7 @@ public:
 
 private:
     Ui::FenetreAjoutIngredient *ui;
+    QList<QString> creerListeIngredients();
 
 #endif // FENETREAJOUTINGREDIENT_H
 

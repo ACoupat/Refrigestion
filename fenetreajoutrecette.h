@@ -3,6 +3,8 @@
 
 #include <QDialog>
 #include <recette.h>
+#include <gestiondefichiers.h>
+#include <QAbstractItemModel>
 
 namespace Ui {
 class FenetreAjoutRecette;
@@ -19,7 +21,7 @@ public:
 
 private:
     Ui::FenetreAjoutRecette *ui;
-
+    QList<QString> creerListeIngredients();
 private slots:
     void ajouterLigneTableIng();
     void retirerLigneTableIng();
