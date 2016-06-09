@@ -240,12 +240,104 @@ QList<Ingredient*> GestionDeFichiers::listeIngredientsFichier()
         QTextStream flux(&fichier);
         while(!flux.atEnd())
         {
-
             QString ligne = flux.readLine();
             listIng << creerIngredient(ligne);
         }
+        fichier.close();
     }
      return listIng;
+}
+
+int GestionDeFichiers::supprimerIngredient(Ingredient* ing)
+{
+    QFile fichier("listeIngredients.rfg");
+    if(fichier.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        qDebug() << "Fichier Ingredients ouvert";
+        QString contenuTemp;
+        QTextStream flux(&fichier);
+        QString ligneIng = creerLigneIngredient(ing);
+        ligneIng = ligneIng.left(ligneIng.size()-1);
+        while(!flux.atEnd())
+        {
+            QString ligne = flux.readLine();
+            qDebug() << "ligneIng : " << ligneIng;
+            qDebug() << "ligne    : " << ligne;
+            qDebug() << "Comparaison :" << ligne.compare(ligneIng);
+            if(ligne.compare(ligneIng)!=0)
+            {
+                contenuTemp += ligne +"\n";
+            }
+        }
+        fichier.close();
+        if(fichier.open(QIODevice::WriteOnly | QIODevice::Truncate))
+        {
+           flux << contenuTemp;
+           fichier.close();
+           return 0;
+        }
+    }
+    return 1;
+}
+
+int GestionDeFichiers::reecrireFichier(QList<Ingredient*> listIng)
+{
+    QFile fichier("listeIngredients.rfg");
+    if(fichier.open(QIODevice::WriteOnly | QIODevice::Truncate))
+    {
+        QTextStream flux(&fichier);
+        foreach(Ingredient* ing , listIng)
+        {
+            flux << creerLigneIngredient(ing);
+        }
+    }
+        fichier.close();
+}
+
+
+int GestionDeFichiers::modifierQuantiteIngredient(Ingredient* ing)
+{
+    QFile fichier("listeIngredients.rfg");
+    qDebug() << "Fichier Ingredients ouvert";
+    QString contenuTemp;
+    QTextStream flux(&fichier);
+    QString ligneIng = creerLigneIngredient(ing);
+    ligneIng = ligneIng.left(ligneIng.size()-1);
+
+    if(fichier.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        qDebug() << "Entree";
+        while(!flux.atEnd())
+        {
+        QString ligne = flux.readLine();
+        //mauvaise détection de la ligne
+        if(ligne.compare(ligneIng)== -1)//si c'est la même
+        {
+            qDebug() << "C'est la même";
+            qDebug() << "ligneIng    : " << ligneIng;
+            qDebug() << "ligne       : " << ligne;
+            qDebug() << "Comparaison :" << ligne.compare(ligneIng);
+            contenuTemp += ligneIng +"\n";
+        }
+        else
+        {
+            qDebug() << "C'est pas la même";
+            qDebug() << "ligneIng    : " << ligneIng;
+            qDebug() << "ligne       : " << ligne;
+            qDebug() << "Comparaison :" << ligne.compare(ligneIng);
+            contenuTemp += ligne +"\n";
+        }
+    }
+    fichier.close();
+    if(fichier.open(QIODevice::WriteOnly | QIODevice::Truncate))
+    {
+       flux << contenuTemp;
+       fichier.close();
+       return 0;
+    }
+
+    return 1;
+    }
 }
 
 void GestionDeFichiers::ControleEspace(QString Nom)

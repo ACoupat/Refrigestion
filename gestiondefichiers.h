@@ -16,6 +16,9 @@ public:
     static Ingredient* creerIngredient(QString ligneFichier);
     static Recette* creerRecette(QString nomFichier);
     static QList<Ingredient*> listeIngredientsFichier();
+    static int supprimerIngredient(Ingredient* ing);
+    static int modifierQuantiteIngredient(Ingredient* ing);
+    static int reecrireFichier(QList<Ingredient*> listIng);
 };
 
 #endif // GESTIONDEFICHIERS_H

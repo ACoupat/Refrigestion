@@ -49,7 +49,13 @@ public:
 "{\n"
 "	font: bold 18px;\n"
 "}\n"
-"                       "));
+"\n"
+"QWidget#VignetteRecette:hover\n"
+"{\n"
+"	border: 3px solid black;\n"
+"	background-color :blue;\n"
+"	border-radius:20px;\n"
+"}           "));
         verticalLayout = new QVBoxLayout(VignetteRecette);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         labelNom = new QLabel(VignetteRecette);

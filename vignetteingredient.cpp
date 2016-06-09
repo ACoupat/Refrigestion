@@ -1,7 +1,7 @@
 #include "vignetteingredient.h"
 #include "ui_vignetteingredient.h"
 
-VignetteIngredient::VignetteIngredient(int width,Ingredient* ingredient, QWidget *parent) :
+VignetteIngredient::VignetteIngredient(int width, Ingredient* ingredient, QList<Ingredient*>* listIng, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::VignetteIngredient)
 {
@@ -10,6 +10,7 @@ VignetteIngredient::VignetteIngredient(int width,Ingredient* ingredient, QWidget
     connect(ui->pushButton, SIGNAL(clicked(bool)), this, SLOT(retraitQuantite()));
     connect(ui->pushButton_2, SIGNAL(clicked(bool)), this, SLOT(ajoutQuantite()));
     this->ingredient = ingredient;
+    this->listIng = listIng;
     this->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
     this->setMaximumWidth(width);
     this->setMaximumHeight(width);
@@ -23,7 +24,9 @@ VignetteIngredient::VignetteIngredient(int width,Ingredient* ingredient, QWidget
     ui->pushButton_2->setMask(QRegion(forme));
 
     QString color = ingredient->getTypeColor();
-    this->setStyleSheet("QWidget#VignetteIngredient{border: 3px solid black;background-color : " + color + ";border-radius:20px;}QLabel{font: bold 18px;}");
+    this->setStyleSheet("QWidget#VignetteIngredient{border: 3px solid black;background-color : " + color + ";border-radius:20px;}"
+                        "QLabel{font: bold 18px;} "
+                        "QWidget#VignetteIngredient:hover{border: 3px solid black;background-color :blue;border-radius:20px; } ");
     initLabels();
     this->show();
 }
@@ -31,13 +34,19 @@ VignetteIngredient::VignetteIngredient(int width,Ingredient* ingredient, QWidget
 void VignetteIngredient::ajoutQuantite() {
     ingredient->setQuantite(+1);
     ui->label_quantite->setText(QString::number(ingredient->getQuantite()) + " " + ingredient->getUnite());
-
+    GestionDeFichiers::reecrireFichier(*listIng);
 }
 
 void VignetteIngredient::retraitQuantite() {
     ingredient->setQuantite(-1);
     ui->label_quantite->setText(QString::number(ingredient->getQuantite()) + " " + ingredient->getUnite());
-    if(ingredient->getQuantite() == 0) this->deleteLater();
+     GestionDeFichiers::reecrireFichier(*listIng);
+    if(ingredient->getQuantite() == 0)
+    {
+        this->deleteLater();
+        listIng->removeOne(ingredient);
+        GestionDeFichiers::reecrireFichier(*listIng);//supprimer complètement la ligne
+    }
 }
 
 void VignetteIngredient::initLabels()

@@ -63,7 +63,7 @@ void MainWindow::ajoutIngredient()
     else {
         fenAI->close();
         fenAI = new FenetreAjoutIngredient(this);
-        VignetteIngredient *newVignetteIngredient = new VignetteIngredient(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX,nouvelIngredient,this);
+        VignetteIngredient *newVignetteIngredient = new VignetteIngredient(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX,nouvelIngredient,&ingredients,this);
 
         ui->grilleIngredients->addWidget(newVignetteIngredient, ingredients.size() / NB_COLONNE_MAX, ingredients.size() % NB_COLONNE_MAX);
         ingredients << nouvelIngredient;
@@ -85,16 +85,13 @@ void MainWindow::creerVignettesIngredientDemarrage()
     QList<Ingredient*> listIng = GestionDeFichiers::listeIngredientsFichier();
     if (listIng.size() == 0)
     {
-        QMessageBox msgBox;
-        msgBox.setWindowFlags(Qt::Popup);
-        msgBox.setText("Erreur de chargement du fichier Ingredients");
-        msgBox.exec();
+        qDebug() << "Le fichier listIgredients.rfg est vide";
     }
     else
     {
         foreach (Ingredient* ing, listIng)
         {
-            VignetteIngredient *newVignetteIngredient = new VignetteIngredient(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX,ing,this);
+            VignetteIngredient *newVignetteIngredient = new VignetteIngredient(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX,ing,&ingredients,this);
             ui->grilleIngredients->addWidget(newVignetteIngredient, ingredients.size() / NB_COLONNE_MAX, ingredients.size() % NB_COLONNE_MAX);
             ingredients << ing;
         }
@@ -123,4 +120,9 @@ void MainWindow::creerVignettesRecettesDemarrage()
     {
         qDebug()<< "liste Vide";
     }
+}
+
+QList<Ingredient*> MainWindow::getIngredients()
+{
+    return this->ingredients;
 }

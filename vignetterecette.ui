@@ -24,7 +24,13 @@ QLabel
 {
 	font: bold 18px;
 }
-                       </string>
+
+QWidget#VignetteRecette:hover
+{
+	border: 3px solid black;
+	background-color :blue;
+	border-radius:20px;
+}           </string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

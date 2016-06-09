@@ -43,11 +43,15 @@ private:
     void creerVignettesIngredientDemarrage();
     void creerVignettesRecettesDemarrage();
 
+public:
+    QList<Ingredient*> getIngredients();
+
 public slots:
     void ouvrirFenetreAjoutIngredient();
     void ajoutIngredient();
     void ouvrirFenetreAjoutRecette();
     void ajoutRecette();
+
 };
 
 #endif // MAINWINDOW_H

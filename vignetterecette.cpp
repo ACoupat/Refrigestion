@@ -12,7 +12,9 @@ VignetteRecette::VignetteRecette(int width,Recette* recette, QWidget *parent) :
     this->setMaximumWidth(width);
     this->setMaximumHeight(width);
     ui->labelImage->setMinimumHeight(width * 0.5);
-
+    this->setStyleSheet("QWidget#VignetteRecette{border: 3px solid black;background-color :lightgreen;border-radius:20px;}"
+                        "QLabel{font: bold 18px;}"
+                        "QWidget#VignetteRecette:hover{border: 3px solid black;background-color :blue;border-radius:20px;}");
     initLabels();
 
     this->show();
@@ -22,7 +24,7 @@ void VignetteRecette::initLabels()
 {
     ui->labelNom->setText(recette->getNom());
     ui->labelDureePrep->setText((recette->getDureePreparation()));
-    ui->labelImage->setStyleSheet("QLabel#labelImage{ border-image: url("+recette->getCheminImage()+") 0 0 0 0 stretch stretch; }");
+    ui->labelImage->setStyleSheet("QLabel#labelImage{ border-image: url("+recette->getCheminImage()+") 0 0 0 0 stretch stretch; }" );
     qDebug()<<recette->getCheminImage();
     repaint();
 }
