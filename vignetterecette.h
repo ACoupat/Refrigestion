@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <recette.h>
 #include <QPainter>
+#include <fenetredetailrecette.h>
 
 namespace Ui {
 class VignetteRecette;
@@ -22,6 +23,10 @@ private:
     Ui::VignetteRecette *ui;
     void initLabels();
     void paintEvent(QPaintEvent *pe);
+
+protected:
+    void mousePressEvent ( QMouseEvent * event );
+
 };
 
 #endif // VIGNETTERECETTE_H

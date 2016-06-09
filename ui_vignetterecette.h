@@ -39,6 +39,7 @@ public:
         if (VignetteRecette->objectName().isEmpty())
             VignetteRecette->setObjectName(QStringLiteral("VignetteRecette"));
         VignetteRecette->resize(405, 330);
+        VignetteRecette->setCursor(QCursor(Qt::PointingHandCursor));
         VignetteRecette->setStyleSheet(QLatin1String("QWidget#VignetteRecette\n"
 "{\n"
 "	border: 3px solid black;\n"

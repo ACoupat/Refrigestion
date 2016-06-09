@@ -43,9 +43,24 @@ void VignetteIngredient::retraitQuantite() {
      GestionDeFichiers::reecrireFichier(*listIng);
     if(ingredient->getQuantite() == 0)
     {
-        this->deleteLater();
-        listIng->removeOne(ingredient);
-        GestionDeFichiers::reecrireFichier(*listIng);//supprimer complètement la ligne
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Attention");
+        msgBox.setText("Vous êtes sur le point de supprimer définitivement cet ingrédient.\nEtes vous sûr de vouloir continuer ?");
+        msgBox.setStandardButtons(QMessageBox::Yes);
+        msgBox.addButton(QMessageBox::No);
+        msgBox.setDefaultButton(QMessageBox::No);
+        if(msgBox.exec() == QMessageBox::Yes)
+        {
+            this->deleteLater();
+            listIng->removeOne(ingredient);
+
+        }
+        else
+        {
+            ingredient->setQuantite(+1);
+            ui->label_quantite->setText(QString::number(ingredient->getQuantite()) + " " + ingredient->getUnite());
+        }
+        GestionDeFichiers::reecrireFichier(*listIng);
     }
 }
 

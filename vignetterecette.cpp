@@ -17,6 +17,7 @@ VignetteRecette::VignetteRecette(int width,Recette* recette, QWidget *parent) :
                         "QWidget#VignetteRecette:hover{border: 3px solid black;background-color :blue;border-radius:20px;}");
     initLabels();
 
+
     this->show();
 }
 
@@ -36,6 +37,13 @@ void VignetteRecette::paintEvent(QPaintEvent *pe) {
     QPainter p(this);
     style()->drawPrimitive(QStyle::PE_Widget, &o, &p, this);
 };
+
+void VignetteRecette::mousePressEvent ( QMouseEvent * event )
+{
+    fenetreDetailRecette* fenDR = new fenetreDetailRecette(recette);
+    fenDR->show();
+
+}
 
 VignetteRecette::~VignetteRecette()
 {

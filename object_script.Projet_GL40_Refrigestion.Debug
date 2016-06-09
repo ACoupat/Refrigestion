@@ -8,10 +8,12 @@ INPUT(
 ./debug\vignetteingredient.o
 ./debug\vignetterecette.o
 ./debug\gestiondefichiers.o
+./debug\fenetredetailrecette.o
 ./debug\qrc_ressources.o
 ./debug\moc_mainwindow.o
 ./debug\moc_fenetreajoutingredient.o
 ./debug\moc_fenetreajoutrecette.o
 ./debug\moc_vignetteingredient.o
 ./debug\moc_vignetterecette.o
+./debug\moc_fenetredetailrecette.o
 );

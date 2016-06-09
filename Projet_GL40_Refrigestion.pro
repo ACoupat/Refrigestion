@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     fenetreajoutrecette.cpp \
     vignetteingredient.cpp \
     vignetterecette.cpp \
-    gestiondefichiers.cpp
+    gestiondefichiers.cpp \
+    fenetredetailrecette.cpp
 
 HEADERS  += mainwindow.h \
     ingredient.h \
@@ -29,13 +30,15 @@ HEADERS  += mainwindow.h \
     fenetreajoutrecette.h \
     vignetteingredient.h \
     vignetterecette.h \
-    gestiondefichiers.h
+    gestiondefichiers.h \
+    fenetredetailrecette.h
 
 FORMS    += mainwindow.ui \
     fenetreajoutingredient.ui \
     fenetreajoutrecette.ui \
     vignetteingredient.ui \
-    vignetterecette.ui
+    vignetterecette.ui \
+    fenetredetailrecette.ui
 
 DISTFILES +=
 
