@@ -29,6 +29,12 @@ FenetreAjoutRecette::FenetreAjoutRecette(QWidget *parent) :
 
 Recette* FenetreAjoutRecette::creerRecette()
 {
+    qDebug() << ui->le_nom->text() ;
+    qDebug()<< ui->le_duree->text();
+    qDebug()<< creerListeIngredients();
+    qDebug()<< ui->te_etapes->toPlainText();
+    qDebug()<< ui->cb_type->currentText() ;
+    qDebug()<< ui->cb_image->currentData().toString();
     Recette* recetteTemp = new Recette(ui->le_nom->text(),ui->le_duree->text(),creerListeIngredients(),ui->te_etapes->toPlainText(),ui->cb_type->currentText(),ui->cb_image->currentData().toString());
     GestionDeFichiers::ajoutFichier(recetteTemp,NULL);
     return recetteTemp;
@@ -50,19 +56,21 @@ void FenetreAjoutRecette::retirerLigneTableIng()
 QList<QString> FenetreAjoutRecette::creerListeIngredients()
 {
     QList<QString> liste;
+
     int nbIngredients = ui->tableIngredients->rowCount();
 
     for(int i=0; i<nbIngredients; i++)
     {
-        QVariant varTemp0 = ui->tableIngredients->item(i,0)->data(0);
+        QVariant varTemp0 = ui->tableIngredients->item(i,0)->data(0);//erreur si nom vide
         QVariant varTemp1 = ui->tableIngredients->item(i,1)->data(0);
         QVariant varTemp2 = ui->tableIngredients->item(i,2)->data(0);
         QString strTemp;
 
         strTemp = strTemp + varTemp0.toString() + " (" + varTemp1.toString() + varTemp2.toString() +")" ;
         liste << strTemp;
-    }
+    }    qDebug() << "je passe là";
     return liste;
+
 }
 
 FenetreAjoutRecette::~FenetreAjoutRecette()

@@ -5,6 +5,7 @@
 #include <recette.h>
 #include <gestiondefichiers.h>
 #include <QAbstractItemModel>
+#include <QDebug>
 
 namespace Ui {
 class FenetreAjoutRecette;

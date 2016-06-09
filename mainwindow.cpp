@@ -74,10 +74,22 @@ void MainWindow::ajoutRecette()
 {
     Recette* nouvelleRecette = fenAR->creerRecette();
 
-    VignetteRecette *newVignetteRecette = new VignetteRecette(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX,nouvelleRecette,this);
+    if(nouvelleRecette->getNom() == "")
+    {
+            QMessageBox msgBox;
+            msgBox.setWindowFlags(Qt::Popup);
+            msgBox.setText("Erreur. Veuillez renseigner le champ 'Nom'.");
+            msgBox.exec();
+    }
+    else
+    {
+       fenAR->close();
+       fenAR = new FenetreAjoutRecette(this);
+        VignetteRecette *newVignetteRecette = new VignetteRecette(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX,nouvelleRecette,this);
+        ui->grilleRecettes->addWidget(newVignetteRecette, recettes.size() / NB_COLONNE_MAX, recettes.size() % NB_COLONNE_MAX);
+        recettes << nouvelleRecette;
+    }
 
-    ui->grilleRecettes->addWidget(newVignetteRecette, recettes.size() / NB_COLONNE_MAX, recettes.size() % NB_COLONNE_MAX);
-    recettes << nouvelleRecette;
 }
 
 void MainWindow::creerVignettesIngredientDemarrage()
