@@ -30,6 +30,9 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    QList<Ingredient*> getIngredients();
+    bool supprimerVignette(VignetteIngredient*);
+    void reecrireFichier();
 
 private:
     Ui::MainWindow *ui;
@@ -43,8 +46,6 @@ private:
     void creerVignettesIngredientDemarrage();
     void creerVignettesRecettesDemarrage();
 
-public:
-    QList<Ingredient*> getIngredients();
 
 public slots:
     void ouvrirFenetreAjoutIngredient();

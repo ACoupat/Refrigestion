@@ -6,7 +6,7 @@
 #include <QDebug>
 #include <QPainter>
 #include <gestiondefichiers.h>
-#include <mainwindow.h>
+class MainWindow;
 
 namespace Ui {
 class VignetteIngredient;
@@ -18,13 +18,14 @@ class VignetteIngredient : public QWidget
 
        friend class Ingredient;
 public:
-    explicit VignetteIngredient(int width, Ingredient* ingModel, QList<Ingredient *>* listIng,QWidget *parent = 0);
+    explicit VignetteIngredient(int width, Ingredient* ingModel, MainWindow *parent);
     ~VignetteIngredient();
+    Ingredient *getIngredient();
 
 private:
     Ui::VignetteIngredient *ui;
+    MainWindow *window;
     Ingredient* ingredient;
-    QList<Ingredient*>* listIng;
     void paintEvent(QPaintEvent *pe);
 
     void initLabels();

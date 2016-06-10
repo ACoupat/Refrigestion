@@ -63,7 +63,7 @@ void MainWindow::ajoutIngredient()
     else {
         fenAI->close();
         fenAI = new FenetreAjoutIngredient(this);
-        VignetteIngredient *newVignetteIngredient = new VignetteIngredient(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX,nouvelIngredient,&ingredients,this);
+        VignetteIngredient *newVignetteIngredient = new VignetteIngredient(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX,nouvelIngredient,this);
 
         ui->grilleIngredients->addWidget(newVignetteIngredient, ingredients.size() / NB_COLONNE_MAX, ingredients.size() % NB_COLONNE_MAX);
         ingredients << nouvelIngredient;
@@ -103,7 +103,7 @@ void MainWindow::creerVignettesIngredientDemarrage()
     {
         foreach (Ingredient* ing, listIng)
         {
-            VignetteIngredient *newVignetteIngredient = new VignetteIngredient(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX,ing,&ingredients,this);
+            VignetteIngredient *newVignetteIngredient = new VignetteIngredient(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX, ing, this);
             ui->grilleIngredients->addWidget(newVignetteIngredient, ingredients.size() / NB_COLONNE_MAX, ingredients.size() % NB_COLONNE_MAX);
             ingredients << ing;
         }
@@ -132,6 +132,40 @@ void MainWindow::creerVignettesRecettesDemarrage()
     {
         qDebug()<< "liste Vide";
     }
+}
+
+bool MainWindow::supprimerVignette(VignetteIngredient *vignette)
+{
+    QMessageBox msgBox;
+    msgBox.setWindowFlags(Qt::Popup);
+    msgBox.setText("Vous êtes sur le point de supprimer définitivement cet ingrédient.\nEtes vous sûr de vouloir continuer ?");
+    msgBox.setStandardButtons(QMessageBox::Yes);
+    msgBox.addButton(QMessageBox::No);
+    msgBox.setDefaultButton(QMessageBox::No);
+    if(msgBox.exec() == QMessageBox::Yes)
+    {
+        vignette->deleteLater();
+        ingredients.removeOne(vignette->getIngredient());
+        foreach(Ingredient *ingredient, ingredients)
+        {
+            VignetteIngredient *newVignetteIngredient = new VignetteIngredient(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX, ingredient, this);
+        }
+    }
+    else
+    {
+        return false;
+        /*
+        ingredient->setQuantite(+1);
+        ui->label_quantite->setText(QString::number(ingredient->getQuantite()) + " " + ingredient->getUnite());
+        */
+    }
+    reecrireFichier();
+    return true;
+}
+
+void MainWindow::reecrireFichier()
+{
+    GestionDeFichiers::reecrireFichier(ingredients);
 }
 
 QList<Ingredient*> MainWindow::getIngredients()

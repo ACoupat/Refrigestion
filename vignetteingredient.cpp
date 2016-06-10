@@ -1,16 +1,16 @@
 #include "vignetteingredient.h"
 #include "ui_vignetteingredient.h"
+#include "mainwindow.h"
 
-VignetteIngredient::VignetteIngredient(int width, Ingredient* ingredient, QList<Ingredient*>* listIng, QWidget *parent) :
+VignetteIngredient::VignetteIngredient(int width, Ingredient* ingredient, MainWindow *parent) :
     QWidget(parent),
     ui(new Ui::VignetteIngredient)
 {
     ui->setupUi(this);
-
+    window = parent;
     connect(ui->pushButton, SIGNAL(clicked(bool)), this, SLOT(retraitQuantite()));
     connect(ui->pushButton_2, SIGNAL(clicked(bool)), this, SLOT(ajoutQuantite()));
     this->ingredient = ingredient;
-    this->listIng = listIng;
     this->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
     this->setMaximumWidth(width);
     this->setMaximumHeight(width);
@@ -34,34 +34,19 @@ VignetteIngredient::VignetteIngredient(int width, Ingredient* ingredient, QList<
 void VignetteIngredient::ajoutQuantite() {
     ingredient->setQuantite(+1);
     ui->label_quantite->setText(QString::number(ingredient->getQuantite()) + " " + ingredient->getUnite());
-    GestionDeFichiers::reecrireFichier(*listIng);
+    window->reecrireFichier();
+    //GestionDeFichiers::reecrireFichier(*listIng);
 }
 
 void VignetteIngredient::retraitQuantite() {
     ingredient->setQuantite(-1);
-    ui->label_quantite->setText(QString::number(ingredient->getQuantite()) + " " + ingredient->getUnite());
-     GestionDeFichiers::reecrireFichier(*listIng);
+
+    window->reecrireFichier();
     if(ingredient->getQuantite() == 0)
     {
-        QMessageBox msgBox;
-        msgBox.setWindowTitle("Attention");
-        msgBox.setText("Vous êtes sur le point de supprimer définitivement cet ingrédient.\nEtes vous sûr de vouloir continuer ?");
-        msgBox.setStandardButtons(QMessageBox::Yes);
-        msgBox.addButton(QMessageBox::No);
-        msgBox.setDefaultButton(QMessageBox::No);
-        if(msgBox.exec() == QMessageBox::Yes)
-        {
-            this->deleteLater();
-            listIng->removeOne(ingredient);
-
-        }
-        else
-        {
-            ingredient->setQuantite(+1);
-            ui->label_quantite->setText(QString::number(ingredient->getQuantite()) + " " + ingredient->getUnite());
-        }
-        GestionDeFichiers::reecrireFichier(*listIng);
+        if(!window->supprimerVignette(this)) ingredient->setQuantite(+1);
     }
+    ui->label_quantite->setText(QString::number(ingredient->getQuantite()) + " " + ingredient->getUnite());
 }
 
 void VignetteIngredient::initLabels()
@@ -79,6 +64,11 @@ void VignetteIngredient::paintEvent(QPaintEvent *pe) {
     QPainter p(this);
     style()->drawPrimitive(QStyle::PE_Widget, &o, &p, this);
 };
+
+Ingredient *VignetteIngredient::getIngredient()
+{
+    return ingredient;
+}
 
 VignetteIngredient::~VignetteIngredient()
 {
