@@ -76,18 +76,25 @@ void MainWindow::ajoutRecette()
 
     if(nouvelleRecette->getNom() == "")
     {
-            QMessageBox msgBox;
-            msgBox.setWindowFlags(Qt::Popup);
-            msgBox.setText("Erreur. Veuillez renseigner le champ 'Nom'.");
-            msgBox.exec();
+        QMessageBox msgBox;
+        msgBox.setWindowFlags(Qt::Popup);
+        msgBox.setText("Erreur. Veuillez renseigner le champ 'Nom'.");
+        msgBox.exec();
+    }
+    else if(nouvelleRecette->aucunIngredient())
+    {
+        QMessageBox msgBox;
+        msgBox.setWindowFlags(Qt::Popup);
+        msgBox.setText("Erreur. Veuillez renseigner au moins un ingrédient.");
+        msgBox.exec();
     }
     else
     {
        fenAR->close();
        fenAR = new FenetreAjoutRecette(this);
-        VignetteRecette *newVignetteRecette = new VignetteRecette(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX,nouvelleRecette,this);
-        ui->grilleRecettes->addWidget(newVignetteRecette, recettes.size() / NB_COLONNE_MAX, recettes.size() % NB_COLONNE_MAX);
-        recettes << nouvelleRecette;
+       VignetteRecette *newVignetteRecette = new VignetteRecette(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX,nouvelleRecette,this);
+       ui->grilleRecettes->addWidget(newVignetteRecette, recettes.size() / NB_COLONNE_MAX, recettes.size() % NB_COLONNE_MAX);
+       recettes << nouvelleRecette;
     }
 
 }

@@ -15,6 +15,7 @@ public:
     void creerFichierRecette();
     QList<QString> getListIngredients();
     QString getTypeRecette();
+    bool aucunIngredient();
     ~Recette();
 private :
     QString nom;

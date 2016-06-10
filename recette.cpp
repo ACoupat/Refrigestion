@@ -10,6 +10,17 @@ Recette::Recette(QString nom, QString dureePrep, QList<QString> listeIng,QString
     this->cheminImage = cheminImage;
 }
 
+bool Recette::aucunIngredient()
+{
+    bool aucunIngredient = true;
+    foreach(QString str, this->listeIngredients)
+    {
+        if(str != " ()")
+            aucunIngredient = false;
+    }
+    return aucunIngredient;
+}
+
 QString Recette::getNom()
 {
     return nom;

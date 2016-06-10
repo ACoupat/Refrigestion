@@ -49,8 +49,9 @@ void FenetreAjoutRecette::ajouterLigneTableIng()
 
 void FenetreAjoutRecette::retirerLigneTableIng()
 {
-    ui->tableIngredients->setRowCount(ui->tableIngredients->rowCount()-1);
-    //essayer de trouver comment supprimer la ligne sélectionnée plutôt que la dernière
+    if(ui->tableIngredients->rowCount() > 1)
+        ui->tableIngredients->setRowCount(ui->tableIngredients->rowCount()-1);
+        //essayer de trouver comment supprimer la ligne sélectionnée plutôt que la dernière
 }
 
 QList<QString> FenetreAjoutRecette::creerListeIngredients()
@@ -61,9 +62,25 @@ QList<QString> FenetreAjoutRecette::creerListeIngredients()
 
     for(int i=0; i<nbIngredients; i++)
     {
-        QVariant varTemp0 = ui->tableIngredients->item(i,0)->data(0);//erreur si nom vide
-        QVariant varTemp1 = ui->tableIngredients->item(i,1)->data(0);
-        QVariant varTemp2 = ui->tableIngredients->item(i,2)->data(0);
+        QVariant varTemp0;
+        QVariant varTemp1;
+        QVariant varTemp2;
+        QTableWidgetItem*  qtwi0 = ui->tableIngredients->item(i,0);
+        QTableWidgetItem* qtwi1 = ui->tableIngredients->item(i,1);
+        QTableWidgetItem* qtwi2 = ui->tableIngredients->item(i,2);
+        if(qtwi0 != 0)
+            varTemp0 = qtwi0->data(0);//erreur si nom vide
+        else
+            varTemp0 = "";
+        if(qtwi1 != 0)
+            varTemp1 = qtwi1->data(0);
+        else
+            varTemp1 = "";
+        if(qtwi2 != 0)
+            varTemp2 = qtwi2->data(0);
+        else
+            varTemp2 = "";
+
         QString strTemp;
 
         strTemp = strTemp + varTemp0.toString() + " (" + varTemp1.toString() + varTemp2.toString() +")" ;

@@ -19,6 +19,7 @@ public:
     static int supprimerIngredient(Ingredient* ing);
     static int modifierQuantiteIngredient(Ingredient* ing);
     static int reecrireFichier(QList<Ingredient*> listIng);
+    static bool etudeFaisabilite(Recette* );
 };
 
 #endif // GESTIONDEFICHIERS_H
