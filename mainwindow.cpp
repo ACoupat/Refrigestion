@@ -146,9 +146,14 @@ bool MainWindow::supprimerVignette(VignetteIngredient *vignette)
     {
         vignette->deleteLater();
         ingredients.removeOne(vignette->getIngredient());
+        ui->grilleIngredients = new QGridLayout(ui->scrollAreaWidgetContents);
+        //ui->scrollArea->setLayout(ui->grilleIngredients);
+        //ui->scrollAreaWidgetContents->layout()->addItem(ui->grilleIngredients);
+
         foreach(Ingredient *ingredient, ingredients)
         {
             VignetteIngredient *newVignetteIngredient = new VignetteIngredient(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX, ingredient, this);
+            ui->grilleIngredients->addWidget(newVignetteIngredient, ingredients.size() / NB_COLONNE_MAX, ingredients.size() % NB_COLONNE_MAX);
         }
     }
     else
