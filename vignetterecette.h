@@ -17,6 +17,7 @@ class VignetteRecette : public QWidget
 public:
     explicit VignetteRecette(int width,Recette* recette, QWidget *parent = 0);
     ~VignetteRecette();
+    Recette *getRecette();
 
 private:
     Recette* recette;

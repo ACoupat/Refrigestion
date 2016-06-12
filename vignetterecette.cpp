@@ -45,6 +45,11 @@ void VignetteRecette::mousePressEvent ( QMouseEvent * event )
 
 }
 
+Recette *VignetteRecette::getRecette()
+{
+    return recette;
+}
+
 VignetteRecette::~VignetteRecette()
 {
     delete ui;

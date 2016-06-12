@@ -22,6 +22,7 @@
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -39,7 +40,7 @@ public:
     QScrollArea *scrollArea;
     QWidget *scrollAreaWidgetContents;
     QGridLayout *gridLayout_4;
-    QGridLayout *grilleIngredients;
+    QVBoxLayout *verticalLayout;
     QPushButton *boutonAjoutIngredient;
     QWidget *tab_2;
     QGridLayout *gridLayout_3;
@@ -97,11 +98,11 @@ public:
         gridLayout_4->setSpacing(6);
         gridLayout_4->setContentsMargins(11, 11, 11, 11);
         gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
-        grilleIngredients = new QGridLayout();
-        grilleIngredients->setSpacing(6);
-        grilleIngredients->setObjectName(QStringLiteral("grilleIngredients"));
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setSpacing(6);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
 
-        gridLayout_4->addLayout(grilleIngredients, 0, 0, 1, 1);
+        gridLayout_4->addLayout(verticalLayout, 0, 0, 1, 1);
 
         scrollArea->setWidget(scrollAreaWidgetContents);
 

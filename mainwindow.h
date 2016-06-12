@@ -31,17 +31,22 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     QList<Ingredient*> getIngredients();
-    bool supprimerVignette(VignetteIngredient*);
+    bool supprimerVignetteIngredient(VignetteIngredient*);
+    bool supprimerVignetteRecette(VignetteRecette*);
     void reecrireFichier();
 
 private:
     Ui::MainWindow *ui;
     QList<Recette*> recettes;
     QList<Ingredient*> ingredients;
+    QList<VignetteIngredient*> vignettesIngredients;
+    QList<VignetteRecette*> vignettesRecettes;
     int screenWidth;
     int screenHeight;
     FenetreAjoutIngredient* fenAI;
     FenetreAjoutRecette* fenAR;
+    QGridLayout *grilleIngredients;
+    QGridLayout *grilleRecettes;
 
     void creerVignettesIngredientDemarrage();
     void creerVignettesRecettesDemarrage();
