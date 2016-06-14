@@ -14,10 +14,10 @@
 #include <fenetreajoutingredient.h>
 #include <fenetreajoutrecette.h>
 #include <vignetteingredient.h>
-#include <vignetterecette.h>
 #include <QMessageBox>
 #include <gestiondefichiers.h>
 #include <QDir>
+#include <vignetterecette.h>
 
 namespace Ui {
 class MainWindow;
@@ -32,7 +32,7 @@ public:
     ~MainWindow();
     QList<Ingredient*> getIngredients();
     bool supprimerVignetteIngredient(VignetteIngredient*);
-    bool supprimerVignetteRecette(VignetteRecette*);
+    bool supprimerVignetteRecette(VignetteRecette *);
     void reecrireFichier();
 
 private:

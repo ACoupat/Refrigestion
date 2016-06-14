@@ -1,6 +1,6 @@
 #include "vignetteingredient.h"
 #include "ui_vignetteingredient.h"
-#include "mainwindow.h"
+#include <mainwindow.h>
 
 VignetteIngredient::VignetteIngredient(int width, Ingredient* ingredient, MainWindow *parent) :
     QWidget(parent),
@@ -63,7 +63,7 @@ void VignetteIngredient::paintEvent(QPaintEvent *pe) {
     o.initFrom(this);
     QPainter p(this);
     style()->drawPrimitive(QStyle::PE_Widget, &o, &p, this);
-};
+}
 
 Ingredient *VignetteIngredient::getIngredient()
 {

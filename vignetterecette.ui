@@ -37,6 +37,13 @@ QWidget#VignetteRecette:hover
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
+    <widget class="QPushButton" name="buttonSuppr">
+     <property name="text">
+      <string>Supprimer recette</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QLabel" name="labelNom">
      <property name="text">
       <string>Gateau au chocolat</string>

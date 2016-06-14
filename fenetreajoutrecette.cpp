@@ -83,9 +83,16 @@ QList<QString> FenetreAjoutRecette::creerListeIngredients()
 
         QString strTemp;
 
-        strTemp = strTemp + varTemp0.toString() + " (" + varTemp1.toString() + varTemp2.toString() +")" ;
-        liste << strTemp;
-    }    qDebug() << "je passe là";
+        if(varTemp0 != "")
+        {
+            strTemp += varTemp0.toString();
+            if(varTemp1 != "")
+            {
+                strTemp += " (" + varTemp1.toString() + varTemp2.toString() +")" ;
+            }
+            liste << strTemp;
+        }
+    }
     return liste;
 
 }

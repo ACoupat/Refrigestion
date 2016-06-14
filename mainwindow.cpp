@@ -24,7 +24,9 @@ MainWindow::MainWindow(QWidget *parent) :
     fenAI = new FenetreAjoutIngredient(this);
     fenAR = new FenetreAjoutRecette(this);
     grilleIngredients = new QGridLayout();
+    grilleRecettes = new QGridLayout();
     ui->verticalLayout->addLayout(grilleIngredients);
+    ui->verticalLayout_2->addLayout(grilleRecettes);
     creerVignettesIngredientDemarrage();
     creerVignettesRecettesDemarrage();
     GestionDeFichiers::creerRecette("recette.rfg");
@@ -95,7 +97,7 @@ void MainWindow::ajoutRecette()
        fenAR->close();
        fenAR = new FenetreAjoutRecette(this);
        VignetteRecette *newVignetteRecette = new VignetteRecette(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX,nouvelleRecette,this);
-       ui->grilleRecettes->addWidget(newVignetteRecette, recettes.size() / NB_COLONNE_MAX, recettes.size() % NB_COLONNE_MAX);
+       grilleRecettes->addWidget(newVignetteRecette, recettes.size() / NB_COLONNE_MAX, recettes.size() % NB_COLONNE_MAX);
        recettes << nouvelleRecette;
     }
 
@@ -134,7 +136,8 @@ void MainWindow::creerVignettesRecettesDemarrage()
         {
             Recette* nouvelleRecette = GestionDeFichiers::creerRecette(chemin);
             VignetteRecette *newVignetteRecette = new VignetteRecette(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX,nouvelleRecette,this);
-            ui->grilleRecettes->addWidget(newVignetteRecette, recettes.size() / NB_COLONNE_MAX, recettes.size() % NB_COLONNE_MAX);
+            grilleRecettes->addWidget(newVignetteRecette, recettes.size() / NB_COLONNE_MAX, recettes.size() % NB_COLONNE_MAX);
+            vignettesRecettes << newVignetteRecette;
             recettes << nouvelleRecette;
         }
     }
@@ -152,15 +155,16 @@ bool MainWindow::supprimerVignetteIngredient(VignetteIngredient *vignette)
     msgBox.setStandardButtons(QMessageBox::Yes);
     msgBox.addButton(QMessageBox::No);
     msgBox.setDefaultButton(QMessageBox::No);
+
     if(msgBox.exec() == QMessageBox::Yes)
     {
         ingredients.removeOne(vignette->getIngredient());
+
         foreach(VignetteIngredient *vignette, vignettesIngredients) vignette->deleteLater();
         vignettesIngredients.clear();
         delete grilleIngredients;
         grilleIngredients = new QGridLayout();
         ui->verticalLayout->addLayout(grilleIngredients);
-
 
         foreach(Ingredient *ingredient, ingredients)
         {
@@ -187,14 +191,15 @@ bool MainWindow::supprimerVignetteRecette(VignetteRecette *vignette)
     msgBox.setDefaultButton(QMessageBox::No);
     if(msgBox.exec() == QMessageBox::Yes)
     {
+        qDebug() << GestionDeFichiers::supprimerFichierRecette(vignette->getRecette());
         recettes.removeOne(vignette->getRecette());
+
+        qDebug() << vignettesRecettes;
         foreach(VignetteRecette *vignette, vignettesRecettes) vignette->deleteLater();
         vignettesRecettes.clear();
         delete grilleRecettes;
         grilleRecettes = new QGridLayout();
-        ui->verticalLayout->addLayout(grilleRecettes);
-
-
+        ui->verticalLayout_2->addLayout(grilleRecettes);
         foreach(Recette *recette, recettes)
         {
             VignetteRecette *newVignetteRecette = new VignetteRecette(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX, recette, this);
@@ -206,7 +211,6 @@ bool MainWindow::supprimerVignetteRecette(VignetteRecette *vignette)
     {
         return false;
     }
-    reecrireFichier();
     return true;
 }
 

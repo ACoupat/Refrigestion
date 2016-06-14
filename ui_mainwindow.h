@@ -47,7 +47,7 @@ public:
     QScrollArea *scrollArea_2;
     QWidget *scrollAreaWidgetContents_2;
     QGridLayout *gridLayout_7;
-    QGridLayout *grilleRecettes;
+    QVBoxLayout *verticalLayout_2;
     QPushButton *boutonAjoutRecette;
     QMenuBar *menuBar;
     QStatusBar *statusBar;
@@ -130,11 +130,11 @@ public:
         gridLayout_7->setSpacing(6);
         gridLayout_7->setContentsMargins(11, 11, 11, 11);
         gridLayout_7->setObjectName(QStringLiteral("gridLayout_7"));
-        grilleRecettes = new QGridLayout();
-        grilleRecettes->setSpacing(6);
-        grilleRecettes->setObjectName(QStringLiteral("grilleRecettes"));
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
 
-        gridLayout_7->addLayout(grilleRecettes, 0, 0, 1, 1);
+        gridLayout_7->addLayout(verticalLayout_2, 0, 0, 1, 1);
 
         scrollArea_2->setWidget(scrollAreaWidgetContents_2);
 
@@ -160,7 +160,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);

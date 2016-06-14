@@ -42,6 +42,7 @@ int GestionDeFichiers::ajoutFichier(Recette* recette, Ingredient* ing)//Static ?
             cout << "Erreur d'ouverture de fichier" << endl;
         }
     }
+    //Pour Créer une recette
     else if(recette != NULL && ing == NULL)
     {
         QString nomFichier = "Recettes/"+recette->getNom()+".rfg";
@@ -84,7 +85,8 @@ QString GestionDeFichiers::creerStringRecette(Recette* recette)
     int nbIngredients = recette->getListIngredients().size();
     for(int i = 0; i<nbIngredients; i++)
     {
-        ligne += "\n"+recette->getListIngredients().at(i);
+        if(recette->getListIngredients().at(i) != " ()")
+            ligne += "\n"+recette->getListIngredients().at(i);
     }
     ligne += "\n;\n" + recette->getEtapesPreparation();
     ligne += "\n;\n" + recette->getCheminImage()+"\n" ;
@@ -219,13 +221,6 @@ Recette* GestionDeFichiers::creerRecette(QString nomFichier)
             cheminImage = flux.readLine();
         }
     }
-    qDebug() << "là";
-    qDebug() << nom;
-    qDebug() << dureePrep;
-    qDebug() << listIng;
-    qDebug() << etapesPrep;
-    qDebug() << type;
-    qDebug() << cheminImage;
     Recette* recette = new Recette(nom,dureePrep,listIng,etapesPrep,type,cheminImage);
     return recette;
 }
@@ -236,7 +231,6 @@ QList<Ingredient*> GestionDeFichiers::listeIngredientsFichier()
     QFile fichier("listeIngredients.rfg");
     if(fichier.open(QIODevice::ReadOnly))
     {
-        qDebug() << "Fichier Ingredients ouvert";
         QTextStream flux(&fichier);
         while(!flux.atEnd())
         {
@@ -306,25 +300,16 @@ int GestionDeFichiers::modifierQuantiteIngredient(Ingredient* ing)
 
     if(fichier.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        qDebug() << "Entree";
         while(!flux.atEnd())
         {
         QString ligne = flux.readLine();
         //mauvaise détection de la ligne
         if(ligne.compare(ligneIng)== -1)//si c'est la même
         {
-            qDebug() << "C'est la même";
-            qDebug() << "ligneIng    : " << ligneIng;
-            qDebug() << "ligne       : " << ligne;
-            qDebug() << "Comparaison :" << ligne.compare(ligneIng);
             contenuTemp += ligneIng +"\n";
         }
         else
         {
-            qDebug() << "C'est pas la même";
-            qDebug() << "ligneIng    : " << ligneIng;
-            qDebug() << "ligne       : " << ligne;
-            qDebug() << "Comparaison :" << ligne.compare(ligneIng);
             contenuTemp += ligne +"\n";
         }
     }
@@ -338,6 +323,12 @@ int GestionDeFichiers::modifierQuantiteIngredient(Ingredient* ing)
 
     return 1;
     }
+}
+bool GestionDeFichiers::supprimerFichierRecette(Recette* recette)
+{
+    QString nomFichier = "Recettes/" + recette->getNom() + ".rfg";
+    qDebug() << nomFichier;
+    return QFile::remove(nomFichier);
 }
 
 void GestionDeFichiers::ControleEspace(QString Nom)

@@ -16,6 +16,7 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -25,6 +26,7 @@ class Ui_VignetteRecette
 {
 public:
     QVBoxLayout *verticalLayout;
+    QPushButton *buttonSuppr;
     QLabel *labelNom;
     QLabel *labelImage;
     QHBoxLayout *horizontalLayout;
@@ -59,6 +61,11 @@ public:
 "}           "));
         verticalLayout = new QVBoxLayout(VignetteRecette);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        buttonSuppr = new QPushButton(VignetteRecette);
+        buttonSuppr->setObjectName(QStringLiteral("buttonSuppr"));
+
+        verticalLayout->addWidget(buttonSuppr);
+
         labelNom = new QLabel(VignetteRecette);
         labelNom->setObjectName(QStringLiteral("labelNom"));
 
@@ -114,6 +121,7 @@ public:
     void retranslateUi(QWidget *VignetteRecette)
     {
         VignetteRecette->setWindowTitle(QApplication::translate("VignetteRecette", "Form", 0));
+        buttonSuppr->setText(QApplication::translate("VignetteRecette", "Supprimer recette", 0));
         labelNom->setText(QApplication::translate("VignetteRecette", "Gateau au chocolat", 0));
         labelImage->setText(QString());
         label->setText(QApplication::translate("VignetteRecette", "Dur\303\251e de pr\303\251paration :", 0));

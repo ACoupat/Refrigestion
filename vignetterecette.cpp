@@ -1,12 +1,13 @@
 #include "vignetterecette.h"
 #include "ui_vignetterecette.h"
 #include <QDebug>
-VignetteRecette::VignetteRecette(int width,Recette* recette, QWidget *parent) :
+#include <mainwindow.h>
+VignetteRecette::VignetteRecette(int width, Recette* recette, MainWindow *parent) :
     QWidget(parent),
     ui(new Ui::VignetteRecette)
 {
     ui->setupUi(this);
-
+    window = parent;
     this->recette = recette;
     this->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
     this->setMaximumWidth(width);
@@ -16,7 +17,7 @@ VignetteRecette::VignetteRecette(int width,Recette* recette, QWidget *parent) :
                         "QLabel{font: bold 18px;}"
                         "QWidget#VignetteRecette:hover{border: 3px solid black;background-color :blue;border-radius:20px;}");
     initLabels();
-
+    connect(ui->buttonSuppr,SIGNAL(clicked(bool)),this,SLOT(supprimerVignette()));
 
     this->show();
 }
@@ -26,7 +27,6 @@ void VignetteRecette::initLabels()
     ui->labelNom->setText(recette->getNom());
     ui->labelDureePrep->setText((recette->getDureePreparation()));
     ui->labelImage->setStyleSheet("QLabel#labelImage{ border-image: url("+recette->getCheminImage()+") 0 0 0 0 stretch stretch; }" );
-    qDebug()<<recette->getCheminImage();
     repaint();
 }
 
@@ -36,13 +36,17 @@ void VignetteRecette::paintEvent(QPaintEvent *pe) {
     o.initFrom(this);
     QPainter p(this);
     style()->drawPrimitive(QStyle::PE_Widget, &o, &p, this);
-};
+}
 
 void VignetteRecette::mousePressEvent ( QMouseEvent * event )
 {
     fenetreDetailRecette* fenDR = new fenetreDetailRecette(recette);
     fenDR->show();
+}
 
+void VignetteRecette::supprimerVignette()
+{
+    window->supprimerVignetteRecette(this);
 }
 
 Recette *VignetteRecette::getRecette()
