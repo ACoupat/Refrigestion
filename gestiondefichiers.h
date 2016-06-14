@@ -3,7 +3,7 @@
 #include <QString>
 #include <recette.h>
 #include <ingredient.h>
-
+#include <QDir>
 
 class GestionDeFichiers
 {
@@ -21,6 +21,8 @@ public:
     static int reecrireFichier(QList<Ingredient*> listIng);
     static bool etudeFaisabilite(Recette* );
     static bool supprimerFichierRecette(Recette*);
+    static bool recetteExisteDeja(QString nomFichier);
+    static bool nomEstConforme(QString nomFichier);
 };
 
 #endif // GESTIONDEFICHIERS_H

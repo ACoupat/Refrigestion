@@ -186,6 +186,24 @@ Ingredient* GestionDeFichiers::creerIngredient(QString ligneFichier)
     return nouvelIngredient;
 }
 
+bool GestionDeFichiers::recetteExisteDeja(QString nomFichier)
+{
+
+    QDir rep("Recettes");
+    QStringList filters;
+    filters << "*.rfg";
+    QStringList listeRep = rep.entryList(filters);
+
+    foreach(QString s, listeRep)
+    {
+        qDebug() << nomFichier << " | " << s;
+        if(s == nomFichier)
+            return true;
+    }
+    qDebug("La recette n'existe pas");
+    return false;
+}
+
 Recette* GestionDeFichiers::creerRecette(QString nomFichier)
 {
     QString nom;
@@ -209,7 +227,8 @@ Recette* GestionDeFichiers::creerRecette(QString nomFichier)
             strTemp = flux.readLine();
             while(strTemp != ";")
             {
-                listIng << strTemp;
+                if(strTemp != "" )
+                    listIng << strTemp;
                 strTemp = flux.readLine();
             }
             strTemp = flux.readLine();
@@ -255,9 +274,6 @@ int GestionDeFichiers::supprimerIngredient(Ingredient* ing)
         while(!flux.atEnd())
         {
             QString ligne = flux.readLine();
-            qDebug() << "ligneIng : " << ligneIng;
-            qDebug() << "ligne    : " << ligne;
-            qDebug() << "Comparaison :" << ligne.compare(ligneIng);
             if(ligne.compare(ligneIng)!=0)
             {
                 contenuTemp += ligne +"\n";
@@ -329,6 +345,60 @@ bool GestionDeFichiers::supprimerFichierRecette(Recette* recette)
     QString nomFichier = "Recettes/" + recette->getNom() + ".rfg";
     qDebug() << nomFichier;
     return QFile::remove(nomFichier);
+}
+
+bool GestionDeFichiers::nomEstConforme(QString nomFichier)
+{
+    qDebug() << "coucou";
+    if(nomFichier == "")
+    {
+        qDebug() << ("vide");
+        return false;
+    }
+    if(nomFichier.contains("<"))
+    {
+        qDebug() << ("<");
+        return false;
+    }
+    if(nomFichier.contains(">"))
+    {
+        qDebug() << (">");
+        return false;
+    }
+    if(nomFichier.contains(":"))
+    {
+        qDebug() << (":");
+        return false;
+    }
+    if(nomFichier.contains("\\"))
+    {
+        qDebug() << ("\\");
+        return false;
+    }
+    if(nomFichier.contains("/"))
+    {
+        qDebug() << ("/");
+        return false;
+    }
+
+    if(nomFichier.contains("|"))
+    {
+        qDebug("|");
+        return false;
+    }
+    if(nomFichier.contains("?"))
+    {
+        qDebug("?");
+        return false;
+    }
+    if(nomFichier.contains("*"))
+    {
+        qDebug("*");
+        return false;
+    }
+    qDebug() << "Nom du fichier" << nomFichier ;
+    return true;
+
 }
 
 void GestionDeFichiers::ControleEspace(QString Nom)

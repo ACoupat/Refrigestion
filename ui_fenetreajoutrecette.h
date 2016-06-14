@@ -15,12 +15,12 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
-#include <QtWidgets/QDialogButtonBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolButton>
@@ -33,17 +33,19 @@ class Ui_FenetreAjoutRecette
 public:
     QGridLayout *gridLayout_2;
     QGridLayout *gridLayout;
-    QLineEdit *le_duree;
+    QHBoxLayout *horizontalLayout_3;
+    QPushButton *cancelButton;
+    QPushButton *okButton;
     QLabel *label_6;
     QLabel *label_2;
-    QTextEdit *te_etapes;
+    QLineEdit *le_duree;
     QComboBox *cb_image;
+    QTextEdit *te_etapes;
     QLabel *label_4;
-    QDialogButtonBox *buttonBox;
     QLabel *label_3;
     QLineEdit *le_nom;
-    QLabel *label_5;
     QLabel *label;
+    QLabel *label_5;
     QVBoxLayout *verticalLayout;
     QTableWidget *tableIngredients;
     QHBoxLayout *horizontalLayout;
@@ -66,10 +68,21 @@ public:
         gridLayout->setSpacing(15);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         gridLayout->setContentsMargins(10, 10, 10, 10);
-        le_duree = new QLineEdit(FenetreAjoutRecette);
-        le_duree->setObjectName(QStringLiteral("le_duree"));
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        cancelButton = new QPushButton(FenetreAjoutRecette);
+        cancelButton->setObjectName(QStringLiteral("cancelButton"));
+        cancelButton->setAutoDefault(false);
 
-        gridLayout->addWidget(le_duree, 3, 3, 1, 1);
+        horizontalLayout_3->addWidget(cancelButton);
+
+        okButton = new QPushButton(FenetreAjoutRecette);
+        okButton->setObjectName(QStringLiteral("okButton"));
+
+        horizontalLayout_3->addWidget(okButton);
+
+
+        gridLayout->addLayout(horizontalLayout_3, 8, 3, 1, 1);
 
         label_6 = new QLabel(FenetreAjoutRecette);
         label_6->setObjectName(QStringLiteral("label_6"));
@@ -81,27 +94,25 @@ public:
 
         gridLayout->addWidget(label_2, 1, 1, 1, 1);
 
-        te_etapes = new QTextEdit(FenetreAjoutRecette);
-        te_etapes->setObjectName(QStringLiteral("te_etapes"));
+        le_duree = new QLineEdit(FenetreAjoutRecette);
+        le_duree->setObjectName(QStringLiteral("le_duree"));
 
-        gridLayout->addWidget(te_etapes, 5, 3, 1, 1);
+        gridLayout->addWidget(le_duree, 3, 3, 1, 1);
 
         cb_image = new QComboBox(FenetreAjoutRecette);
         cb_image->setObjectName(QStringLiteral("cb_image"));
 
         gridLayout->addWidget(cb_image, 6, 3, 1, 1);
 
+        te_etapes = new QTextEdit(FenetreAjoutRecette);
+        te_etapes->setObjectName(QStringLiteral("te_etapes"));
+
+        gridLayout->addWidget(te_etapes, 5, 3, 1, 1);
+
         label_4 = new QLabel(FenetreAjoutRecette);
         label_4->setObjectName(QStringLiteral("label_4"));
 
         gridLayout->addWidget(label_4, 5, 1, 1, 1);
-
-        buttonBox = new QDialogButtonBox(FenetreAjoutRecette);
-        buttonBox->setObjectName(QStringLiteral("buttonBox"));
-        buttonBox->setOrientation(Qt::Horizontal);
-        buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
-
-        gridLayout->addWidget(buttonBox, 7, 3, 1, 1);
 
         label_3 = new QLabel(FenetreAjoutRecette);
         label_3->setObjectName(QStringLiteral("label_3"));
@@ -113,15 +124,15 @@ public:
 
         gridLayout->addWidget(le_nom, 0, 3, 1, 1);
 
-        label_5 = new QLabel(FenetreAjoutRecette);
-        label_5->setObjectName(QStringLiteral("label_5"));
-
-        gridLayout->addWidget(label_5, 6, 1, 1, 1);
-
         label = new QLabel(FenetreAjoutRecette);
         label->setObjectName(QStringLiteral("label"));
 
         gridLayout->addWidget(label, 0, 1, 1, 1);
+
+        label_5 = new QLabel(FenetreAjoutRecette);
+        label_5->setObjectName(QStringLiteral("label_5"));
+
+        gridLayout->addWidget(label_5, 6, 1, 1, 1);
 
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
@@ -181,7 +192,7 @@ public:
         gridLayout->addWidget(cb_type, 1, 3, 1, 1);
 
 
-        gridLayout_2->addLayout(gridLayout, 0, 0, 1, 1);
+        gridLayout_2->addLayout(gridLayout, 1, 0, 1, 1);
 
         QWidget::setTabOrder(le_nom, tableIngredients);
         QWidget::setTabOrder(tableIngredients, tbRetirerIng);
@@ -191,8 +202,9 @@ public:
         QWidget::setTabOrder(te_etapes, cb_image);
 
         retranslateUi(FenetreAjoutRecette);
-        QObject::connect(buttonBox, SIGNAL(accepted()), FenetreAjoutRecette, SLOT(accept()));
-        QObject::connect(buttonBox, SIGNAL(rejected()), FenetreAjoutRecette, SLOT(reject()));
+
+        okButton->setDefault(true);
+
 
         QMetaObject::connectSlotsByName(FenetreAjoutRecette);
     } // setupUi
@@ -200,12 +212,14 @@ public:
     void retranslateUi(QDialog *FenetreAjoutRecette)
     {
         FenetreAjoutRecette->setWindowTitle(QApplication::translate("FenetreAjoutRecette", "Dialog", 0));
+        cancelButton->setText(QApplication::translate("FenetreAjoutRecette", "Annuler", 0));
+        okButton->setText(QApplication::translate("FenetreAjoutRecette", "Ok", 0));
         label_6->setText(QApplication::translate("FenetreAjoutRecette", "Dur\303\251e de pr\303\251paration :", 0));
         label_2->setText(QApplication::translate("FenetreAjoutRecette", "Type de recette :", 0));
         label_4->setText(QApplication::translate("FenetreAjoutRecette", "Etapes de pr\303\251paration :", 0));
         label_3->setText(QApplication::translate("FenetreAjoutRecette", "Ingr\303\251dients", 0));
-        label_5->setText(QApplication::translate("FenetreAjoutRecette", "Image :", 0));
         label->setText(QApplication::translate("FenetreAjoutRecette", "Nom :", 0));
+        label_5->setText(QApplication::translate("FenetreAjoutRecette", "Image :", 0));
         QTableWidgetItem *___qtablewidgetitem = tableIngredients->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("FenetreAjoutRecette", "Ingr\303\251dients", 0));
         QTableWidgetItem *___qtablewidgetitem1 = tableIngredients->horizontalHeaderItem(1);

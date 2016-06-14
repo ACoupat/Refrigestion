@@ -40,7 +40,8 @@ public:
     {
         if (VignetteRecette->objectName().isEmpty())
             VignetteRecette->setObjectName(QStringLiteral("VignetteRecette"));
-        VignetteRecette->resize(405, 330);
+        VignetteRecette->resize(400, 330);
+        VignetteRecette->setMaximumSize(QSize(400, 400));
         VignetteRecette->setCursor(QCursor(Qt::PointingHandCursor));
         VignetteRecette->setStyleSheet(QLatin1String("QWidget#VignetteRecette\n"
 "{\n"

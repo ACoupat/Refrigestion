@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>405</width>
+    <width>400</width>
     <height>330</height>
    </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>400</width>
+    <height>400</height>
+   </size>
   </property>
   <property name="cursor">
    <cursorShape>PointingHandCursor</cursorShape>

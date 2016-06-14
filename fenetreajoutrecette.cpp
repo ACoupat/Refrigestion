@@ -21,20 +21,14 @@ FenetreAjoutRecette::FenetreAjoutRecette(QWidget *parent) :
     ui->cb_image->addItem("Poulet Roti",QVariant(":/Images/Images/pouletRoti.jpg"));
     ui->cb_image->addItem("Tacos",QVariant(":/Images/Images/tacos.jpg"));
     ui->cb_image->addItem("Aspic",QVariant(":/Images/Images/aspic.jpg"));
-    connect(ui->buttonBox,SIGNAL(accepted()),parent,SLOT(ajoutRecette()));
-    connect(ui->buttonBox,SIGNAL(rejected()),this,SLOT(close()));
+    connect(ui->okButton,SIGNAL(clicked()),parent,SLOT(ajoutRecette()));
+    connect(ui->cancelButton,SIGNAL(clicked()),this,SLOT(close()));
     connect(ui->tbAjouterIng,SIGNAL(clicked()),this,SLOT(ajouterLigneTableIng()));
     connect(ui->tbRetirerIng,SIGNAL(clicked()),this,SLOT(retirerLigneTableIng()));
 }
 
 Recette* FenetreAjoutRecette::creerRecette()
 {
-    qDebug() << ui->le_nom->text() ;
-    qDebug()<< ui->le_duree->text();
-    qDebug()<< creerListeIngredients();
-    qDebug()<< ui->te_etapes->toPlainText();
-    qDebug()<< ui->cb_type->currentText() ;
-    qDebug()<< ui->cb_image->currentData().toString();
     Recette* recetteTemp = new Recette(ui->le_nom->text(),ui->le_duree->text(),creerListeIngredients(),ui->te_etapes->toPlainText(),ui->cb_type->currentText(),ui->cb_image->currentData().toString());
     GestionDeFichiers::ajoutFichier(recetteTemp,NULL);
     return recetteTemp;
@@ -95,6 +89,24 @@ QList<QString> FenetreAjoutRecette::creerListeIngredients()
     }
     return liste;
 
+}
+
+bool FenetreAjoutRecette::pasDingredients()
+{
+    int nbRows = ui->tableIngredients->rowCount();
+
+    qDebug() << "Count" << nbRows;
+    for(int i=0; i<nbRows; i++)
+    {
+        if(ui->tableIngredients->item(i,0) != NULL)
+            return false;
+    }
+    return true;
+}
+
+QString FenetreAjoutRecette::getNomEntre()
+{
+    return ui->le_nom->text();
 }
 
 FenetreAjoutRecette::~FenetreAjoutRecette()

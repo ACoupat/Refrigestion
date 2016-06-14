@@ -19,6 +19,8 @@ public:
     explicit FenetreAjoutRecette(QWidget *parent = 0);
     ~FenetreAjoutRecette();
     Recette* creerRecette();
+    QString getNomEntre();
+    bool pasDingredients();
 
 private:
     Ui::FenetreAjoutRecette *ui;

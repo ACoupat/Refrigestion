@@ -38,7 +38,8 @@ public:
     {
         if (fenetreDetailRecette->objectName().isEmpty())
             fenetreDetailRecette->setObjectName(QStringLiteral("fenetreDetailRecette"));
-        fenetreDetailRecette->resize(432, 409);
+        fenetreDetailRecette->resize(400, 400);
+        fenetreDetailRecette->setMaximumSize(QSize(400, 400));
         fenetreDetailRecette->setStyleSheet(QLatin1String("QWidget#fenetreDetailRecette\n"
 "{\n"
 "	background-color: lightgreen;\n"

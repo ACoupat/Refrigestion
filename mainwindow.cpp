@@ -76,16 +76,17 @@ void MainWindow::ajoutIngredient()
 
 void MainWindow::ajoutRecette()
 {
-    Recette* nouvelleRecette = fenAR->creerRecette();
 
-    if(nouvelleRecette->getNom() == "")
+    QString nomEntre =  fenAR->getNomEntre();
+    if(GestionDeFichiers::recetteExisteDeja(nomEntre+".rfg") || !GestionDeFichiers::nomEstConforme(nomEntre))
     {
         QMessageBox msgBox;
         msgBox.setWindowFlags(Qt::Popup);
-        msgBox.setText("Erreur. Veuillez renseigner le champ 'Nom'.");
+        msgBox.setText("Erreur. Le nom de la recette est non conforme ou la recette existe déjà.");
+        fenAR->show();
         msgBox.exec();
     }
-    else if(nouvelleRecette->aucunIngredient())
+    else if(fenAR->pasDingredients())
     {
         QMessageBox msgBox;
         msgBox.setWindowFlags(Qt::Popup);
@@ -94,10 +95,12 @@ void MainWindow::ajoutRecette()
     }
     else
     {
+       Recette* nouvelleRecette = fenAR->creerRecette();
        fenAR->close();
        fenAR = new FenetreAjoutRecette(this);
        VignetteRecette *newVignetteRecette = new VignetteRecette(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX,nouvelleRecette,this);
        grilleRecettes->addWidget(newVignetteRecette, recettes.size() / NB_COLONNE_MAX, recettes.size() % NB_COLONNE_MAX);
+       vignettesRecettes << newVignetteRecette;
        recettes << nouvelleRecette;
     }
 
@@ -191,8 +194,9 @@ bool MainWindow::supprimerVignetteRecette(VignetteRecette *vignette)
     msgBox.setDefaultButton(QMessageBox::No);
     if(msgBox.exec() == QMessageBox::Yes)
     {
+        qDebug() << vignettesRecettes;
         qDebug() << GestionDeFichiers::supprimerFichierRecette(vignette->getRecette());
-        recettes.removeOne(vignette->getRecette());
+        qDebug() << "Removal" << recettes.removeOne(vignette->getRecette());
 
         qDebug() << vignettesRecettes;
         foreach(VignetteRecette *vignette, vignettesRecettes) vignette->deleteLater();
