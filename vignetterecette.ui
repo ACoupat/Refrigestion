@@ -50,6 +50,13 @@ QWidget#VignetteRecette:hover
     </widget>
    </item>
    <item>
+    <widget class="QPushButton" name="modifButton">
+     <property name="text">
+      <string>Modifier</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QLabel" name="labelNom">
      <property name="text">
       <string>Gateau au chocolat</string>

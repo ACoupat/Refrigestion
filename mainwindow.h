@@ -31,8 +31,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     QList<Ingredient*> getIngredients();
-    bool supprimerVignetteIngredient(VignetteIngredient*);
-    bool supprimerVignetteRecette(VignetteRecette *);
+    bool supprimerVignetteIngredient(VignetteIngredient* vi);
+    bool supprimerVignetteRecette(VignetteRecette * vr, bool modif);
     void reecrireFichier();
 
 private:
@@ -57,6 +57,8 @@ public slots:
     void ajoutIngredient();
     void ouvrirFenetreAjoutRecette();
     void ajoutRecette();
+    void modifRecette(QString nomModif);
+    void ouvrirFenArModif(Recette* recette);
 
 };
 

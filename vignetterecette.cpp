@@ -18,8 +18,14 @@ VignetteRecette::VignetteRecette(int width, Recette* recette, MainWindow *parent
                         "QWidget#VignetteRecette:hover{border: 3px solid black;background-color :blue;border-radius:20px;}");
     initLabels();
     connect(ui->buttonSuppr,SIGNAL(clicked(bool)),this,SLOT(supprimerVignette()));
+    connect(ui->modifButton, SIGNAL(clicked(bool)),this,SLOT(ouvrirModif()));
 
     this->show();
+}
+
+void VignetteRecette::ouvrirModif()
+{
+    window->ouvrirFenArModif(this->recette);
 }
 
 void VignetteRecette::initLabels()
@@ -46,7 +52,7 @@ void VignetteRecette::mousePressEvent ( QMouseEvent * event )
 
 void VignetteRecette::supprimerVignette()
 {
-    window->supprimerVignetteRecette(this);
+    window->supprimerVignetteRecette(this,false);
 }
 
 Recette *VignetteRecette::getRecette()

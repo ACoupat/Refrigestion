@@ -1,8 +1,8 @@
 #include "fenetreajoutrecette.h"
 #include "ui_fenetreajoutrecette.h"
+#include <mainwindow.h>
 
-
-FenetreAjoutRecette::FenetreAjoutRecette(QWidget *parent) :
+FenetreAjoutRecette::FenetreAjoutRecette(MainWindow *parent):
     QDialog(parent),
     ui(new Ui::FenetreAjoutRecette)
 {
@@ -10,7 +10,7 @@ FenetreAjoutRecette::FenetreAjoutRecette(QWidget *parent) :
     this->setWindowFlags(Qt::SplashScreen);
     this->setModal(true);
     this->setWindowTitle("Ajouter une recette");
-
+    window = parent;
     ui->tableIngredients->setColumnCount(3);
     ui->tableIngredients->setRowCount(1);
     ui->tableIngredients->horizontalHeader()->setStretchLastSection(true);
@@ -21,7 +21,8 @@ FenetreAjoutRecette::FenetreAjoutRecette(QWidget *parent) :
     ui->cb_image->addItem("Poulet Roti",QVariant(":/Images/Images/pouletRoti.jpg"));
     ui->cb_image->addItem("Tacos",QVariant(":/Images/Images/tacos.jpg"));
     ui->cb_image->addItem("Aspic",QVariant(":/Images/Images/aspic.jpg"));
-    connect(ui->okButton,SIGNAL(clicked()),parent,SLOT(ajoutRecette()));
+    connect(ui->okButton,SIGNAL(clicked()),this,SLOT(ajoutModifRecette()));
+    //connect(ui->okButton,SIGNAL(clicked()),window,SLOT(ajoutRecette()));
     connect(ui->cancelButton,SIGNAL(clicked()),this,SLOT(close()));
     connect(ui->tbAjouterIng,SIGNAL(clicked()),this,SLOT(ajouterLigneTableIng()));
     connect(ui->tbRetirerIng,SIGNAL(clicked()),this,SLOT(retirerLigneTableIng()));
@@ -32,6 +33,82 @@ Recette* FenetreAjoutRecette::creerRecette()
     Recette* recetteTemp = new Recette(ui->le_nom->text(),ui->le_duree->text(),creerListeIngredients(),ui->te_etapes->toPlainText(),ui->cb_type->currentText(),ui->cb_image->currentData().toString());
     GestionDeFichiers::ajoutFichier(recetteTemp,NULL);
     return recetteTemp;
+}
+
+void FenetreAjoutRecette::ajoutModifRecette()
+{
+    if(ui->okButton->text() == "Modifier")
+        window -> modifRecette(nomModif);
+    else
+        window->ajoutRecette();
+}
+
+QString FenetreAjoutRecette::getFenAREtat()
+{
+    return ui->okButton->text();
+}
+
+void FenetreAjoutRecette::setContenu(Recette * recette)
+{
+    ui->le_nom->setText(recette->getNom());
+    nomModif = recette->getNom();
+    ui->cb_type->setCurrentText(recette->getTypeRecette());
+    ui->te_etapes->setText(recette->getEtapesPreparation());
+    ui->le_duree->setText(recette->getDureePreparation());
+    ui->cb_image->setCurrentText(recette->getCheminImage());
+
+    int nbIngredients = recette->getListIngredients().size();
+    qDebug() << recette->getListIngredients();
+    if(nbIngredients >0)
+    {
+        ui->tableIngredients->setRowCount(nbIngredients);
+        int j =0;
+        for(int i=0;i<nbIngredients;i++)
+        {
+            QString strIng = recette->getListIngredients().at(i);
+            QString strTemp;
+            QChar c;
+
+            c = strIng.at(j);
+            while(c != '(')
+            {qDebug() << c;
+                strTemp += c;
+                j++;
+                c = strIng.at(j);
+
+            }
+            strTemp = strTemp.left(strTemp.size()-1);
+            qDebug() << "ingrédient : " << strTemp;
+            ui->tableIngredients->item(i,0)->setText(strTemp);
+            strTemp = "";
+            j++;
+            c =strIng.at(j);
+            while(c.isNumber() || c == '/')
+            {
+                strTemp += c;
+                j++;
+                c = strIng.at(j);
+
+            }
+            qDebug() << "quantité : " << strTemp;
+            ui->tableIngredients->item(i,1)->setText(strTemp);
+            while(c != ')')
+            {
+                strTemp += c;
+                j++;
+                c = strIng.at(j);
+
+            }
+            qDebug() << "unité : " << strTemp;
+            ui->tableIngredients->item(i,2)->setText(strTemp);
+        }
+
+    }
+
+    /*
+     * remplir le tableau avec les ingrédients
+     */
+    ui->okButton->setText("Modifier");
 }
 
 void FenetreAjoutRecette::ajouterLigneTableIng()

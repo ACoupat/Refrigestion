@@ -27,11 +27,13 @@ private:
     void paintEvent(QPaintEvent *pe);
     MainWindow* window;
 
+
 protected:
     void mousePressEvent ( QMouseEvent * event );
 
 private slots:
     void supprimerVignette();
+    void ouvrirModif();
 
 };
 

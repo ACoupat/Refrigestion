@@ -21,8 +21,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->boutonAjoutRecette->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
     ui->boutonAjoutRecette->setLayoutDirection(Qt::RightToLeft);
     connect(ui->boutonAjoutRecette, SIGNAL(clicked(bool)), this, SLOT(ouvrirFenetreAjoutRecette()));
-    fenAI = new FenetreAjoutIngredient(this);
     fenAR = new FenetreAjoutRecette(this);
+    fenAI = new FenetreAjoutIngredient(this);
     grilleIngredients = new QGridLayout();
     grilleRecettes = new QGridLayout();
     ui->verticalLayout->addLayout(grilleIngredients);
@@ -45,11 +45,19 @@ MainWindow::~MainWindow()
 
 void MainWindow::ouvrirFenetreAjoutIngredient()
 {
+    fenAI = new FenetreAjoutIngredient(this);
     fenAI->show();
 }
 
 void MainWindow::ouvrirFenetreAjoutRecette()
 {
+    fenAR = new FenetreAjoutRecette(this);
+    fenAR->show();
+}
+
+void MainWindow::ouvrirFenArModif(Recette* recette)
+{
+    fenAR->setContenu(recette);
     fenAR->show();
 }
 
@@ -73,10 +81,54 @@ void MainWindow::ajoutIngredient()
         ingredients << nouvelIngredient;
     }
 }
+void MainWindow::modifRecette(QString nomModif)
+{
+    qDebug() << "la2";
+qDebug() << vignettesRecettes.size();
+        foreach(VignetteRecette* vr, vignettesRecettes)
+        {
+            qDebug() << "la3";
+            if(vr->getRecette()->getNom() == nomModif)
+            {       qDebug() << "la4";
+                supprimerVignetteRecette(vr,true);
+                    qDebug() << "la5";
+            }
+
+
+        }
+        //Ajout de la recette
+        QString nomEntre =  fenAR->getNomEntre();
+
+        if(!GestionDeFichiers::nomEstConforme(nomEntre))
+        {
+            QMessageBox msgBox;
+            msgBox.setWindowFlags(Qt::Popup);
+            msgBox.setText("Erreur. Le nom de la recette est non conforme ou la recette existe déjà.");
+            fenAR->show();
+            msgBox.exec();
+        }
+        else if(fenAR->pasDingredients())
+        {
+            QMessageBox msgBox;
+            msgBox.setWindowFlags(Qt::Popup);
+            msgBox.setText("Erreur. Veuillez renseigner au moins un ingrédient.");
+            msgBox.exec();
+        }
+        else
+        {
+           Recette* nouvelleRecette = fenAR->creerRecette();
+           fenAR->close();
+           fenAR = new FenetreAjoutRecette(this);
+           VignetteRecette *newVignetteRecette = new VignetteRecette(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX,nouvelleRecette,this);
+           grilleRecettes->addWidget(newVignetteRecette, recettes.size() / NB_COLONNE_MAX, recettes.size() % NB_COLONNE_MAX);
+           vignettesRecettes << newVignetteRecette;
+           recettes << nouvelleRecette;
+        }
+}
 
 void MainWindow::ajoutRecette()
 {
-
+    //Ajout de la recette
     QString nomEntre =  fenAR->getNomEntre();
     if(GestionDeFichiers::recetteExisteDeja(nomEntre+".rfg") || !GestionDeFichiers::nomEstConforme(nomEntre))
     {
@@ -154,7 +206,7 @@ bool MainWindow::supprimerVignetteIngredient(VignetteIngredient *vignette)
 {
     QMessageBox msgBox;
     msgBox.setWindowFlags(Qt::Popup);
-    msgBox.setText("Vous êtes sur le point de supprimer définitivement cet ingrédient.\nEtes vous sûr de vouloir continuer ?");
+    msgBox.setText("Vous êtes sur le point de supprimer définitvement cet ingrédient.\nConfirmer ?");
     msgBox.setStandardButtons(QMessageBox::Yes);
     msgBox.addButton(QMessageBox::No);
     msgBox.setDefaultButton(QMessageBox::No);
@@ -184,11 +236,14 @@ bool MainWindow::supprimerVignetteIngredient(VignetteIngredient *vignette)
     return true;
 }
 
-bool MainWindow::supprimerVignetteRecette(VignetteRecette *vignette)
+bool MainWindow::supprimerVignetteRecette(VignetteRecette *vignette, bool modif)
 {
     QMessageBox msgBox;
     msgBox.setWindowFlags(Qt::Popup);
-    msgBox.setText("Vous êtes sur le point de supprimer définitivement cette recette.\nEtes vous sûr de vouloir continuer ?");
+    if(modif)
+        msgBox.setText("Vous êtes sur le point de modifier cet ingrédient.\nConfirmer ?");
+    else
+     msgBox.setText("Vous êtes sur le point de supprimer définitivement cette recette.\nEtes vous sûr de vouloir continuer ?");
     msgBox.setStandardButtons(QMessageBox::Yes);
     msgBox.addButton(QMessageBox::No);
     msgBox.setDefaultButton(QMessageBox::No);
