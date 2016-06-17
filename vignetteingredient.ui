@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>VignetteIngredient</class>
- <widget class="QWidget" name="VignetteIngredient">
+ <class>VignetteIngredie</class>
+ <widget class="QWidget" name="VignetteIngredie">
   <property name="enabled">
    <bool>true</bool>
   </property>
@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>300</width>
-    <height>305</height>
+    <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,9 +25,10 @@
   <property name="styleSheet">
    <string notr="true">QWidget#VignetteIngredient
 {
-	border: 3px solid black;
-	background-color : yellow;
-	border-radius:20px;
+
+	background-color : white;
+	border-bottom : 3px solid #BDBDBD;
+	border-right : 1px solid #BDBDBD;
 }
 QLabel
 {

@@ -60,6 +60,23 @@ Recette *VignetteRecette::getRecette()
     return recette;
 }
 
+
+void VignetteRecette::enterEvent(QEvent * event)
+{
+    QGraphicsDropShadowEffect *g = new QGraphicsDropShadowEffect(this);
+    g->setBlurRadius(7);
+    g->setOffset(0,0);
+    this->setGraphicsEffect(g);
+    QWidget::enterEvent(event);
+}
+
+void VignetteRecette::leaveEvent(QEvent * event)
+{
+    this->setGraphicsEffect(NULL);
+    QWidget::leaveEvent(event);
+}
+
+
 VignetteRecette::~VignetteRecette()
 {
     delete ui;

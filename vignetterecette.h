@@ -25,6 +25,8 @@ private:
     Ui::VignetteRecette *ui;
     void initLabels();
     void paintEvent(QPaintEvent *pe);
+    void enterEvent(QEvent * event);
+    void leaveEvent(QEvent * event);
     MainWindow* window;
 
 

@@ -6,6 +6,8 @@
 #include <QDebug>
 #include <QPainter>
 #include <gestiondefichiers.h>
+#include <QGraphicsDropShadowEffect>
+#include <QHoverEvent>
 class MainWindow;
 
 namespace Ui {
@@ -27,7 +29,8 @@ private:
     MainWindow *window;
     Ingredient* ingredient;
     void paintEvent(QPaintEvent *pe);
-
+    void enterEvent(QEvent * event);
+    void leaveEvent(QEvent * event);
     void initLabels();
 
 public slots:

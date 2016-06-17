@@ -24,11 +24,27 @@ VignetteIngredient::VignetteIngredient(int width, Ingredient* ingredient, MainWi
     ui->pushButton_2->setMask(QRegion(forme));
 
     QString color = ingredient->getTypeColor();
-    this->setStyleSheet("QWidget#VignetteIngredient{border: 3px solid black;background-color : " + color + ";border-radius:20px;}"
-                        "QLabel{font: bold 18px;} "
-                        "QWidget#VignetteIngredient:hover{border: 3px solid black;background-color :blue;border-radius:20px; } ");
+    this->setStyleSheet("QWidget#VignetteIngredient{border-bottom: 3px solid #BDBDBD;border-right : 1px solid #BDBDBD;background-color : white;}"
+                        "QLabel{font:16px;} ");
     initLabels();
+
+    this->setAttribute(Qt::WA_Hover, true);
     this->show();
+}
+
+void VignetteIngredient::enterEvent(QEvent * event)
+{
+    QGraphicsDropShadowEffect *g = new QGraphicsDropShadowEffect(this);
+    g->setBlurRadius(7);
+    g->setOffset(0,0);
+    this->setGraphicsEffect(g);
+    QWidget::enterEvent(event);
+}
+
+void VignetteIngredient::leaveEvent(QEvent * event)
+{
+    this->setGraphicsEffect(NULL);
+    QWidget::leaveEvent(event);
 }
 
 void VignetteIngredient::ajoutQuantite() {
