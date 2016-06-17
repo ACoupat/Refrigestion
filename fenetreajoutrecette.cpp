@@ -30,7 +30,7 @@ FenetreAjoutRecette::FenetreAjoutRecette(MainWindow *parent):
 
 Recette* FenetreAjoutRecette::creerRecette()
 {
-    Recette* recetteTemp = new Recette(ui->le_nom->text(),ui->le_duree->text(),creerListeIngredients(),ui->te_etapes->toPlainText(),ui->cb_type->currentText(),ui->cb_image->currentData().toString());
+    Recette* recetteTemp = new Recette(ui->le_nom->text(),ui->le_duree->text(),creerListeIngredients(),ui->te_etapes->toPlainText(),ui->cb_type->currentText(),ui->cb_image->currentText(), ui->cb_image->currentData().toString());
     GestionDeFichiers::ajoutFichier(recetteTemp,NULL);
     return recetteTemp;
 }
@@ -51,13 +51,14 @@ QString FenetreAjoutRecette::getFenAREtat()
 void FenetreAjoutRecette::setContenu(Recette * recette)
 {
     ui->le_nom->setText(recette->getNom());
-    nomModif = recette->getNom();
+    /*nomModif = recette->getNom();*/
     ui->cb_type->setCurrentText(recette->getTypeRecette());
     ui->te_etapes->setText(recette->getEtapesPreparation());
     ui->le_duree->setText(recette->getDureePreparation());
-    ui->cb_image->setCurrentText(recette->getCheminImage());
+    ui->cb_image->setCurrentText(recette->getNomImage());
 
-    int nbIngredients = recette->getListIngredients().size();
+
+    /*int nbIngredients = recette->getListIngredients().size();
     qDebug() << recette->getListIngredients();
     if(nbIngredients >0)
     {
@@ -104,7 +105,7 @@ void FenetreAjoutRecette::setContenu(Recette * recette)
         }
 
     }
-
+    */
     /*
      * remplir le tableau avec les ingrédients
      */

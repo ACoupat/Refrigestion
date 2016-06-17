@@ -7,10 +7,11 @@
 class Recette
 {
 public:
-    explicit Recette(QString nom, QString dureePrep, QList<QString> listeIng,QString etapesPrep,QString typeRecette, QString cheminImage);
+    explicit Recette(QString nom, QString dureePrep, QList<QString> listeIng,QString etapesPrep,QString typeRecette, QString nomImage, QString cheminImage);
     QString getNom();
     QString getDureePreparation();
     QString getCheminImage();
+    QString getNomImage();
     QString getEtapesPreparation();
     void creerFichierRecette();
     QList<QString> getListIngredients();
@@ -24,6 +25,7 @@ private :
     QString etapesPreparation;
     QString typeRecette;
     QString cheminImage;
+    QString nomImage;
 };
 
 #endif // RECETTE_H

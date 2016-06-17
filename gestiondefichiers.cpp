@@ -89,7 +89,8 @@ QString GestionDeFichiers::creerStringRecette(Recette* recette)
             ligne += "\n"+recette->getListIngredients().at(i);
     }
     ligne += "\n;\n" + recette->getEtapesPreparation();
-    ligne += "\n;\n" + recette->getCheminImage()+"\n" ;
+    ligne += "\n;\n" + recette->getNomImage()+"\n";
+    ligne += recette->getCheminImage()+"\n" ;
     return ligne;
 }
 
@@ -211,6 +212,7 @@ Recette* GestionDeFichiers::creerRecette(QString nomFichier)
     QList<QString> listIng;
     QString etapesPrep;
     QString type;
+    QString nomImage;
     QString cheminImage;
     QString strTemp;
 
@@ -237,10 +239,11 @@ Recette* GestionDeFichiers::creerRecette(QString nomFichier)
                 etapesPrep += strTemp+"\n";
                 strTemp = flux.readLine();
             }
+            nomImage = flux.readLine();
             cheminImage = flux.readLine();
         }
     }
-    Recette* recette = new Recette(nom,dureePrep,listIng,etapesPrep,type,cheminImage);
+    Recette* recette = new Recette(nom,dureePrep,listIng,etapesPrep,type,nomImage,cheminImage);
     return recette;
 }
 
