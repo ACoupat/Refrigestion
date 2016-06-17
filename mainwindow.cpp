@@ -207,8 +207,8 @@ bool MainWindow::supprimerVignetteIngredient(VignetteIngredient *vignette)
     QMessageBox msgBox;
     msgBox.setWindowFlags(Qt::Popup);
     msgBox.setText("Vous êtes sur le point de supprimer définitvement cet ingrédient.\nConfirmer ?");
-    msgBox.setStandardButtons(QMessageBox::Yes);
-    msgBox.addButton(QMessageBox::No);
+    msgBox.addButton(trUtf8("Oui"),QMessageBox::YesRole);
+    msgBox.addButton(trUtf8("Non"),QMessageBox::NoRole);
     msgBox.setDefaultButton(QMessageBox::No);
 
     if(msgBox.exec() == QMessageBox::Yes)
@@ -230,6 +230,7 @@ bool MainWindow::supprimerVignetteIngredient(VignetteIngredient *vignette)
     }
     else
     {
+        //vignette->getIngredient()->setQuantite(0);
         return false;
     }
     reecrireFichier();

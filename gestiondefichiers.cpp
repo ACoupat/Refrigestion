@@ -264,7 +264,7 @@ QList<Ingredient*> GestionDeFichiers::listeIngredientsFichier()
      return listIng;
 }
 
-int GestionDeFichiers::supprimerIngredient(Ingredient* ing)
+/*int GestionDeFichiers::supprimerIngredient(Ingredient* ing)
 {
     QFile fichier("listeIngredients.rfg");
     if(fichier.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -291,7 +291,7 @@ int GestionDeFichiers::supprimerIngredient(Ingredient* ing)
         }
     }
     return 1;
-}
+}*/
 
 int GestionDeFichiers::reecrireFichier(QList<Ingredient*> listIng)
 {

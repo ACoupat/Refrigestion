@@ -67,6 +67,7 @@ void VignetteIngredient::retraitQuantite() {
 
 void VignetteIngredient::initLabels()
 {
+    if(ingredient->getQuantite()==0) ingredient->setQuantite(1);
     ui->label_quantite->setText(QString::number(ingredient->getQuantite()) + " " + ingredient->getUnite());
     ui->label_nom->setText(ingredient->getNom());
     ui->label_2->setText(ingredient->getDate().toString("dd.MM.yyyy"));
