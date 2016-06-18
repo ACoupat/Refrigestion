@@ -41,14 +41,15 @@ public:
         if (VignetteIngredient->objectName().isEmpty())
             VignetteIngredient->setObjectName(QStringLiteral("VignetteIngredient"));
         VignetteIngredient->setEnabled(true);
-        VignetteIngredient->resize(300, 305);
+        VignetteIngredient->resize(300, 300);
         VignetteIngredient->setWindowOpacity(1);
         VignetteIngredient->setAutoFillBackground(false);
         VignetteIngredient->setStyleSheet(QLatin1String("QWidget#VignetteIngredient\n"
 "{\n"
-"	border: 3px solid black;\n"
-"	background-color : yellow;\n"
-"	border-radius:20px;\n"
+"\n"
+"	background-color : white;\n"
+"	border-bottom : 3px solid #BDBDBD;\n"
+"	border-right : 1px solid #BDBDBD;\n"
 "}\n"
 "QLabel\n"
 "{\n"

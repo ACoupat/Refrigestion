@@ -57,11 +57,12 @@ void VignetteIngredient::ajoutQuantite() {
 void VignetteIngredient::retraitQuantite() {
     ingredient->setQuantite(-1);
 
-    window->reecrireFichier();
+
     if(ingredient->getQuantite() == 0)
     {
         if(!window->supprimerVignetteIngredient(this)) ingredient->setQuantite(+1);
     }
+    window->reecrireFichier();
     ui->label_quantite->setText(QString::number(ingredient->getQuantite()) + " " + ingredient->getUnite());
 }
 
