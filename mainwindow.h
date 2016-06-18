@@ -9,6 +9,7 @@
 #include <QDialog>
 #include <QPushButton>
 #include <QDebug>
+#include <QFontDatabase>
 #include <ingredient.h>
 #include <recette.h>
 #include <fenetreajoutingredient.h>
@@ -18,6 +19,7 @@
 #include <gestiondefichiers.h>
 #include <QDir>
 #include <vignetterecette.h>
+
 
 namespace Ui {
 class MainWindow;
@@ -51,6 +53,7 @@ private:
     void creerVignettesIngredientDemarrage();
     void creerVignettesRecettesDemarrage();
     void creerPostit();
+    void creerListeIngredientDateLimite();
 
 
 public slots:

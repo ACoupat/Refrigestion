@@ -36,9 +36,8 @@ MainWindow::MainWindow(QWidget *parent) :
     creerVignettesRecettesDemarrage();
     GestionDeFichiers::creerRecette("recette.rfg");
     creerPostit();
+    creerListeIngredientDateLimite();
     connect(ui->textEdit_Postit, SIGNAL(textChanged()), this, SLOT(modifierContenuPostit()));
-
-
 }
 
 MainWindow::~MainWindow()
@@ -277,13 +276,15 @@ void MainWindow::reecrireFichier()
 }
 void MainWindow::creerPostit()
 {
+    QFontDatabase::addApplicationFont("Images/crackedJohnnie.ttf");
+
     QGridLayout * grillePostit = new QGridLayout();
     QFont fontPostit("Cracked Johnnie",16);
     QFile fichierPostit("postit.rfg");
     fichierPostit.open(QIODevice::ReadOnly);
     QString contenuPostit = fichierPostit.readAll();
     ui->label_Postit->setFixedSize(screenWidth * TAILLE_GROUPE_WIDGETS-10,screenWidth * TAILLE_GROUPE_WIDGETS-10);
-    ui->label_Postit->setStyleSheet("QLabel#label_Postit{ border-image: url(ZcPostIt.png) 0 0 0 0 stretch stretch; }");
+    ui->label_Postit->setStyleSheet("QLabel#label_Postit{ border-image: url(Images/ZcPostIt.png) 0 0 0 0 stretch stretch; }");
     ui->label_Postit->setLayout(grillePostit);
 
     ui->textEdit_Postit->setFixedSize(screenWidth * TAILLE_GROUPE_WIDGETS -45,screenWidth * TAILLE_GROUPE_WIDGETS -150);
@@ -304,10 +305,23 @@ void MainWindow::modifierContenuPostit()
     QTextStream fluxPostit(&fichierPostit);
     fluxPostit << contenuPostit;
     fichierPostit.close();
-    qDebug() << contenuPostit;
 }
 
 QList<Ingredient*> MainWindow::getIngredients()
 {
     return this->ingredients;
+}
+
+void MainWindow::creerListeIngredientDateLimite()
+{
+    QList<Ingredient*> listeIngredient = getIngredients();
+    foreach(Ingredient * ing, listeIngredient)
+    {
+        QDate datePeremption = ing->getDate();
+        if(QDate::currentDate().daysTo(datePeremption) < 4)
+        {
+            new QListViewItem(ui->listViewAlimentDateLimite, ing->getNom());
+        }
+
+    }
 }
