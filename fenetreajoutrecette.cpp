@@ -11,10 +11,10 @@ FenetreAjoutRecette::FenetreAjoutRecette(MainWindow *parent):
     this->setModal(true);
     this->setWindowTitle("Ajouter une recette");
     window = parent;
-    ui->tableIngredients->setColumnCount(3);
-    ui->tableIngredients->setRowCount(1);
-    ui->tableIngredients->horizontalHeader()->setStretchLastSection(true);
-    ui->tableIngredients->verticalHeader()->setVisible(false);
+
+    le_list << ui->le_ing1 <<  ui->le_ing2;
+    cb_list << ui->cb_ing1 << ui->cb_ing2;
+    sb_list << ui->sb_ing1 << ui->sb_ing2;
 
     ui->cb_image->addItem("Tomates",QVariant(":/Images/Images/tomate.jpg"));
     ui->cb_image->addItem("Gateau au chocolat",QVariant(":/Images/Images/gateauChocolat.jpg"));
@@ -22,7 +22,6 @@ FenetreAjoutRecette::FenetreAjoutRecette(MainWindow *parent):
     ui->cb_image->addItem("Tacos",QVariant(":/Images/Images/tacos.jpg"));
     ui->cb_image->addItem("Aspic",QVariant(":/Images/Images/aspic.jpg"));
     connect(ui->okButton,SIGNAL(clicked()),this,SLOT(ajoutModifRecette()));
-    //connect(ui->okButton,SIGNAL(clicked()),window,SLOT(ajoutRecette()));
     connect(ui->cancelButton,SIGNAL(clicked()),this,SLOT(close()));
     connect(ui->tbAjouterIng,SIGNAL(clicked()),this,SLOT(ajouterLigneTableIng()));
     connect(ui->tbRetirerIng,SIGNAL(clicked()),this,SLOT(retirerLigneTableIng()));
@@ -51,133 +50,99 @@ QString FenetreAjoutRecette::getFenAREtat()
 void FenetreAjoutRecette::setContenu(Recette * recette)
 {
     ui->le_nom->setText(recette->getNom());
-    /*nomModif = recette->getNom();*/
+    nomModif = recette->getNom();
     ui->cb_type->setCurrentText(recette->getTypeRecette());
     ui->te_etapes->setText(recette->getEtapesPreparation());
     ui->le_duree->setText(recette->getDureePreparation());
     ui->cb_image->setCurrentText(recette->getNomImage());
 
-
-    /*int nbIngredients = recette->getListIngredients().size();
-    qDebug() << recette->getListIngredients();
-    if(nbIngredients >0)
+    int nbIngredients = recette->getListIngredients().size();
+    qDebug() << nbIngredients;
+    if(nbIngredients>2)
     {
-        ui->tableIngredients->setRowCount(nbIngredients);
-        int j =0;
-        for(int i=0;i<nbIngredients;i++)
+        for(int i=0;i<nbIngredients-2;i++)
         {
-            QString strIng = recette->getListIngredients().at(i);
-            QString strTemp;
-            QChar c;
-
-            c = strIng.at(j);
-            while(c != '(')
-            {qDebug() << c;
-                strTemp += c;
-                j++;
-                c = strIng.at(j);
-
-            }
-            strTemp = strTemp.left(strTemp.size()-1);
-            qDebug() << "ingrédient : " << strTemp;
-            ui->tableIngredients->item(i,0)->setText(strTemp);
-            strTemp = "";
-            j++;
-            c =strIng.at(j);
-            while(c.isNumber() || c == '/')
-            {
-                strTemp += c;
-                j++;
-                c = strIng.at(j);
-
-            }
-            qDebug() << "quantité : " << strTemp;
-            ui->tableIngredients->item(i,1)->setText(strTemp);
-            while(c != ')')
-            {
-                strTemp += c;
-                j++;
-                c = strIng.at(j);
-
-            }
-            qDebug() << "unité : " << strTemp;
-            ui->tableIngredients->item(i,2)->setText(strTemp);
+            ajouterLigneTableIng();
         }
-
     }
-    */
-    /*
-     * remplir le tableau avec les ingrédients
-     */
+    for(int i=0;i<nbIngredients;i++)
+    {
+        Ingredient* ingTemp = recette->getListIngredients().at(i);
+        le_list.at(i)->setText(ingTemp->getNom());
+        cb_list.at(i)->setCurrentText(ingTemp->getUnite());
+        sb_list.at(i)->setValue(ingTemp->getQuantite());
+    }
+
     ui->okButton->setText("Modifier");
 }
 
 void FenetreAjoutRecette::ajouterLigneTableIng()
 {
+    QLineEdit* le = new QLineEdit();
+    le->setMinimumWidth(175);
+    QDoubleSpinBox* sb = new QDoubleSpinBox();
+    QComboBox* cb = new QComboBox();
+    cb->addItem(QIcon()," ",QVariant());
+    cb->addItem(QIcon(),"mL",QVariant());
+    cb->addItem(QIcon(),"cL",QVariant());
+    cb->addItem(QIcon(),"L",QVariant());
+    cb->addItem(QIcon(),"g",QVariant());
+    cb->addItem(QIcon(),"kg",QVariant());
+    cb->setMinimumWidth(45);
+    ui->grilleIngredients->addWidget(le,ui->grilleIngredients->rowCount()+1,0,Qt::AlignLeft);
+    ui->grilleIngredients->addWidget(sb,ui->grilleIngredients->rowCount()-1,1,Qt::AlignLeft);
+    ui->grilleIngredients->addWidget(cb,ui->grilleIngredients->rowCount()-1,2,Qt::AlignCenter);
 
-    ui->tableIngredients->setRowCount(ui->tableIngredients->rowCount()+1);
+    le_list << le;
+    cb_list << cb;
+    sb_list << sb;
 
+    qDebug() << "nombre de lignes :" << ui->grilleIngredients->rowCount();
 }
 
 void FenetreAjoutRecette::retirerLigneTableIng()
 {
-    if(ui->tableIngredients->rowCount() > 1)
-        ui->tableIngredients->setRowCount(ui->tableIngredients->rowCount()-1);
-        //essayer de trouver comment supprimer la ligne sélectionnée plutôt que la dernière
+    /*if(ui->grilleIngredients->rowCount() > 1)
+    {
+        qDebug() << "le rowCount" <<  ui->grilleIngredients->rowCount();
+        delete le_list.at(2);
+        delete cb_list.at(2);
+        delete sb_list.at(2);
+    }*/
 }
 
-QList<QString> FenetreAjoutRecette::creerListeIngredients()
+QList<Ingredient*> FenetreAjoutRecette::creerListeIngredients()
 {
-    QList<QString> liste;
+    QList<Ingredient*> liste;
 
-    int nbIngredients = ui->tableIngredients->rowCount();
-
-    for(int i=0; i<nbIngredients; i++)
+    int nbLignes = ui->grilleIngredients->rowCount()-3;
+    qDebug() << nbLignes << "la liste :" << le_list;
+    for(int i=0; i<nbLignes; i++)
     {
-        QVariant varTemp0;
-        QVariant varTemp1;
-        QVariant varTemp2;
-        QTableWidgetItem*  qtwi0 = ui->tableIngredients->item(i,0);
-        QTableWidgetItem* qtwi1 = ui->tableIngredients->item(i,1);
-        QTableWidgetItem* qtwi2 = ui->tableIngredients->item(i,2);
-        if(qtwi0 != 0)
-            varTemp0 = qtwi0->data(0);//erreur si nom vide
-        else
-            varTemp0 = "";
-        if(qtwi1 != 0)
-            varTemp1 = qtwi1->data(0);
-        else
-            varTemp1 = "";
-        if(qtwi2 != 0)
-            varTemp2 = qtwi2->data(0);
-        else
-            varTemp2 = "";
-
-        QString strTemp;
-
-        if(varTemp0 != "")
+        if(le_list.at(i)->text() != "" && le_list.at(i)->text() != NULL )
         {
-            strTemp += varTemp0.toString();
-            if(varTemp1 != "")
-            {
-                strTemp += " (" + varTemp1.toString() + varTemp2.toString() +")" ;
-            }
-            liste << strTemp;
+            Ingredient* ingTemp = new Ingredient(le_list.at(i)->text(),0,sb_list.at(i)->value(),cb_list.at(i)->currentText(),QDate(),"");
+            liste << ingTemp;
+            qDebug() << "je passe icieuh";
         }
     }
     return liste;
-
 }
 
 bool FenetreAjoutRecette::pasDingredients()
 {
-    int nbRows = ui->tableIngredients->rowCount();
+    int nbRows = ui->grilleIngredients->rowCount()-1;
 
     qDebug() << "Count" << nbRows;
-    for(int i=0; i<nbRows; i++)
+    qDebug() << "liste" << le_list;
+    foreach(QLineEdit* le, le_list)
     {
-        if(ui->tableIngredients->item(i,0) != NULL)
+        qDebug() << le;
+        if(le->text()!= "" && le->text() != NULL)
+        {
+            qDebug() << "blou : " << le->text();
             return false;
+        }
     }
     return true;
 }

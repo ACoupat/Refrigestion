@@ -15,16 +15,18 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
+#include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QTableWidget>
+#include <QtWidgets/QScrollArea>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -33,24 +35,36 @@ class Ui_FenetreAjoutRecette
 public:
     QGridLayout *gridLayout_2;
     QGridLayout *gridLayout;
-    QHBoxLayout *horizontalLayout_3;
-    QPushButton *cancelButton;
-    QPushButton *okButton;
-    QLabel *label_6;
-    QLabel *label_2;
-    QLineEdit *le_duree;
-    QComboBox *cb_image;
-    QTextEdit *te_etapes;
-    QLabel *label_4;
-    QLabel *label_3;
-    QLineEdit *le_nom;
-    QLabel *label;
-    QLabel *label_5;
-    QVBoxLayout *verticalLayout;
-    QTableWidget *tableIngredients;
+    QVBoxLayout *verticalLayout_5;
+    QScrollArea *scrollIngredients;
+    QWidget *tableIngredients;
+    QGridLayout *gridLayout_4;
+    QGridLayout *grilleIngredients;
+    QDoubleSpinBox *sb_ing1;
+    QComboBox *cb_ing1;
+    QLabel *label_7;
+    QLabel *label_9;
+    QLabel *label_8;
+    QLineEdit *le_ing1;
+    QComboBox *cb_ing2;
+    QDoubleSpinBox *sb_ing2;
+    QLineEdit *le_ing2;
     QHBoxLayout *horizontalLayout;
     QToolButton *tbRetirerIng;
     QToolButton *tbAjouterIng;
+    QLabel *label_3;
+    QHBoxLayout *horizontalLayout_3;
+    QPushButton *cancelButton;
+    QPushButton *okButton;
+    QLineEdit *le_duree;
+    QLabel *label_6;
+    QLabel *label_2;
+    QComboBox *cb_image;
+    QTextEdit *te_etapes;
+    QLabel *label_4;
+    QLineEdit *le_nom;
+    QLabel *label;
+    QLabel *label_5;
     QComboBox *cb_type;
 
     void setupUi(QDialog *FenetreAjoutRecette)
@@ -61,6 +75,11 @@ public:
         FenetreAjoutRecette->setStyleSheet(QLatin1String("QDialog\n"
 "{\n"
 "	background-color: darkgray;\n"
+"}\n"
+"\n"
+"QWidget#scrollAreaWidgetContents_2\n"
+"{\n"
+"	padding-top : 5pxpx;\n"
 "}"));
         gridLayout_2 = new QGridLayout(FenetreAjoutRecette);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
@@ -68,105 +87,71 @@ public:
         gridLayout->setSpacing(15);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         gridLayout->setContentsMargins(10, 10, 10, 10);
-        horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        cancelButton = new QPushButton(FenetreAjoutRecette);
-        cancelButton->setObjectName(QStringLiteral("cancelButton"));
-        cancelButton->setAutoDefault(false);
-
-        horizontalLayout_3->addWidget(cancelButton);
-
-        okButton = new QPushButton(FenetreAjoutRecette);
-        okButton->setObjectName(QStringLiteral("okButton"));
-
-        horizontalLayout_3->addWidget(okButton);
-
-
-        gridLayout->addLayout(horizontalLayout_3, 8, 3, 1, 1);
-
-        label_6 = new QLabel(FenetreAjoutRecette);
-        label_6->setObjectName(QStringLiteral("label_6"));
-
-        gridLayout->addWidget(label_6, 3, 1, 1, 1);
-
-        label_2 = new QLabel(FenetreAjoutRecette);
-        label_2->setObjectName(QStringLiteral("label_2"));
-
-        gridLayout->addWidget(label_2, 1, 1, 1, 1);
-
-        le_duree = new QLineEdit(FenetreAjoutRecette);
-        le_duree->setObjectName(QStringLiteral("le_duree"));
-
-        gridLayout->addWidget(le_duree, 3, 3, 1, 1);
-
-        cb_image = new QComboBox(FenetreAjoutRecette);
-        cb_image->setObjectName(QStringLiteral("cb_image"));
-
-        gridLayout->addWidget(cb_image, 6, 3, 1, 1);
-
-        te_etapes = new QTextEdit(FenetreAjoutRecette);
-        te_etapes->setObjectName(QStringLiteral("te_etapes"));
-
-        gridLayout->addWidget(te_etapes, 5, 3, 1, 1);
-
-        label_4 = new QLabel(FenetreAjoutRecette);
-        label_4->setObjectName(QStringLiteral("label_4"));
-
-        gridLayout->addWidget(label_4, 5, 1, 1, 1);
-
-        label_3 = new QLabel(FenetreAjoutRecette);
-        label_3->setObjectName(QStringLiteral("label_3"));
-
-        gridLayout->addWidget(label_3, 2, 1, 1, 1);
-
-        le_nom = new QLineEdit(FenetreAjoutRecette);
-        le_nom->setObjectName(QStringLiteral("le_nom"));
-
-        gridLayout->addWidget(le_nom, 0, 3, 1, 1);
-
-        label = new QLabel(FenetreAjoutRecette);
-        label->setObjectName(QStringLiteral("label"));
-
-        gridLayout->addWidget(label, 0, 1, 1, 1);
-
-        label_5 = new QLabel(FenetreAjoutRecette);
-        label_5->setObjectName(QStringLiteral("label_5"));
-
-        gridLayout->addWidget(label_5, 6, 1, 1, 1);
-
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        tableIngredients = new QTableWidget(FenetreAjoutRecette);
-        if (tableIngredients->columnCount() < 3)
-            tableIngredients->setColumnCount(3);
-        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
-        tableIngredients->setHorizontalHeaderItem(0, __qtablewidgetitem);
-        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
-        tableIngredients->setHorizontalHeaderItem(1, __qtablewidgetitem1);
-        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
-        tableIngredients->setHorizontalHeaderItem(2, __qtablewidgetitem2);
-        if (tableIngredients->rowCount() < 1)
-            tableIngredients->setRowCount(1);
+        verticalLayout_5 = new QVBoxLayout();
+        verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
+        scrollIngredients = new QScrollArea(FenetreAjoutRecette);
+        scrollIngredients->setObjectName(QStringLiteral("scrollIngredients"));
+        scrollIngredients->setStyleSheet(QStringLiteral("padding : 0px;"));
+        scrollIngredients->setWidgetResizable(true);
+        tableIngredients = new QWidget();
         tableIngredients->setObjectName(QStringLiteral("tableIngredients"));
-        tableIngredients->setStyleSheet(QLatin1String("QHeaderView::section {\n"
-"    background-color:gray; /*qlineargradient(x1:0, y1:0, x2:0, y2:1,\n"
-"                                      stop:0 #616161, stop: 0.5 #505050,\n"
-"                                      stop: 0.6 #434343, stop:1 #656565);*/\n"
-"    color: white;\n"
-"    padding-left: 4px;\n"
-"    border: 1px solid #6c6c6c;\n"
-"}"));
-        tableIngredients->setFrameShape(QFrame::StyledPanel);
-        tableIngredients->setGridStyle(Qt::SolidLine);
-        tableIngredients->setRowCount(1);
-        tableIngredients->horizontalHeader()->setCascadingSectionResizes(false);
-        tableIngredients->horizontalHeader()->setProperty("showSortIndicator", QVariant(false));
-        tableIngredients->horizontalHeader()->setStretchLastSection(true);
-        tableIngredients->verticalHeader()->setVisible(false);
-        tableIngredients->verticalHeader()->setProperty("showSortIndicator", QVariant(false));
-        tableIngredients->verticalHeader()->setStretchLastSection(false);
+        tableIngredients->setGeometry(QRect(0, 0, 319, 124));
+        gridLayout_4 = new QGridLayout(tableIngredients);
+        gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
+        grilleIngredients = new QGridLayout();
+        grilleIngredients->setObjectName(QStringLiteral("grilleIngredients"));
+        sb_ing1 = new QDoubleSpinBox(tableIngredients);
+        sb_ing1->setObjectName(QStringLiteral("sb_ing1"));
 
-        verticalLayout->addWidget(tableIngredients);
+        grilleIngredients->addWidget(sb_ing1, 1, 1, 1, 1);
+
+        cb_ing1 = new QComboBox(tableIngredients);
+        cb_ing1->setObjectName(QStringLiteral("cb_ing1"));
+
+        grilleIngredients->addWidget(cb_ing1, 1, 2, 1, 1);
+
+        label_7 = new QLabel(tableIngredients);
+        label_7->setObjectName(QStringLiteral("label_7"));
+        label_7->setMaximumSize(QSize(16777215, 25));
+
+        grilleIngredients->addWidget(label_7, 0, 0, 1, 1);
+
+        label_9 = new QLabel(tableIngredients);
+        label_9->setObjectName(QStringLiteral("label_9"));
+
+        grilleIngredients->addWidget(label_9, 0, 2, 1, 1);
+
+        label_8 = new QLabel(tableIngredients);
+        label_8->setObjectName(QStringLiteral("label_8"));
+
+        grilleIngredients->addWidget(label_8, 0, 1, 1, 1);
+
+        le_ing1 = new QLineEdit(tableIngredients);
+        le_ing1->setObjectName(QStringLiteral("le_ing1"));
+
+        grilleIngredients->addWidget(le_ing1, 1, 0, 1, 1);
+
+        cb_ing2 = new QComboBox(tableIngredients);
+        cb_ing2->setObjectName(QStringLiteral("cb_ing2"));
+
+        grilleIngredients->addWidget(cb_ing2, 2, 2, 1, 1);
+
+        sb_ing2 = new QDoubleSpinBox(tableIngredients);
+        sb_ing2->setObjectName(QStringLiteral("sb_ing2"));
+
+        grilleIngredients->addWidget(sb_ing2, 2, 1, 1, 1);
+
+        le_ing2 = new QLineEdit(tableIngredients);
+        le_ing2->setObjectName(QStringLiteral("le_ing2"));
+
+        grilleIngredients->addWidget(le_ing2, 2, 0, 1, 1);
+
+
+        gridLayout_4->addLayout(grilleIngredients, 0, 0, 1, 1);
+
+        scrollIngredients->setWidget(tableIngredients);
+
+        verticalLayout_5->addWidget(scrollIngredients);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
@@ -181,10 +166,76 @@ public:
         horizontalLayout->addWidget(tbAjouterIng);
 
 
-        verticalLayout->addLayout(horizontalLayout);
+        verticalLayout_5->addLayout(horizontalLayout);
 
 
-        gridLayout->addLayout(verticalLayout, 2, 3, 1, 1);
+        gridLayout->addLayout(verticalLayout_5, 2, 3, 1, 1);
+
+        label_3 = new QLabel(FenetreAjoutRecette);
+        label_3->setObjectName(QStringLiteral("label_3"));
+
+        gridLayout->addWidget(label_3, 2, 1, 1, 1);
+
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        cancelButton = new QPushButton(FenetreAjoutRecette);
+        cancelButton->setObjectName(QStringLiteral("cancelButton"));
+        cancelButton->setAutoDefault(false);
+
+        horizontalLayout_3->addWidget(cancelButton);
+
+        okButton = new QPushButton(FenetreAjoutRecette);
+        okButton->setObjectName(QStringLiteral("okButton"));
+
+        horizontalLayout_3->addWidget(okButton);
+
+
+        gridLayout->addLayout(horizontalLayout_3, 9, 3, 1, 1);
+
+        le_duree = new QLineEdit(FenetreAjoutRecette);
+        le_duree->setObjectName(QStringLiteral("le_duree"));
+
+        gridLayout->addWidget(le_duree, 3, 3, 1, 1);
+
+        label_6 = new QLabel(FenetreAjoutRecette);
+        label_6->setObjectName(QStringLiteral("label_6"));
+
+        gridLayout->addWidget(label_6, 3, 1, 1, 1);
+
+        label_2 = new QLabel(FenetreAjoutRecette);
+        label_2->setObjectName(QStringLiteral("label_2"));
+
+        gridLayout->addWidget(label_2, 1, 1, 1, 1);
+
+        cb_image = new QComboBox(FenetreAjoutRecette);
+        cb_image->setObjectName(QStringLiteral("cb_image"));
+
+        gridLayout->addWidget(cb_image, 7, 3, 1, 1);
+
+        te_etapes = new QTextEdit(FenetreAjoutRecette);
+        te_etapes->setObjectName(QStringLiteral("te_etapes"));
+
+        gridLayout->addWidget(te_etapes, 6, 3, 1, 1);
+
+        label_4 = new QLabel(FenetreAjoutRecette);
+        label_4->setObjectName(QStringLiteral("label_4"));
+
+        gridLayout->addWidget(label_4, 6, 1, 1, 1);
+
+        le_nom = new QLineEdit(FenetreAjoutRecette);
+        le_nom->setObjectName(QStringLiteral("le_nom"));
+
+        gridLayout->addWidget(le_nom, 0, 3, 1, 1);
+
+        label = new QLabel(FenetreAjoutRecette);
+        label->setObjectName(QStringLiteral("label"));
+
+        gridLayout->addWidget(label, 0, 1, 1, 1);
+
+        label_5 = new QLabel(FenetreAjoutRecette);
+        label_5->setObjectName(QStringLiteral("label_5"));
+
+        gridLayout->addWidget(label_5, 7, 1, 1, 1);
 
         cb_type = new QComboBox(FenetreAjoutRecette);
         cb_type->setObjectName(QStringLiteral("cb_type"));
@@ -192,14 +243,23 @@ public:
         gridLayout->addWidget(cb_type, 1, 3, 1, 1);
 
 
-        gridLayout_2->addLayout(gridLayout, 1, 0, 1, 1);
+        gridLayout_2->addLayout(gridLayout, 0, 0, 1, 1);
 
-        QWidget::setTabOrder(le_nom, tableIngredients);
-        QWidget::setTabOrder(tableIngredients, tbRetirerIng);
+        QWidget::setTabOrder(le_nom, cb_type);
+        QWidget::setTabOrder(cb_type, scrollIngredients);
+        QWidget::setTabOrder(scrollIngredients, le_ing1);
+        QWidget::setTabOrder(le_ing1, sb_ing1);
+        QWidget::setTabOrder(sb_ing1, cb_ing1);
+        QWidget::setTabOrder(cb_ing1, le_ing2);
+        QWidget::setTabOrder(le_ing2, sb_ing2);
+        QWidget::setTabOrder(sb_ing2, cb_ing2);
+        QWidget::setTabOrder(cb_ing2, tbRetirerIng);
         QWidget::setTabOrder(tbRetirerIng, tbAjouterIng);
         QWidget::setTabOrder(tbAjouterIng, le_duree);
         QWidget::setTabOrder(le_duree, te_etapes);
         QWidget::setTabOrder(te_etapes, cb_image);
+        QWidget::setTabOrder(cb_image, cancelButton);
+        QWidget::setTabOrder(cancelButton, okButton);
 
         retranslateUi(FenetreAjoutRecette);
 
@@ -212,22 +272,37 @@ public:
     void retranslateUi(QDialog *FenetreAjoutRecette)
     {
         FenetreAjoutRecette->setWindowTitle(QApplication::translate("FenetreAjoutRecette", "Dialog", 0));
+        cb_ing1->clear();
+        cb_ing1->insertItems(0, QStringList()
+         << QString()
+         << QApplication::translate("FenetreAjoutRecette", "mL", 0)
+         << QApplication::translate("FenetreAjoutRecette", "cL", 0)
+         << QApplication::translate("FenetreAjoutRecette", "L", 0)
+         << QApplication::translate("FenetreAjoutRecette", "g", 0)
+         << QApplication::translate("FenetreAjoutRecette", "kg", 0)
+        );
+        label_7->setText(QApplication::translate("FenetreAjoutRecette", "Ingr\303\251dients", 0));
+        label_9->setText(QApplication::translate("FenetreAjoutRecette", "Unit\303\251", 0));
+        label_8->setText(QApplication::translate("FenetreAjoutRecette", "Quantit\303\251", 0));
+        cb_ing2->clear();
+        cb_ing2->insertItems(0, QStringList()
+         << QString()
+         << QApplication::translate("FenetreAjoutRecette", "mL", 0)
+         << QApplication::translate("FenetreAjoutRecette", "cL", 0)
+         << QApplication::translate("FenetreAjoutRecette", "L", 0)
+         << QApplication::translate("FenetreAjoutRecette", "g", 0)
+         << QApplication::translate("FenetreAjoutRecette", "kg", 0)
+        );
+        tbRetirerIng->setText(QApplication::translate("FenetreAjoutRecette", " - ", 0));
+        tbAjouterIng->setText(QApplication::translate("FenetreAjoutRecette", " + ", 0));
+        label_3->setText(QApplication::translate("FenetreAjoutRecette", "Ingr\303\251dients", 0));
         cancelButton->setText(QApplication::translate("FenetreAjoutRecette", "Annuler", 0));
         okButton->setText(QApplication::translate("FenetreAjoutRecette", "Ok", 0));
         label_6->setText(QApplication::translate("FenetreAjoutRecette", "Dur\303\251e de pr\303\251paration :", 0));
         label_2->setText(QApplication::translate("FenetreAjoutRecette", "Type de recette :", 0));
         label_4->setText(QApplication::translate("FenetreAjoutRecette", "Etapes de pr\303\251paration :", 0));
-        label_3->setText(QApplication::translate("FenetreAjoutRecette", "Ingr\303\251dients", 0));
         label->setText(QApplication::translate("FenetreAjoutRecette", "Nom :", 0));
         label_5->setText(QApplication::translate("FenetreAjoutRecette", "Image :", 0));
-        QTableWidgetItem *___qtablewidgetitem = tableIngredients->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("FenetreAjoutRecette", "Ingr\303\251dients", 0));
-        QTableWidgetItem *___qtablewidgetitem1 = tableIngredients->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("FenetreAjoutRecette", "Quantit\303\251s", 0));
-        QTableWidgetItem *___qtablewidgetitem2 = tableIngredients->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QApplication::translate("FenetreAjoutRecette", "Unit\303\251", 0));
-        tbRetirerIng->setText(QApplication::translate("FenetreAjoutRecette", " - ", 0));
-        tbAjouterIng->setText(QApplication::translate("FenetreAjoutRecette", " + ", 0));
         cb_type->clear();
         cb_type->insertItems(0, QStringList()
          << QApplication::translate("FenetreAjoutRecette", "Autre", 0)

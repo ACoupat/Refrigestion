@@ -1,5 +1,5 @@
 #include "ingredient.h"
-
+#include <QDebug>
 Ingredient::Ingredient(QString nom, int type, double quantite, QString unite, QDate datePeremption, QString cheminImage)
 {
     this->nom = nom;
@@ -8,6 +8,58 @@ Ingredient::Ingredient(QString nom, int type, double quantite, QString unite, QD
     this->unite = unite;
     this->quantite = quantite;
     this->cheminImage = cheminImage;
+}
+
+Ingredient::Ingredient(QString strFichier)
+{
+   int i=0;
+   QString strTemp;
+   QChar c;
+
+   c= strFichier[i];
+   while(c != ';')
+   {
+        strTemp += c;
+        i++;
+        c = strFichier[i];
+   }
+   nom = strTemp;
+   strTemp ="";
+   i+=2;
+   c= strFichier[i];
+   while(c != ';')
+   {
+        strTemp += c;
+        i++;
+        c = strFichier[i];
+   }
+   qDebug() << "qte" << strTemp;
+   quantite=strTemp.toDouble();
+   strTemp ="";
+   i++;
+   c= strFichier[i];
+   while(c != ';')
+   {
+        strTemp += c;
+        i++;
+        c = strFichier[i];
+   }
+   qDebug() << "unite :" << strTemp;
+   unite = strTemp;
+   type =0;
+   datePeremption=QDate();
+   cheminImage="";
+}
+
+QString Ingredient::toStringDetail()
+{
+    QString str;
+    if(quantite != 0)
+     str += nom +" ("+QString::number(quantite)+unite+")";
+    else
+     str += nom;
+
+    return str;
 }
 
 void Ingredient::setQuantite(double dQte) {

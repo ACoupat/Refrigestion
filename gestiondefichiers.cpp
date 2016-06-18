@@ -21,7 +21,7 @@ GestionDeFichiers::GestionDeFichiers()
  *
  * Renvoie 0 si l'opération a réussi, 1 sinon.
  */
-int GestionDeFichiers::ajoutFichier(Recette* recette, Ingredient* ing)//Static ?
+int GestionDeFichiers::ajoutFichier(Recette* recette, Ingredient* ing)
 {
     //Tester si le fichier existe déja
     //ControleEspace et MIN de Nom
@@ -30,7 +30,6 @@ int GestionDeFichiers::ajoutFichier(Recette* recette, Ingredient* ing)//Static ?
         QFile fichier("listeIngredients.rfg");
         if(fichier.open(QIODevice::ReadWrite | QIODevice::Append))
         {
-            //fichier.write();
             qDebug() << "Fichier créé";
             QTextStream flux(&fichier);
             flux << creerLigneIngredient(ing);
@@ -82,15 +81,24 @@ QString GestionDeFichiers::creerStringRecette(Recette* recette)
     QString ligne(recette->getNom());
     ligne += "\n"+ recette->getDureePreparation();
     ligne += "\n"+ recette->getTypeRecette()+"\n;\n";
+
     int nbIngredients = recette->getListIngredients().size();
     for(int i = 0; i<nbIngredients; i++)
+    /*{
+        ligne += "\n"+recette->getListIngredients().at(i)->toStringFichier();
+        qDebug()<< ligne;
+    }*/
+    qDebug() << recette->getListIngredients();
+    foreach(Ingredient* ing, recette->getListIngredients())
     {
-        if(recette->getListIngredients().at(i) != " ()")
-            ligne += "\n"+recette->getListIngredients().at(i);
+        ligne += creerLigneIngredient(ing)+"\n";
+        qDebug()<< ligne;
     }
-    ligne += "\n;\n" + recette->getEtapesPreparation();
+
+    ligne += ";\n" + recette->getEtapesPreparation();
     ligne += "\n;\n" + recette->getNomImage()+"\n";
     ligne += recette->getCheminImage()+"\n" ;
+
     return ligne;
 }
 
@@ -209,7 +217,7 @@ Recette* GestionDeFichiers::creerRecette(QString nomFichier)
 {
     QString nom;
     QString dureePrep;
-    QList<QString> listIng;
+    QList<Ingredient*> listIng;
     QString etapesPrep;
     QString type;
     QString nomImage;
@@ -230,7 +238,7 @@ Recette* GestionDeFichiers::creerRecette(QString nomFichier)
             while(strTemp != ";")
             {
                 if(strTemp != "" )
-                    listIng << strTemp;
+                    listIng << new Ingredient(strTemp);
                 strTemp = flux.readLine();
             }
             strTemp = flux.readLine();

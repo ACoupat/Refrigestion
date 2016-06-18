@@ -77,18 +77,12 @@ void MainWindow::ajoutIngredient()
 }
 void MainWindow::modifRecette(QString nomModif)
 {
-    qDebug() << "la2";
-    qDebug() << vignettesRecettes.size();
         foreach(VignetteRecette* vr, vignettesRecettes)
         {
-            qDebug() << "la3";
             if(vr->getRecette()->getNom() == nomModif)
-            {       qDebug() << "la4";
+            {
                 supprimerVignetteRecette(vr,true);
-                    qDebug() << "la5";
             }
-
-
         }
         //Ajout de la recette
         QString nomEntre =  fenAR->getNomEntre();
@@ -141,6 +135,7 @@ void MainWindow::ajoutRecette()
     }
     else
     {
+
        Recette* nouvelleRecette = fenAR->creerRecette();
        fenAR->close();
        fenAR = new FenetreAjoutRecette(this);

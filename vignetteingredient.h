@@ -8,6 +8,7 @@
 #include <gestiondefichiers.h>
 #include <QGraphicsDropShadowEffect>
 #include <QHoverEvent>
+
 class MainWindow;
 
 namespace Ui {

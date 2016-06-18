@@ -6,6 +6,10 @@
 #include <gestiondefichiers.h>
 #include <QAbstractItemModel>
 #include <QDebug>
+#include <QLineEdit>
+#include <QComboBox>
+#include <QDoubleSpinBox>
+#include <ingredient.h>
 
 class MainWindow;
 
@@ -28,7 +32,10 @@ public:
 
 private:
     Ui::FenetreAjoutRecette *ui;
-    QList<QString> creerListeIngredients();
+    QList<Ingredient *> creerListeIngredients();
+    QList<QLineEdit*> le_list;
+    QList<QComboBox*> cb_list;
+    QList<QDoubleSpinBox*> sb_list;
     QString nomModif;
     MainWindow* window;
 

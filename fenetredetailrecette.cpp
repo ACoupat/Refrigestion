@@ -16,10 +16,10 @@ fenetreDetailRecette::fenetreDetailRecette(Recette *recette, QWidget *parent) :
 void fenetreDetailRecette::initLabels()
 {
     QString ingredients;
-    QList<QString> liste = recette->getListIngredients();
-    foreach(QString str, liste)
+    QList<Ingredient*> liste = recette->getListIngredients();
+    foreach(Ingredient* ing, liste)
     {
-        ingredients += "- " + str +"\n";
+        ingredients += "- " + ing->toStringDetail() +"\n";
     }
 
     ui->labelNom->setText(recette->getNom());

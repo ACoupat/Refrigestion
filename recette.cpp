@@ -1,6 +1,6 @@
 #include "recette.h"
 
-Recette::Recette(QString nom, QString dureePrep, QList<QString> listeIng,QString etapesPrep,QString typeRecette, QString nomImage, QString cheminImage)
+Recette::Recette(QString nom, QString dureePrep, QList<Ingredient*> listeIng,QString etapesPrep,QString typeRecette, QString nomImage, QString cheminImage)
 {
     this->nom = nom;
     this->dureePreparation = dureePrep;
@@ -13,13 +13,7 @@ Recette::Recette(QString nom, QString dureePrep, QList<QString> listeIng,QString
 
 bool Recette::aucunIngredient()
 {
-    bool aucunIngredient = true;
-    foreach(QString str, this->listeIngredients)
-    {
-        if(str != " ()")
-            aucunIngredient = false;
-    }
-    return aucunIngredient;
+    return listeIngredients.isEmpty();
 }
 
 QString Recette::getNom()
@@ -41,7 +35,7 @@ QString Recette::getCheminImage()
     return cheminImage;
 }
 
-QList<QString> Recette::getListIngredients()
+QList<Ingredient*> Recette::getListIngredients()
 {
     return listeIngredients;
 }
