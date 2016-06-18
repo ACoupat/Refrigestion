@@ -12,7 +12,7 @@ FenetreAjoutIngredient::FenetreAjoutIngredient(QWidget *parent) :
     this->setModal(true);
     this->setWindowTitle("Ajouter un ingrédient");
     ui->de_date->setDateTime(QDateTime::currentDateTime());
-    QDir *image = new QDir(QDir::currentPath() + "/Images/Contenu");
+    QDir *image = new QDir("Images/Contenu");
     image->setFilter(QDir::Files);
     image->setSorting(QDir::Name);
 
