@@ -14,7 +14,12 @@ MainWindow::MainWindow(QWidget *parent) :
     this->showFullScreen();
     screenWidth = QApplication::desktop()->screenGeometry().width();
     screenHeight = QApplication::desktop()->screenGeometry().height();
+
     ui->widgets->setFixedWidth(screenWidth * TAILLE_GROUPE_WIDGETS);
+    int tab = (screenWidth * TAILLE_GROUPE_WIDGETS *4)/2 - 14;
+    ui->tabWidget->setStyleSheet("QTabBar::tab { height: 20px; width: "+ QString::number(tab) + "px; }");
+    ui->tabWidget->setElideMode(Qt::ElideRight);
+
     ui->boutonAjoutIngredient->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
     ui->boutonAjoutIngredient->setLayoutDirection(Qt::RightToLeft);
     connect(ui->boutonAjoutIngredient, SIGNAL(clicked(bool)), this, SLOT(ouvrirFenetreAjoutIngredient()));
