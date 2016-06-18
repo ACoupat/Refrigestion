@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.6.0
+** Created by: Qt User Interface Compiler version 5.5.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -16,12 +16,14 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
+#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -34,6 +36,8 @@ public:
     QGridLayout *gridLayout;
     QGroupBox *widgets;
     QGridLayout *gridLayout_5;
+    QTextEdit *textEdit_Postit;
+    QLabel *label_Postit;
     QTabWidget *tabWidget;
     QWidget *tab;
     QGridLayout *gridLayout_2;
@@ -71,6 +75,16 @@ public:
         gridLayout_5->setSpacing(6);
         gridLayout_5->setContentsMargins(11, 11, 11, 11);
         gridLayout_5->setObjectName(QStringLiteral("gridLayout_5"));
+        textEdit_Postit = new QTextEdit(widgets);
+        textEdit_Postit->setObjectName(QStringLiteral("textEdit_Postit"));
+
+        gridLayout_5->addWidget(textEdit_Postit, 1, 0, 1, 1);
+
+        label_Postit = new QLabel(widgets);
+        label_Postit->setObjectName(QStringLiteral("label_Postit"));
+
+        gridLayout_5->addWidget(label_Postit, 0, 0, 1, 1);
+
 
         gridLayout->addWidget(widgets, 0, 1, 1, 1);
 
@@ -93,7 +107,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 667, 440));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 350, 440));
         gridLayout_4 = new QGridLayout(scrollAreaWidgetContents);
         gridLayout_4->setSpacing(6);
         gridLayout_4->setContentsMargins(11, 11, 11, 11);
@@ -125,7 +139,7 @@ public:
         scrollArea_2->setWidgetResizable(true);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName(QStringLiteral("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 667, 440));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 350, 440));
         gridLayout_7 = new QGridLayout(scrollAreaWidgetContents_2);
         gridLayout_7->setSpacing(6);
         gridLayout_7->setContentsMargins(11, 11, 11, 11);
@@ -170,6 +184,7 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
         widgets->setTitle(QApplication::translate("MainWindow", "Widgets", 0));
+        label_Postit->setText(QString());
         boutonAjoutIngredient->setText(QApplication::translate("MainWindow", "Ajouter un ingr\303\251dient", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Ingr\303\251dients", 0));
 #ifndef QT_NO_ACCESSIBILITY

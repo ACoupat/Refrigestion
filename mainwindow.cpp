@@ -30,6 +30,10 @@ MainWindow::MainWindow(QWidget *parent) :
     creerVignettesIngredientDemarrage();
     creerVignettesRecettesDemarrage();
     GestionDeFichiers::creerRecette("recette.rfg");
+    creerPostit();
+    connect(ui->textEdit_Postit, SIGNAL(textChanged()), this, SLOT(modifierContenuPostit()));
+
+
 }
 
 MainWindow::~MainWindow()
@@ -265,6 +269,37 @@ bool MainWindow::supprimerVignetteRecette(VignetteRecette *vignette, bool modif)
 void MainWindow::reecrireFichier()
 {
     GestionDeFichiers::reecrireFichier(ingredients);
+}
+void MainWindow::creerPostit()
+{
+    QGridLayout * grillePostit = new QGridLayout();
+    QFont fontPostit("Cracked Johnnie",16);
+    QFile fichierPostit("postit.rfg");
+    fichierPostit.open(QIODevice::ReadOnly);
+    QString contenuPostit = fichierPostit.readAll();
+    ui->label_Postit->setFixedSize(screenWidth * TAILLE_GROUPE_WIDGETS-10,screenWidth * TAILLE_GROUPE_WIDGETS-10);
+    ui->label_Postit->setStyleSheet("QLabel#label_Postit{ border-image: url(ZcPostIt.png) 0 0 0 0 stretch stretch; }");
+    ui->label_Postit->setLayout(grillePostit);
+
+    ui->textEdit_Postit->setFixedSize(screenWidth * TAILLE_GROUPE_WIDGETS -45,screenWidth * TAILLE_GROUPE_WIDGETS -150);
+    ui->textEdit_Postit->setStyleSheet("background-color: transparent;");
+    ui->textEdit_Postit->setFrameShape(QFrame::NoFrame);
+    ui->textEdit_Postit->setFont(fontPostit);
+    ui->textEdit_Postit->setText(contenuPostit);
+
+    grillePostit->addWidget(ui->textEdit_Postit);
+    fichierPostit.close();
+}
+
+void MainWindow::modifierContenuPostit()
+{
+    QString contenuPostit = ui->textEdit_Postit->toPlainText();
+    QFile fichierPostit("postit.rfg");
+    fichierPostit.open(QIODevice::ReadWrite | QIODevice::Truncate);
+    QTextStream fluxPostit(&fichierPostit);
+    fluxPostit << contenuPostit;
+    fichierPostit.close();
+    qDebug() << contenuPostit;
 }
 
 QList<Ingredient*> MainWindow::getIngredients()

@@ -26,7 +26,18 @@
       <property name="title">
        <string>Widgets</string>
       </property>
-      <layout class="QGridLayout" name="gridLayout_5"/>
+      <layout class="QGridLayout" name="gridLayout_5">
+       <item row="1" column="0">
+        <widget class="QTextEdit" name="textEdit_Postit"/>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_Postit">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
     <item row="0" column="0">
@@ -57,7 +68,7 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>667</width>
+             <width>350</width>
              <height>440</height>
             </rect>
            </property>
@@ -96,7 +107,7 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>667</width>
+             <width>350</width>
              <height>440</height>
             </rect>
            </property>

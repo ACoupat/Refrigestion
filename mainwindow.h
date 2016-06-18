@@ -50,6 +50,7 @@ private:
 
     void creerVignettesIngredientDemarrage();
     void creerVignettesRecettesDemarrage();
+    void creerPostit();
 
 
 public slots:
@@ -59,6 +60,7 @@ public slots:
     void ajoutRecette();
     void modifRecette(QString nomModif);
     void ouvrirFenArModif(Recette* recette);
+    void modifierContenuPostit();
 
 };
 
