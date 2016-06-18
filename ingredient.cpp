@@ -46,15 +46,30 @@ int Ingredient::getType()
 }
 
 QString Ingredient::getTypeColor() {
-    static const QString colors[] = {"rgba(200, 200, 200, 0.5);", // Autre
-                                     "rgba(0, 255, 255, 0.5);", // Boisson
-                                     "rgba(0, 255, 0, 0.5);", // Légume
-                                     "rgba(255, 0, 255, 0.5);", // Fruit
-                                     "rgba(255, 0, 0, 0.5);", // Viande
-                                     "rgba(0, 0, 255, 0.5);", // Poisson
-                                     "rgba(255, 255, 0, 0.5);", // Fromage
-                                     "rgba(90, 58, 34, 0.5);", // Dessert
-                                     "rgba(0, 255, 255, 0.5);"}; // Plat
+    static const QString colors[] = {"Images/autre.png", // Autre
+                                     "Images/boisson.png", // Boisson
+                                     "Images/legume.png", // Légume
+                                     "Images/fruit.png", // Fruit
+                                     "Images/viande.png", // Viande
+                                     "Images/poisson.png", // Poisson
+                                     "Images/fromage.png", // Fromage
+                                     "Images/entree.png", //Entrée
+                                     "Images/plat.png", //Plat
+                                     "Images/dessert.png"}; // Dessert
+    return colors[type];
+}
+
+QString Ingredient::getTypeColorLettre() {
+    static const QString colors[] = {"Images/autreLettre.png", // Autre
+                                     "Images/boissonLettre.png", // Boisson
+                                     "Images/legumeLettre.png", // Légume
+                                     "Images/fruitLettre.png", // Fruit
+                                     "Images/viandeLettre.png", // Viande
+                                     "Images/poissonLettre.png", // Poisson
+                                     "Images/fromageLettre.png", // Fromage
+                                     "Images/entreeLettre.png", //Entrée
+                                     "Images/platLettre.png", //Plat
+                                     "Images/dessertLettre.png"}; // Dessert
     return colors[type];
 }
 

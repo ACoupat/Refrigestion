@@ -15,6 +15,7 @@ VignetteIngredient::VignetteIngredient(int width, Ingredient* ingredient, MainWi
     this->setMaximumWidth(width);
     this->setMaximumHeight(width);
     ui->labelImage->setMinimumHeight(width * 0.5);
+    ui->labelImage->setMaximumSize(width * 0.9, width * 0.56);
 
     QPolygon forme;
     forme << QPoint(0, 20) << QPoint(40, 0) << QPoint(40, 40);
@@ -23,9 +24,9 @@ VignetteIngredient::VignetteIngredient(int width, Ingredient* ingredient, MainWi
     forme << QPoint(0, 0) << QPoint(40, 20) << QPoint(0, 40);
     ui->pushButton_2->setMask(QRegion(forme));
 
-    QString color = ingredient->getTypeColor();
+    ui->label_type->setPixmap(ingredient->getTypeColor());
     this->setStyleSheet("QWidget#VignetteIngredient{border-bottom: 3px solid #BDBDBD;border-right : 1px solid #BDBDBD;background-color : white;}"
-                        "QLabel{font:16px;} ");
+                        "QLabel{font:16px;color:black;} ");
     initLabels();
 
     this->setAttribute(Qt::WA_Hover, true);
@@ -38,12 +39,14 @@ void VignetteIngredient::enterEvent(QEvent * event)
     g->setBlurRadius(7);
     g->setOffset(0,0);
     this->setGraphicsEffect(g);
+    ui->label_type->setPixmap(ingredient->getTypeColorLettre());
     QWidget::enterEvent(event);
 }
 
 void VignetteIngredient::leaveEvent(QEvent * event)
 {
     this->setGraphicsEffect(NULL);
+    ui->label_type->setPixmap(ingredient->getTypeColor());
     QWidget::leaveEvent(event);
 }
 
@@ -51,7 +54,6 @@ void VignetteIngredient::ajoutQuantite() {
     ingredient->setQuantite(+1);
     ui->label_quantite->setText(QString::number(ingredient->getQuantite()) + " " + ingredient->getUnite());
     window->reecrireFichier();
-    //GestionDeFichiers::reecrireFichier(*listIng);
 }
 
 void VignetteIngredient::retraitQuantite() {

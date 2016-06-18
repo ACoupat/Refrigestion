@@ -9,6 +9,7 @@
 #include <QPixmap>
 #include <QVBoxLayout>
 #include <QFile>
+#include <QDir>
 
 class Ingredient //: public QWidget
 {
@@ -23,6 +24,7 @@ public:
     QString getCheminImage();
     int getType();
     QString getTypeColor();
+    QString getTypeColorLettre();
 
 private:
     double quantite;
