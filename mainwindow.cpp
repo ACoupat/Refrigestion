@@ -30,12 +30,6 @@ MainWindow::MainWindow(QWidget *parent) :
     creerVignettesIngredientDemarrage();
     creerVignettesRecettesDemarrage();
     GestionDeFichiers::creerRecette("recette.rfg");
-    //Test
-    /*for(int i=0;i<3;++i)
-    {
-        ajoutIngredient();
-        ajoutRecette();
-    }*/
 }
 
 MainWindow::~MainWindow()
@@ -84,7 +78,7 @@ void MainWindow::ajoutIngredient()
 void MainWindow::modifRecette(QString nomModif)
 {
     qDebug() << "la2";
-qDebug() << vignettesRecettes.size();
+    qDebug() << vignettesRecettes.size();
         foreach(VignetteRecette* vr, vignettesRecettes)
         {
             qDebug() << "la3";

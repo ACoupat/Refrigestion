@@ -25,12 +25,14 @@ QT_BEGIN_NAMESPACE
 class Ui_VignetteIngredient
 {
 public:
-    QVBoxLayout *verticalLayout_2;
-    QLabel *label_nom;
-    QLabel *labelImage;
+    QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label;
     QLabel *label_2;
+    QHBoxLayout *horizontalLayout_3;
+    QLabel *label_nom;
+    QLabel *label_type;
+    QLabel *labelImage;
     QHBoxLayout *horizontalLayout;
     QPushButton *pushButton;
     QLabel *label_quantite;
@@ -44,25 +46,55 @@ public:
         VignetteIngredient->resize(300, 300);
         VignetteIngredient->setWindowOpacity(1);
         VignetteIngredient->setAutoFillBackground(false);
-        VignetteIngredient->setStyleSheet(QLatin1String("QWidget#VignetteIngredient\n"
-"{\n"
-"\n"
-"	background-color : white;\n"
-"	border-bottom : 3px solid #BDBDBD;\n"
+        VignetteIngredient->setStyleSheet(QLatin1String("QWidget#VignetteIngredient{\n"
+"	border-bottom: 3px solid #BDBDBD;\n"
 "	border-right : 1px solid #BDBDBD;\n"
+"	background-color : white;\n"
 "}\n"
-"QLabel\n"
-"{\n"
-"	font: bold 18px;\n"
-"}\n"
-"                       "));
-        verticalLayout_2 = new QVBoxLayout(VignetteIngredient);
-        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+"QLabel{\n"
+"	font:16px;\n"
+"	color: black;\n"
+"}"));
+        verticalLayout = new QVBoxLayout(VignetteIngredient);
+        verticalLayout->setSpacing(6);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        horizontalLayout_2->setSizeConstraint(QLayout::SetDefaultConstraint);
+        label = new QLabel(VignetteIngredient);
+        label->setObjectName(QStringLiteral("label"));
+        label->setMaximumSize(QSize(16777215, 22));
+
+        horizontalLayout_2->addWidget(label);
+
+        label_2 = new QLabel(VignetteIngredient);
+        label_2->setObjectName(QStringLiteral("label_2"));
+        label_2->setMaximumSize(QSize(16777215, 20));
+
+        horizontalLayout_2->addWidget(label_2);
+
+
+        verticalLayout->addLayout(horizontalLayout_2);
+
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         label_nom = new QLabel(VignetteIngredient);
         label_nom->setObjectName(QStringLiteral("label_nom"));
         label_nom->setAlignment(Qt::AlignCenter);
 
-        verticalLayout_2->addWidget(label_nom);
+        horizontalLayout_3->addWidget(label_nom);
+
+        label_type = new QLabel(VignetteIngredient);
+        label_type->setObjectName(QStringLiteral("label_type"));
+
+        horizontalLayout_3->addWidget(label_type);
+
+        horizontalLayout_3->setStretch(0, 10);
+        horizontalLayout_3->setStretch(1, 1);
+
+        verticalLayout->addLayout(horizontalLayout_3);
 
         labelImage = new QLabel(VignetteIngredient);
         labelImage->setObjectName(QStringLiteral("labelImage"));
@@ -79,22 +111,7 @@ public:
 "}"));
         labelImage->setScaledContents(true);
 
-        verticalLayout_2->addWidget(labelImage);
-
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        label = new QLabel(VignetteIngredient);
-        label->setObjectName(QStringLiteral("label"));
-
-        horizontalLayout_2->addWidget(label);
-
-        label_2 = new QLabel(VignetteIngredient);
-        label_2->setObjectName(QStringLiteral("label_2"));
-
-        horizontalLayout_2->addWidget(label_2);
-
-
-        verticalLayout_2->addLayout(horizontalLayout_2);
+        verticalLayout->addWidget(labelImage);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
@@ -137,8 +154,9 @@ public:
         horizontalLayout->addWidget(pushButton_2);
 
 
-        verticalLayout_2->addLayout(horizontalLayout);
+        verticalLayout->addLayout(horizontalLayout);
 
+        verticalLayout->setStretch(2, 10);
 
         retranslateUi(VignetteIngredient);
 
@@ -148,10 +166,11 @@ public:
     void retranslateUi(QWidget *VignetteIngredient)
     {
         VignetteIngredient->setWindowTitle(QApplication::translate("VignetteIngredient", "Form", 0));
-        label_nom->setText(QApplication::translate("VignetteIngredient", "Nom", 0));
-        labelImage->setText(QString());
         label->setText(QApplication::translate("VignetteIngredient", "DLC :", 0));
         label_2->setText(QApplication::translate("VignetteIngredient", "01/01/2000", 0));
+        label_nom->setText(QApplication::translate("VignetteIngredient", "Nom", 0));
+        label_type->setText(QString());
+        labelImage->setText(QString());
         pushButton->setText(QApplication::translate("VignetteIngredient", "-", 0));
         label_quantite->setText(QApplication::translate("VignetteIngredient", "0", 0));
         pushButton_2->setText(QApplication::translate("VignetteIngredient", "+", 0));
