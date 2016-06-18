@@ -10,6 +10,9 @@
 #include <QPushButton>
 #include <QDebug>
 #include <QFontDatabase>
+#include <QStringListModel>
+#include <QCalendarWidget>
+#include <QTimer>
 #include <ingredient.h>
 #include <recette.h>
 #include <fenetreajoutingredient.h>
@@ -64,6 +67,7 @@ public slots:
     void modifRecette(QString nomModif);
     void ouvrirFenArModif(Recette* recette);
     void modifierContenuPostit();
+    void updateHeure();
 
 };
 

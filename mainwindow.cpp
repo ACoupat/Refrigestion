@@ -38,6 +38,10 @@ MainWindow::MainWindow(QWidget *parent) :
     creerPostit();
     creerListeIngredientDateLimite();
     connect(ui->textEdit_Postit, SIGNAL(textChanged()), this, SLOT(modifierContenuPostit()));
+    QTimer *timer = new QTimer(this);
+    connect(timer,SIGNAL(timeout()),this,SLOT(updateHeure()));
+    timer->start(1000);
+
 }
 
 MainWindow::~MainWindow()
@@ -314,14 +318,33 @@ QList<Ingredient*> MainWindow::getIngredients()
 
 void MainWindow::creerListeIngredientDateLimite()
 {
+    ui->listViewAlimentDateLimite->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    //ui->listViewAlimentDateLimite->
     QList<Ingredient*> listeIngredient = getIngredients();
+    QStringListModel * model = new QStringListModel();
+    QStringList listeAConsommer;
+    QFont fontAConsommer("MS Shell Dlg 2",12);
     foreach(Ingredient * ing, listeIngredient)
     {
         QDate datePeremption = ing->getDate();
-        if(QDate::currentDate().daysTo(datePeremption) < 4)
+        if(QDate::currentDate().daysTo(datePeremption) < 4 && QDate::currentDate().daysTo(datePeremption) > -2)
         {
-            new QListViewItem(ui->listViewAlimentDateLimite, ing->getNom());
+            listeAConsommer << ing->getNom();
+        }else{
+            if(QDate::currentDate().daysTo(datePeremption) < -1)
+            {
+                qDebug() << "Veuillez vérifier avant de manger : " + ing->getNom();
+            }
         }
-
     }
+    model->setStringList(listeAConsommer);
+    ui->listViewAlimentDateLimite->setFont(fontAConsommer);
+    ui->listViewAlimentDateLimite->setModel(model);
+}
+
+void MainWindow::updateHeure()
+{
+    ui->lcdNumberHeure->setDigitCount(8);
+    qDebug () << QTime::currentTime().toString();
+    ui->lcdNumberHeure->display(QTime::currentTime().toString()/*.hour() + ":" + QTime::currentTime().minute()+ ":" + QTime::currentTime().second()*/);
 }
