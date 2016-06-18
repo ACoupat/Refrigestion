@@ -76,12 +76,13 @@ void MainWindow::ajoutIngredient()
     }
 }
 void MainWindow::modifRecette(QString nomModif)
-{
+{       qDebug() <<"vignettes " << vignettesRecettes;
         foreach(VignetteRecette* vr, vignettesRecettes)
         {
             if(vr->getRecette()->getNom() == nomModif)
             {
                 supprimerVignetteRecette(vr,true);
+
             }
         }
         //Ajout de la recette

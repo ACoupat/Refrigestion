@@ -96,8 +96,6 @@ void FenetreAjoutRecette::ajouterLigneTableIng()
     le_list << le;
     cb_list << cb;
     sb_list << sb;
-
-    qDebug() << "nombre de lignes :" << ui->grilleIngredients->rowCount();
 }
 
 void FenetreAjoutRecette::retirerLigneTableIng()
@@ -115,7 +113,7 @@ QList<Ingredient*> FenetreAjoutRecette::creerListeIngredients()
 {
     QList<Ingredient*> liste;
 
-    int nbLignes = ui->grilleIngredients->rowCount()-3;
+    int nbLignes = le_list.size();
     qDebug() << nbLignes << "la liste :" << le_list;
     for(int i=0; i<nbLignes; i++)
     {
