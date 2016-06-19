@@ -23,12 +23,7 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget#VignetteIngredient{
-	border-bottom: 3px solid #BDBDBD;
-	border-right : 1px solid #BDBDBD;
-	background-color : white;
-}
-QLabel{
+   <string notr="true">QLabel{
 	font:16px;
 	color: black;
 }</string>

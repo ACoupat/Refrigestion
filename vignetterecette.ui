@@ -23,38 +23,114 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget#VignetteRecette
-{
-	border: 3px solid black;
-	background-color :lightgreen;
-	border-radius:20px;
+   <string notr="true">
+QLabel{
+	font:16px;
+	color:black;
 }
-QLabel
-{
-	font: bold 18px;
-}
-
-QWidget#VignetteRecette:hover
-{
-	border: 3px solid black;
-	background-color :blue;
-	border-radius:20px;
-}           </string>
+</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,20,0,0">
    <item>
-    <widget class="QPushButton" name="buttonSuppr">
-     <property name="text">
-      <string>Supprimer recette</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QPushButton" name="modifButton">
-     <property name="text">
-      <string>Modifier</string>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="50,50,0">
+     <item>
+      <widget class="QPushButton" name="modifButton">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>100</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"> QPushButton {
+     border: 1px solid #C3C3C3;;
+     border-radius: 1px;
+     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                       stop: 0 #f6f7fa, stop: 1 #dadbde);
+	text-align: center;
+	font : bold;
+ }
+QPushButton:hover{
+	border: 2px solid #BFBFBF;
+}
+ QPushButton:pressed {
+     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                       stop: 0 #dadbde, stop: 1 #f6f7fa);
+ }
+ QPushButton:flat {
+     border: none; /* no border for a flat push button */
+ }
+ QPushButton:default {
+     border-color: navy; /* make the default button prominent */
+ }</string>
+       </property>
+       <property name="text">
+        <string>Editer</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="buttonSuppr">
+       <property name="minimumSize">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>30</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"> QPushButton {
+     border: 1px solid #C3C3C3;;
+     border-radius: 1px;
+     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                       stop: 0 #f6f7fa, stop: 1 #dadbde);
+	text-align: center;
+	font : bold;
+ }
+QPushButton:hover{
+	border: 2px solid #BFBFBF;
+}
+ QPushButton:pressed {
+     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                       stop: 0 #dadbde, stop: 1 #f6f7fa);
+ }
+ QPushButton:flat {
+     border: none; /* no border for a flat push button */
+ }
+ QPushButton:default {
+     border-color: navy; /* make the default button prominent */
+ }</string>
+       </property>
+       <property name="text">
+        <string>X</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="QLabel" name="labelNom">
@@ -85,7 +161,7 @@ QWidget#VignetteRecette:hover
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Durée de préparation :</string>
+        <string>Préparation :</string>
        </property>
       </widget>
      </item>

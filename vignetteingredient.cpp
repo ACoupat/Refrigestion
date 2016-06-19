@@ -103,7 +103,7 @@ void VignetteIngredient::verifierPeremption()
     }
     else if(diff <= 2) // Ingrédient à manger rapidement
     {
-        this->setStyleSheet("QWidget#VignetteIngredient{border-bottom: 3px solid #BDBDBD;border-right : 1px solid #BDBDBD;background-color : white;}"
+       this->setStyleSheet("QWidget#VignetteIngredient{border-bottom: 3px solid #BDBDBD;border-right : 1px solid #BDBDBD;background-color : white;}"
                             "QLabel{font:16px;color: black;}"
                             "QLabel#labelRestant{font-weight: bold;color:orange;}");
         if(diff == 1)

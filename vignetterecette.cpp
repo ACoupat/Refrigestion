@@ -14,7 +14,7 @@ VignetteRecette::VignetteRecette(int width, Recette* recette, MainWindow *parent
     this->setMaximumHeight(width);
     ui->labelImage->setMinimumHeight(width * 0.5);
     this->setStyleSheet("QWidget#VignetteRecette{border-bottom: 3px solid #BDBDBD;border-right : 1px solid #BDBDBD;background-color : white;}"
-                        "QLabel{font: bold 18px;}");
+                        "QLabel{font:16px;color:black;} ");
     initLabels();
     connect(ui->buttonSuppr,SIGNAL(clicked(bool)),this,SLOT(supprimerVignette()));
     connect(ui->modifButton, SIGNAL(clicked(bool)),this,SLOT(ouvrirModif()));
