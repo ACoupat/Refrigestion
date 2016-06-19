@@ -33,7 +33,6 @@ Ingredient::Ingredient(QString strFichier)
         i++;
         c = strFichier[i];
    }
-   qDebug() << "qte" << strTemp;
    quantite=strTemp.toDouble();
    strTemp ="";
    i++;
@@ -44,7 +43,6 @@ Ingredient::Ingredient(QString strFichier)
         i++;
         c = strFichier[i];
    }
-   qDebug() << "unite :" << strTemp;
    unite = strTemp;
    type =0;
    datePeremption=QDate();

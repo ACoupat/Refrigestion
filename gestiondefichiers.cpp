@@ -30,7 +30,6 @@ int GestionDeFichiers::ajoutFichier(Recette* recette, Ingredient* ing)
         QFile fichier("listeIngredients.rfg");
         if(fichier.open(QIODevice::ReadWrite | QIODevice::Append))
         {
-            qDebug() << "Fichier créé";
             QTextStream flux(&fichier);
             flux << creerLigneIngredient(ing);
             fichier.close();
@@ -85,15 +84,10 @@ QString GestionDeFichiers::creerStringRecette(Recette* recette)
 
     int nbIngredients = recette->getListIngredients().size();
     for(int i = 0; i<nbIngredients; i++)
-    /*{
-        ligne += "\n"+recette->getListIngredients().at(i)->toStringFichier();
-        qDebug()<< ligne;
-    }*/
-    qDebug() << recette->getListIngredients();
+
     foreach(Ingredient* ing, recette->getListIngredients())
     {
         ligne += creerLigneIngredient(ing)+"\n";
-        qDebug()<< ligne;
     }
 
     ligne += ";\n" + recette->getEtapesPreparation();
@@ -206,11 +200,9 @@ bool GestionDeFichiers::recetteExisteDeja(QString nomFichier)
 
     foreach(QString s, listeRep)
     {
-        qDebug() << nomFichier << " | " << s;
         if(s == nomFichier)
             return true;
     }
-    qDebug("La recette n'existe pas");
     return false;
 }
 
@@ -273,35 +265,6 @@ QList<Ingredient*> GestionDeFichiers::listeIngredientsFichier()
      return listIng;
 }
 
-/*int GestionDeFichiers::supprimerIngredient(Ingredient* ing)
-{
-    QFile fichier("listeIngredients.rfg");
-    if(fichier.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-        qDebug() << "Fichier Ingredients ouvert";
-        QString contenuTemp;
-        QTextStream flux(&fichier);
-        QString ligneIng = creerLigneIngredient(ing);
-        ligneIng = ligneIng.left(ligneIng.size()-1);
-        while(!flux.atEnd())
-        {
-            QString ligne = flux.readLine();
-            if(ligne.compare(ligneIng)!=0)
-            {
-                contenuTemp += ligne +"\n";
-            }
-        }
-        fichier.close();
-        if(fichier.open(QIODevice::WriteOnly | QIODevice::Truncate))
-        {
-           flux << contenuTemp;
-           fichier.close();
-           return 0;
-        }
-    }
-    return 1;
-}*/
-
 int GestionDeFichiers::reecrireFichier(QList<Ingredient*> listIng)
 {
     QFile fichier("listeIngredients.rfg");
@@ -320,7 +283,6 @@ int GestionDeFichiers::reecrireFichier(QList<Ingredient*> listIng)
 int GestionDeFichiers::modifierQuantiteIngredient(Ingredient* ing)
 {
     QFile fichier("listeIngredients.rfg");
-    qDebug() << "Fichier Ingredients ouvert";
     QString contenuTemp;
     QTextStream flux(&fichier);
     QString ligneIng = creerLigneIngredient(ing);
@@ -355,103 +317,16 @@ int GestionDeFichiers::modifierQuantiteIngredient(Ingredient* ing)
 bool GestionDeFichiers::supprimerFichierRecette(Recette* recette)
 {
     QString nomFichier = "Recettes/" + recette->getNom() + ".rfg";
-    qDebug() << nomFichier;
     return QFile::remove(nomFichier);
 }
 
 bool GestionDeFichiers::nomEstConforme(QString nomFichier)
 {
-    qDebug() << "coucou";
-    if(nomFichier == "")
+    if(nomFichier == "" || nomFichier.contains("<") || nomFichier.contains(">") || nomFichier.contains(":") || nomFichier.contains("\\") || nomFichier.contains("/") || nomFichier.contains("|") || nomFichier.contains("?") || nomFichier.contains("*"))
     {
-        qDebug() << ("vide");
         return false;
     }
-    if(nomFichier.contains("<"))
-    {
-        qDebug() << ("<");
-        return false;
+    else {
+        return true;
     }
-    if(nomFichier.contains(">"))
-    {
-        qDebug() << (">");
-        return false;
-    }
-    if(nomFichier.contains(":"))
-    {
-        qDebug() << (":");
-        return false;
-    }
-    if(nomFichier.contains("\\"))
-    {
-        qDebug() << ("\\");
-        return false;
-    }
-    if(nomFichier.contains("/"))
-    {
-        qDebug() << ("/");
-        return false;
-    }
-
-    if(nomFichier.contains("|"))
-    {
-        qDebug("|");
-        return false;
-    }
-    if(nomFichier.contains("?"))
-    {
-        qDebug("?");
-        return false;
-    }
-    if(nomFichier.contains("*"))
-    {
-        qDebug("*");
-        return false;
-    }
-    qDebug() << "Nom du fichier" << nomFichier ;
-    return true;
-
-}
-
-void GestionDeFichiers::ControleEspace(QString Nom)
-{
-    /*//int i;
-    //int car;
-
-    //longueurchaine=strlen(Nom);
-
-
-    //for(i=0;i<Nom.size();i++)
-    //{*/
-        //cout << "Salut !";
-        //car=Nom.at(i).toLatin1() ;
-        /*if (car == -126 || car == -112 || (car>=-120 && car<=-118))
-        {
-            //Nom.replace(Nom.at(i),'e');
-        }else if((car>=-125 && car <=-122)||(car >=-114 && car <=-113))
-        {
-            Nom[i]=97;
-        }else if(car>=-117 && car <=-115)
-        {
-            Nom[i]=105;
-        }else if((car>=-109 && car <=-107)||car==-103)
-        {
-            Nom[i]=111;
-        }else if((car>=-106 && car <=-105)||car == -102||car == -127){
-            Nom[i] = 117;
-        }else if(car == -128 || car == -121)
-        {
-            Nom[i]=99;
-        }else if(car == -104)
-        {
-            Nom[i]=121;
-        }else if((car<97&&car>57)||(car<48&&car!=45&&car!=41&&car!=40&&car!=39)||car>122)
-        {
-            Nom[i]='_';
-        }*//*else{
-            //Nom[i]=car;
-        }*/
-
-    //}
-    //cout << Nom;
 }

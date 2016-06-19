@@ -29,12 +29,11 @@ FenetreAjoutRecette::FenetreAjoutRecette(MainWindow *parent):
     connect(ui->okButton,SIGNAL(clicked()),this,SLOT(ajoutModifRecette()));
     connect(ui->cancelButton,SIGNAL(clicked()),this,SLOT(close()));
     connect(ui->tbAjouterIng,SIGNAL(clicked()),this,SLOT(ajouterLigneTableIng()));
-    connect(ui->tbRetirerIng,SIGNAL(clicked()),this,SLOT(retirerLigneTableIng()));
 }
 
 Recette* FenetreAjoutRecette::creerRecette()
 {
-    Recette* recetteTemp = new Recette(ui->le_nom->text(),ui->le_duree->text(),creerListeIngredients(),ui->te_etapes->toPlainText(),ui->cb_type->currentText(),ui->cb_image->currentText(), ui->cb_image->currentData().toString());
+    Recette* recetteTemp = new Recette(ui->le_nom->text(),ui->te_duree->text(),creerListeIngredients(),ui->te_etapes->toPlainText(),ui->cb_type->currentText(),ui->cb_image->currentText(), ui->cb_image->currentData().toString());
     GestionDeFichiers::ajoutFichier(recetteTemp,NULL);
     return recetteTemp;
 }
@@ -58,11 +57,11 @@ void FenetreAjoutRecette::setContenu(Recette * recette)
     nomModif = recette->getNom();
     ui->cb_type->setCurrentText(recette->getTypeRecette());
     ui->te_etapes->setText(recette->getEtapesPreparation());
-    ui->le_duree->setText(recette->getDureePreparation());
+    //ui->te_duree->setText(recette->getDureePreparation());
+    ui->te_duree->setTime(QTime(recette->getDureePreparation().left(2).toInt(), recette->getDureePreparation().right(2).toInt()));
     ui->cb_image->setCurrentText(recette->getNomImage());
 
     int nbIngredients = recette->getListIngredients().size();
-    qDebug() << nbIngredients;
     if(nbIngredients>2)
     {
         for(int i=0;i<nbIngredients-2;i++)
@@ -103,30 +102,17 @@ void FenetreAjoutRecette::ajouterLigneTableIng()
     sb_list << sb;
 }
 
-void FenetreAjoutRecette::retirerLigneTableIng()
-{
-    /*if(ui->grilleIngredients->rowCount() > 1)
-    {
-        qDebug() << "le rowCount" <<  ui->grilleIngredients->rowCount();
-        delete le_list.at(2);
-        delete cb_list.at(2);
-        delete sb_list.at(2);
-    }*/
-}
-
 QList<Ingredient*> FenetreAjoutRecette::creerListeIngredients()
 {
     QList<Ingredient*> liste;
 
     int nbLignes = le_list.size();
-    qDebug() << nbLignes << "la liste :" << le_list;
     for(int i=0; i<nbLignes; i++)
     {
         if(le_list.at(i)->text() != "" && le_list.at(i)->text() != NULL )
         {
             Ingredient* ingTemp = new Ingredient(le_list.at(i)->text(),0,sb_list.at(i)->value(),cb_list.at(i)->currentText(),QDate(),"");
             liste << ingTemp;
-            qDebug() << "je passe icieuh";
         }
     }
     return liste;
@@ -136,14 +122,10 @@ bool FenetreAjoutRecette::pasDingredients()
 {
     int nbRows = ui->grilleIngredients->rowCount()-1;
 
-    qDebug() << "Count" << nbRows;
-    qDebug() << "liste" << le_list;
     foreach(QLineEdit* le, le_list)
     {
-        qDebug() << le;
         if(le->text()!= "" && le->text() != NULL)
         {
-            qDebug() << "blou : " << le->text();
             return false;
         }
     }

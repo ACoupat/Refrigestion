@@ -9,7 +9,6 @@ fenetreDetailRecette::fenetreDetailRecette(Recette *recette, QWidget *parent) :
     this->recette = recette;
     this->setModal(true);
     this->setWindowFlags(Qt::Popup);
-    //this->setWindowFlags(Qt::SplashScreen);
     initLabels();
 }
 

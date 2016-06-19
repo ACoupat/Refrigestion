@@ -91,7 +91,7 @@ void MainWindow::ajoutIngredient()
     }
 }
 void MainWindow::modifRecette(QString nomModif)
-{       qDebug() <<"vignettes " << vignettesRecettes;
+{
         foreach(VignetteRecette* vr, vignettesRecettes)
         {
             if(vr->getRecette()->getNom() == nomModif)
@@ -165,11 +165,7 @@ void MainWindow::ajoutRecette()
 void MainWindow::creerVignettesIngredientDemarrage()
 {
     QList<Ingredient*> listIng = GestionDeFichiers::listeIngredientsFichier();
-    if (listIng.size() == 0)
-    {
-        qDebug() << "Le fichier listIgredients.rfg est vide";
-    }
-    else
+    if (listIng.size() != 0)
     {
         foreach (Ingredient* ing, listIng)
         {
@@ -199,10 +195,6 @@ void MainWindow::creerVignettesRecettesDemarrage()
             vignettesRecettes << newVignetteRecette;
             recettes << nouvelleRecette;
         }
-    }
-    else
-    {
-        qDebug()<< "liste Vide";
     }
 }
 
@@ -256,11 +248,8 @@ bool MainWindow::supprimerVignetteRecette(VignetteRecette *vignette, bool modif)
     msgBox.setDefaultButton(noButton);
     if(msgBox.exec() == 0)
     {
-        qDebug() << vignettesRecettes;
-        qDebug() << GestionDeFichiers::supprimerFichierRecette(vignette->getRecette());
-        qDebug() << "Removal" << recettes.removeOne(vignette->getRecette());
-
-        qDebug() << vignettesRecettes;
+        GestionDeFichiers::supprimerFichierRecette(vignette->getRecette());
+        recettes.removeOne(vignette->getRecette());
         foreach(VignetteRecette *vignette, vignettesRecettes) vignette->deleteLater();
         vignettesRecettes.clear();
         delete grilleRecettes;
@@ -335,9 +324,6 @@ void MainWindow::creerListeIngredientDateLimite()
         if(QDate::currentDate().daysTo(datePeremption) < 4 && QDate::currentDate().daysTo(datePeremption) > -2)
         {
             listeAConsommer << ing->getNom();
-        }else if(QDate::currentDate().daysTo(datePeremption) < -1)
-        {
-            qDebug() << "Veuillez vérifier avant de manger : " + ing->getNom();
         }
     }
     model->setStringList(listeAConsommer);

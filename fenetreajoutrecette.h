@@ -41,7 +41,6 @@ private:
 
 private slots:
     void ajouterLigneTableIng();
-    void retirerLigneTableIng();
     QString getFenAREtat();
     void ajoutModifRecette();
 
