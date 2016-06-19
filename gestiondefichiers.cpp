@@ -44,10 +44,11 @@ int GestionDeFichiers::ajoutFichier(Recette* recette, Ingredient* ing)
     //Pour Créer une recette
     else if(recette != NULL && ing == NULL)
     {
+        QDir dossier;
+        dossier.mkpath("Recettes");
         QString nomFichier = "Recettes/"+recette->getNom()+".rfg";
 
         QFile fichier(nomFichier);
-
         if(fichier.open(QIODevice::ReadWrite | QIODevice::Append))
         {
             //fichier.write();

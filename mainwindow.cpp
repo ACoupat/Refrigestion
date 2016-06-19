@@ -66,6 +66,7 @@ void MainWindow::ouvrirFenetreAjoutRecette()
 
 void MainWindow::ouvrirFenArModif(Recette* recette)
 {
+    fenAR = new FenetreAjoutRecette(this);
     fenAR->setContenu(recette);
     fenAR->show();
 }
@@ -122,7 +123,6 @@ void MainWindow::modifRecette(QString nomModif)
         {
            Recette* nouvelleRecette = fenAR->creerRecette();
            fenAR->close();
-           fenAR = new FenetreAjoutRecette(this);
            VignetteRecette *newVignetteRecette = new VignetteRecette(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX,nouvelleRecette,this);
            grilleRecettes->addWidget(newVignetteRecette, recettes.size() / NB_COLONNE_MAX, recettes.size() % NB_COLONNE_MAX);
            vignettesRecettes << newVignetteRecette;
@@ -211,7 +211,7 @@ bool MainWindow::supprimerVignetteIngredient(VignetteIngredient *vignette)
 {
     QMessageBox msgBox;
     msgBox.setWindowFlags(Qt::Popup);
-    msgBox.setText("Vous êtes sur le point de supprimer définitvement cet ingrédient.\nConfirmer ?");
+    msgBox.setText("Vous êtes sur le point de supprimer définitivement cet ingrédient.\nConfirmer ?");
     QPushButton *yesButton = msgBox.addButton(trUtf8("Oui"), QMessageBox::YesRole);
     QPushButton *noButton = msgBox.addButton(trUtf8("Non"), QMessageBox::NoRole);
     msgBox.setDefaultButton(noButton);
@@ -245,13 +245,17 @@ bool MainWindow::supprimerVignetteRecette(VignetteRecette *vignette, bool modif)
     QMessageBox msgBox;
     msgBox.setWindowFlags(Qt::Popup);
     if(modif)
-        msgBox.setText("Vous êtes sur le point de modifier cet ingrédient.\nConfirmer ?");
+    {
+        msgBox.setText("Vous êtes sur le point de modifier cette recette.\nConfirmer ?");
+    }
     else
-     msgBox.setText("Vous êtes sur le point de supprimer définitivement cette recette.\nEtes vous sûr de vouloir continuer ?");
-    msgBox.setStandardButtons(QMessageBox::Yes);
-    msgBox.addButton(QMessageBox::No);
-    msgBox.setDefaultButton(QMessageBox::No);
-    if(msgBox.exec() == QMessageBox::Yes)
+    {
+        msgBox.setText("Vous êtes sur le point de supprimer définitivement cette recette.\nConfirmer ?");
+    }
+    QPushButton *yesButton = msgBox.addButton(trUtf8("Oui"), QMessageBox::YesRole);
+    QPushButton *noButton = msgBox.addButton(trUtf8("Non"), QMessageBox::NoRole);
+    msgBox.setDefaultButton(noButton);
+    if(msgBox.exec() == 0)
     {
         qDebug() << vignettesRecettes;
         qDebug() << GestionDeFichiers::supprimerFichierRecette(vignette->getRecette());
