@@ -24,6 +24,7 @@ public:
     explicit VignetteIngredient(int width, Ingredient* ingModel, MainWindow *parent);
     ~VignetteIngredient();
     Ingredient *getIngredient();
+    void verifierPeremption();
 
 private:
     Ui::VignetteIngredient *ui;

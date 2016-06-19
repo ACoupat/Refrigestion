@@ -28,6 +28,7 @@ VignetteIngredient::VignetteIngredient(int width, Ingredient* ingredient, MainWi
     this->setStyleSheet("QWidget#VignetteIngredient{border-bottom: 3px solid #BDBDBD;border-right : 1px solid #BDBDBD;background-color : white;}"
                         "QLabel{font:16px;color:black;} ");
     initLabels();
+    verifierPeremption();
 
     this->setAttribute(Qt::WA_Hover, true);
     this->show();
@@ -78,11 +79,26 @@ void VignetteIngredient::initLabels()
 }
 
 //Utile pour que l'affichage se fasse correctement
-void VignetteIngredient::paintEvent(QPaintEvent *pe) {
+void VignetteIngredient::paintEvent(QPaintEvent *pe)
+{
     QStyleOption o;
     o.initFrom(this);
     QPainter p(this);
     style()->drawPrimitive(QStyle::PE_Widget, &o, &p, this);
+}
+
+void VignetteIngredient::verifierPeremption()
+{
+    int diff = QDate::currentDate().daysTo(ingredient->getDate());
+    if(diff <= 0)
+    {
+        this->setStyleSheet("QWidget#VignetteIngredient{border-bottom: 3px solid #BDBDBD;border-right : 1px solid #BDBDBD;background-color : red;}QLabel{font:16px;color: black;}");
+    }
+    else if(diff <= 2)
+    {
+        this->setStyleSheet("QWidget#VignetteIngredient{border-bottom: 3px solid #BDBDBD;border-right : 1px solid #BDBDBD;background-color : orange;}QLabel{font:16px;color: black;}");
+    }
+
 }
 
 Ingredient *VignetteIngredient::getIngredient()
