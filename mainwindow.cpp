@@ -11,10 +11,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    this->showFullScreen();
     screenWidth = QApplication::desktop()->screenGeometry().width();
     screenHeight = QApplication::desktop()->screenGeometry().height();
-
+    this->showFullScreen();
     ui->widgets->setFixedWidth(screenWidth * TAILLE_GROUPE_WIDGETS);
     int tab = (screenWidth * TAILLE_GROUPE_WIDGETS *4)/2 - 14;
     ui->tabWidget->setStyleSheet("QTabBar::tab { height: 20px; width: "+ QString::number(tab) + "px; }");
