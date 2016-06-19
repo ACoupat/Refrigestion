@@ -41,6 +41,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QTimer *timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(updateHeure()));
     timer->start(1000);
+    ui->lcdNumberHeure->setFixedWidth(screenWidth * TAILLE_GROUPE_WIDGETS - 240);
+    ui->widgets->layout()->setAlignment(ui->lcdNumberHeure,Qt::AlignHCenter);
+
 
 }
 
@@ -319,7 +322,6 @@ QList<Ingredient*> MainWindow::getIngredients()
 void MainWindow::creerListeIngredientDateLimite()
 {
     ui->listViewAlimentDateLimite->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    //ui->listViewAlimentDateLimite->
     QList<Ingredient*> listeIngredient = getIngredients();
     QStringListModel * model = new QStringListModel();
     QStringList listeAConsommer;
@@ -330,11 +332,9 @@ void MainWindow::creerListeIngredientDateLimite()
         if(QDate::currentDate().daysTo(datePeremption) < 4 && QDate::currentDate().daysTo(datePeremption) > -2)
         {
             listeAConsommer << ing->getNom();
-        }else{
-            if(QDate::currentDate().daysTo(datePeremption) < -1)
-            {
-                qDebug() << "Veuillez vérifier avant de manger : " + ing->getNom();
-            }
+        }else if(QDate::currentDate().daysTo(datePeremption) < -1)
+        {
+            qDebug() << "Veuillez vérifier avant de manger : " + ing->getNom();
         }
     }
     model->setStringList(listeAConsommer);
