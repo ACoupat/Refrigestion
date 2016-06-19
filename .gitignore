@@ -32,3 +32,8 @@
 /Projet_GL40_Refrigestion.pro.user.2e8f77f
 /ui_mainwindow.h
 *.user
+ui_vignetterecette.h
+ui_fenetreajoutingredient.h
+ui_fenetredetailrecette.h
+ui_fenetreajoutrecette.h
+ui_vignetteingredient.h
