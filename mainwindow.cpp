@@ -345,8 +345,7 @@ void MainWindow::creerListeIngredientDateLimite()
 void MainWindow::updateHeure()
 {
     ui->lcdNumberHeure->setDigitCount(8);
-    //qDebug () << QTime::currentTime().toString();
-    ui->lcdNumberHeure->display(QTime::currentTime().toString()/*.hour() + ":" + QTime::currentTime().minute()+ ":" + QTime::currentTime().second()*/);
+    ui->lcdNumberHeure->display(QTime::currentTime().toString());
     if(QTime::currentTime().toString() == "00:00:00")
     {
         foreach(VignetteIngredient *vignetteIngredient, vignettesIngredients)

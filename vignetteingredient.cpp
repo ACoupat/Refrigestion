@@ -30,7 +30,7 @@ VignetteIngredient::VignetteIngredient(int width, Ingredient* ingredient, MainWi
     initLabels();
     verifierPeremption();
 
-    this->setAttribute(Qt::WA_Hover, true);
+    this->setAttribute(Qt::WA_Hover, true); //On définit la vérification du Hover
     this->show();
 }
 
@@ -39,15 +39,15 @@ void VignetteIngredient::enterEvent(QEvent * event)
     QGraphicsDropShadowEffect *g = new QGraphicsDropShadowEffect(this);
     g->setBlurRadius(7);
     g->setOffset(0,0);
-    this->setGraphicsEffect(g);
-    ui->label_type->setPixmap(ingredient->getTypeColorLettre());
+    this->setGraphicsEffect(g); //On ajoute l'ombre au Widget
+    ui->label_type->setPixmap(ingredient->getTypeColorLettre()); //On modifie l'icone pour afficher la lettre
     QWidget::enterEvent(event);
 }
 
 void VignetteIngredient::leaveEvent(QEvent * event)
 {
-    this->setGraphicsEffect(NULL);
-    ui->label_type->setPixmap(ingredient->getTypeColor());
+    this->setGraphicsEffect(NULL); //On enleve l'ombre
+    ui->label_type->setPixmap(ingredient->getTypeColor()); //On modifie l'icone
     QWidget::leaveEvent(event);
 }
 
@@ -74,7 +74,6 @@ void VignetteIngredient::initLabels()
     if(ingredient->getQuantite()==0) ingredient->setQuantite(1);
     ui->label_quantite->setText(QString::number(ingredient->getQuantite()) + " " + ingredient->getUnite());
     ui->label_nom->setText(ingredient->getNom());
-    ui->label_2->setText(ingredient->getDate().toString("dd.MM.yyyy"));
     ui->labelImage->setStyleSheet("QLabel#labelImage{ border-image: url("+ingredient->getCheminImage()+") 0 0 0 0 stretch stretch; }");
 }
 
@@ -89,14 +88,34 @@ void VignetteIngredient::paintEvent(QPaintEvent *pe)
 
 void VignetteIngredient::verifierPeremption()
 {
-    int diff = QDate::currentDate().daysTo(ingredient->getDate());
-    if(diff <= 0)
+    int diff = QDate::currentDate().daysTo(ingredient->getDate()); //Différence entre la date actuelle et la date de péremption
+    if(diff <= 0) //Ingrédient périmé
     {
-        this->setStyleSheet("QWidget#VignetteIngredient{border-bottom: 3px solid #BDBDBD;border-right : 1px solid #BDBDBD;background-color : red;}QLabel{font:16px;color: black;}");
+        this->setStyleSheet("QWidget#VignetteIngredient{border-bottom: 3px solid #BDBDBD;border-right : 1px solid #BDBDBD;background-color : white;}"
+                            "QLabel{font:16px;color: black;}"
+                            "QLabel#labelRestant{font-weight: bold;color:red;}");
+        if(diff == 0)
+            ui->labelRestant->setText("Périmé aujourd'hui");
+        else if(diff == -1)
+            ui->labelRestant->setText("Périmé depuis " + QString::number(-diff) + " jour");
+        else
+            ui->labelRestant->setText("Périmé depuis " + QString::number(-diff) + " jours");
     }
-    else if(diff <= 2)
+    else if(diff <= 2) // Ingrédient à manger rapidement
     {
-        this->setStyleSheet("QWidget#VignetteIngredient{border-bottom: 3px solid #BDBDBD;border-right : 1px solid #BDBDBD;background-color : orange;}QLabel{font:16px;color: black;}");
+        this->setStyleSheet("QWidget#VignetteIngredient{border-bottom: 3px solid #BDBDBD;border-right : 1px solid #BDBDBD;background-color : white;}"
+                            "QLabel{font:16px;color: black;}"
+                            "QLabel#labelRestant{font-weight: bold;color:orange;}");
+        if(diff == 1)
+            ui->labelRestant->setText(QString::number(diff) + " jour restant");
+        else
+            ui->labelRestant->setText(QString::number(diff) + " jours restants");
+    }
+    else // Cas normal
+    {
+        this->setStyleSheet("QWidget#VignetteIngredient{border-bottom: 3px solid #BDBDBD;border-right : 1px solid #BDBDBD;background-color : white;}"
+                            "QLabel{font:16px;color: black;}");
+        ui->labelRestant->setText(QString::number(diff) + " jours restants");
     }
 
 }

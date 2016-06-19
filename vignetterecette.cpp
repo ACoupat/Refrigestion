@@ -13,13 +13,13 @@ VignetteRecette::VignetteRecette(int width, Recette* recette, MainWindow *parent
     this->setMaximumWidth(width);
     this->setMaximumHeight(width);
     ui->labelImage->setMinimumHeight(width * 0.5);
-    this->setStyleSheet("QWidget#VignetteRecette{border: 3px solid black;background-color :lightgreen;border-radius:20px;}"
-                        "QLabel{font: bold 18px;}"
-                        "QWidget#VignetteRecette:hover{border: 3px solid black;background-color :blue;border-radius:20px;}");
+    this->setStyleSheet("QWidget#VignetteRecette{border-bottom: 3px solid #BDBDBD;border-right : 1px solid #BDBDBD;background-color : white;}"
+                        "QLabel{font: bold 18px;}");
     initLabels();
     connect(ui->buttonSuppr,SIGNAL(clicked(bool)),this,SLOT(supprimerVignette()));
     connect(ui->modifButton, SIGNAL(clicked(bool)),this,SLOT(ouvrirModif()));
 
+    this->setAttribute(Qt::WA_Hover, true);
     this->show();
 }
 

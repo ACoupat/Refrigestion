@@ -16,11 +16,16 @@ FenetreAjoutRecette::FenetreAjoutRecette(MainWindow *parent):
     cb_list << ui->cb_ing1 << ui->cb_ing2;
     sb_list << ui->sb_ing1 << ui->sb_ing2;
 
-    ui->cb_image->addItem("Tomates",QVariant(":/Images/Images/tomate.jpg"));
-    ui->cb_image->addItem("Gateau au chocolat",QVariant(":/Images/Images/gateauChocolat.jpg"));
-    ui->cb_image->addItem("Poulet Roti",QVariant(":/Images/Images/pouletRoti.jpg"));
-    ui->cb_image->addItem("Tacos",QVariant(":/Images/Images/tacos.jpg"));
-    ui->cb_image->addItem("Aspic",QVariant(":/Images/Images/aspic.jpg"));
+    QDir *image = new QDir("Images/Contenu");
+    image->setFilter(QDir::Files);
+    image->setSorting(QDir::Name);
+
+    QFileInfoList list = image->entryInfoList();
+    for(int i=0; i< list.size(); ++i){
+        QFileInfo fileInfo = list.at(i);
+        ui->cb_image->addItem(fileInfo.fileName().split(".").at(0),fileInfo.filePath());
+    }
+
     connect(ui->okButton,SIGNAL(clicked()),this,SLOT(ajoutModifRecette()));
     connect(ui->cancelButton,SIGNAL(clicked()),this,SLOT(close()));
     connect(ui->tbAjouterIng,SIGNAL(clicked()),this,SLOT(ajouterLigneTableIng()));
