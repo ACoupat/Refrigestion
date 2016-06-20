@@ -17,12 +17,12 @@ VignetteIngredient::VignetteIngredient(int width, Ingredient* ingredient, MainWi
     ui->labelImage->setMinimumHeight(width * 0.5);
     ui->labelImage->setMaximumSize(width * 0.9, width * 0.56);
 
-    QPolygon forme;
+   /* QPolygon forme;
     forme << QPoint(0, 20) << QPoint(40, 0) << QPoint(40, 40);
     ui->pushButton->setMask(QRegion(forme));
     forme.clear();
     forme << QPoint(0, 0) << QPoint(40, 20) << QPoint(0, 40);
-    ui->pushButton_2->setMask(QRegion(forme));
+    ui->pushButton_2->setMask(QRegion(forme));*/
 
     ui->label_type->setPixmap(ingredient->getTypeColor());
     this->setStyleSheet("QWidget#VignetteIngredient{border-bottom: 3px solid #BDBDBD;border-right : 1px solid #BDBDBD;background-color : white;}"

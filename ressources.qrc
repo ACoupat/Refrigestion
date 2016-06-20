@@ -24,6 +24,10 @@
         <file>Images/viande.png</file>
         <file>Images/viandeLettre.png</file>
         <file>Images/ZcPostIt.png</file>
+        <file>Images/boutonMoinsClicked.png</file>
+        <file>Images/boutonMoinsHover.png</file>
+        <file>Images/boutonPlusClicked.png</file>
+        <file>Images/boutonPlusHover.png</file>
     </qresource>
     <qresource prefix="/Images/Contenu">
         <file>Images/Contenu/Aile de poulet.png</file>

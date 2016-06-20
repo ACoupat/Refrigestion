@@ -122,8 +122,8 @@
        </property>
        <property name="minimumSize">
         <size>
-         <width>0</width>
-         <height>0</height>
+         <width>40</width>
+         <height>40</height>
         </size>
        </property>
        <property name="maximumSize">
@@ -138,10 +138,22 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true"/>
+        <string notr="true">QPushButton
+{
+	border-image: url(:/Images/Images/boutonMoins.png) 0 0 0 0 stretch stretch;
+}
+QPushButton:hover
+{
+	border-image: url(:/Images/Images/boutonMoinsHover.png) 0 0 0 0 stretch stretch;
+}
+
+QPushButton:pressed
+{
+	border-image:url(:/Images/Images/boutonMoinsClicked.png) 0 0 0 0 stretch stretch;
+}</string>
        </property>
        <property name="text">
-        <string>-</string>
+        <string/>
        </property>
       </widget>
      </item>
@@ -187,10 +199,22 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true"/>
+        <string notr="true">QPushButton
+{
+	border-image: url(:/Images/Images/boutonPlus.png) 0 0 0 0 stretch stretch;
+}
+QPushButton:hover
+{
+	border-image: url(:/Images/Images/boutonPlusHover.png) 0 0 0 0 stretch stretch;
+}
+
+QPushButton:pressed
+{
+	border-image:url(:/Images/Images/boutonPlusClicked.png) 0 0 0 0 stretch stretch;
+}</string>
        </property>
        <property name="text">
-        <string>+</string>
+        <string/>
        </property>
       </widget>
      </item>
