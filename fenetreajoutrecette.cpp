@@ -2,6 +2,8 @@
 #include "ui_fenetreajoutrecette.h"
 #include <mainwindow.h>
 
+static const char color[] = "#FF4500";
+
 FenetreAjoutRecette::FenetreAjoutRecette(MainWindow *parent):
     QDialog(parent),
     ui(new Ui::FenetreAjoutRecette)
@@ -11,6 +13,13 @@ FenetreAjoutRecette::FenetreAjoutRecette(MainWindow *parent):
     this->setModal(true);
     this->setWindowTitle("Ajouter une recette");
     window = parent;
+
+    ui->label1->setStyleSheet("color:" + QString(color) + ";font : bold;");
+    ui->label2->setStyleSheet("color:"+ QString(color)+";font : bold;");
+    ui->label3->setStyleSheet("color:"+QString(color)+";font : bold;");
+    ui->label4->setStyleSheet("color:"+QString(color)+";font : bold;");
+    ui->label5->setStyleSheet("color:"+QString(color)+";font : bold;");
+    ui->label6->setStyleSheet("color:"+QString(color)+";font : bold;");
 
     le_list << ui->le_ing1 <<  ui->le_ing2;
     cb_list << ui->cb_ing1 << ui->cb_ing2;

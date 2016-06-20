@@ -5,6 +5,7 @@
 #include <recette.h>
 #include <QPainter>
 #include <fenetredetailrecette.h>
+#include <QGraphicsDropShadowEffect>
 class MainWindow;
 
 namespace Ui {

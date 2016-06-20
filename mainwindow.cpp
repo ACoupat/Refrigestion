@@ -26,9 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->boutonAjoutRecette->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
     ui->boutonAjoutRecette->setLayoutDirection(Qt::RightToLeft);
     connect(ui->boutonAjoutRecette, SIGNAL(clicked(bool)), this, SLOT(ouvrirFenetreAjoutRecette()));
-    connect(ui->rb_tri_alphabet, SIGNAL(toggled(bool)), this, SLOT(triAlphabetique()));
-    connect(ui->rb_tri_date, SIGNAL(toggled(bool)), this, SLOT(triDatePeremption()));
-    connect(ui->rb_tri_categorie, SIGNAL(toggled(bool)), this, SLOT(triCategorie()));
+    connect(ui->trieBox, SIGNAL(currentIndexChanged(int)),this,SLOT(triage(int)));
     connect(ui->cb_afficher_type, SIGNAL(currentIndexChanged(int)), this, SLOT(actualiserAffichageTypeIngredient(int)));
     connect(ui->chb_faisable, SIGNAL(stateChanged(int)), this, SLOT(actualiserAffichageRecette(int)));
     connect(ui->cb_type, SIGNAL(currentTextChanged(QString)), this, SLOT(actualiserAffichageTypeRecette(QString)));
@@ -51,15 +49,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lcdNumberHeure->setFixedHeight(30);
     ui->lcdNumberHeure->setSegmentStyle(QLCDNumber::Flat);
     ui->widgets->layout()->setAlignment(ui->lcdNumberHeure,Qt::AlignHCenter);
-
+    ui->boutonAjoutIngredient->setShortcut(Qt::Key_A);
+    ui->boutonAjoutRecette->setShortcut(Qt::Key_A);
     ui->timerMinuteur->setDisplayFormat("HH:mm:ss");
-    //ui->timerMinuteur->setMinimumWidth(screenWidth * TAILLE_GROUPE_WIDGETS * 0.25);
     connect(ui->buttonMinuteur, SIGNAL(pressed()), this, SLOT(lancerMinuteur()));
 
     tempMin = new QTimer();
     tempMinuteur = new QTimer();
     connect(tempMinuteur, SIGNAL(timeout()),this,SLOT(decrementMinuteur()));
     connect(tempMin, SIGNAL(timeout()),this,SLOT(finMinuteur()));
+
+    ui->calendarWidget->setSelectedDate(QDate::currentDate());
 
 }
 
@@ -356,6 +356,20 @@ void MainWindow::triCategorie()
     updateVignettesIngredients();
 }
 
+void MainWindow::triage(int i){
+    switch(i){
+        case 0 :
+            triAlphabetique();
+            break;
+        case 1:
+            triDatePeremption();
+            break;
+        case 2:
+            triCategorie();
+            break;
+    }
+}
+
 void MainWindow::actualiserAffichageTypeIngredient(int type)
 {
     foreach(Ingredient *ingredient, ingredients)
@@ -369,16 +383,7 @@ void MainWindow::actualiserAffichageTypeIngredient(int type)
             ingredient->setAffiche(false);
         }
     }
-    if(type == 0)
-    {
-        ui->rb_tri_categorie->setDisabled(false);
-
-    }
-    else
-    {
-        ui->rb_tri_categorie->setDisabled(true);
-        ui->rb_tri_alphabet->setChecked(true);
-    }
+    ui->trieBox->setCurrentIndex(0);
     updateVignettesIngredients();
 }
 

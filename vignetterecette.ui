@@ -30,7 +30,7 @@ QLabel{
 }
 </string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,20,0,0">
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,20,0">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="50,50,0">
      <item>
@@ -48,27 +48,8 @@ QLabel{
         </size>
        </property>
        <property name="styleSheet">
-        <string notr="true"> QPushButton {
-     border: 1px solid #C3C3C3;;
-     border-radius: 1px;
-     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                       stop: 0 #f6f7fa, stop: 1 #dadbde);
-	text-align: center;
-	font : bold;
- }
-QPushButton:hover{
-	border: 2px solid #BFBFBF;
-}
- QPushButton:pressed {
-     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                       stop: 0 #dadbde, stop: 1 #f6f7fa);
- }
- QPushButton:flat {
-     border: none; /* no border for a flat push button */
- }
- QPushButton:default {
-     border-color: navy; /* make the default button prominent */
- }</string>
+        <string notr="true">text-align: center;
+font : bold;</string>
        </property>
        <property name="text">
         <string>Editer</string>
@@ -92,38 +73,19 @@ QPushButton:hover{
       <widget class="QPushButton" name="buttonSuppr">
        <property name="minimumSize">
         <size>
-         <width>20</width>
+         <width>25</width>
          <height>20</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>30</width>
+         <width>25</width>
          <height>20</height>
         </size>
        </property>
        <property name="styleSheet">
-        <string notr="true"> QPushButton {
-     border: 1px solid #C3C3C3;;
-     border-radius: 1px;
-     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                       stop: 0 #f6f7fa, stop: 1 #dadbde);
-	text-align: center;
-	font : bold;
- }
-QPushButton:hover{
-	border: 2px solid #BFBFBF;
-}
- QPushButton:pressed {
-     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                       stop: 0 #dadbde, stop: 1 #f6f7fa);
- }
- QPushButton:flat {
-     border: none; /* no border for a flat push button */
- }
- QPushButton:default {
-     border-color: navy; /* make the default button prominent */
- }</string>
+        <string notr="true">text-align: center;
+font : bold;</string>
        </property>
        <property name="text">
         <string>X</string>
@@ -172,24 +134,6 @@ QPushButton:hover{
       <widget class="QLabel" name="labelDureePrep">
        <property name="text">
         <string>30 min</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Réalisable :</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="labelRealisable">
-       <property name="text">
-        <string>oui</string>
        </property>
       </widget>
      </item>

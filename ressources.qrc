@@ -75,6 +75,5 @@
         <file>Images/Contenu/Tacos.png</file>
         <file>Images/Contenu/Tomate.png</file>
         <file>Images/Contenu/Viande de boeuf.png</file>
-        <file>Images/Contenu/Viande haché.png</file>
     </qresource>
 </RCC>

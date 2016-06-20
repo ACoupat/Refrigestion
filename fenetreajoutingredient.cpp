@@ -3,6 +3,8 @@
 #include <QDebug>
 #include <gestiondefichiers.h>
 
+static const char color[] = "#FF4500";
+
 FenetreAjoutIngredient::FenetreAjoutIngredient(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::FenetreAjoutIngredient)
@@ -15,7 +17,11 @@ FenetreAjoutIngredient::FenetreAjoutIngredient(QWidget *parent) :
     QDir *image = new QDir("Images/Contenu");
     image->setFilter(QDir::Files);
     image->setSorting(QDir::Name);
-
+    ui->label1->setStyleSheet("color:" + QString(color) + ";font : bold;");
+    ui->label2->setStyleSheet("color:"+ QString(color)+";font : bold;");
+    ui->label3->setStyleSheet("color:"+QString(color)+";font : bold;");
+    ui->label4->setStyleSheet("color:"+QString(color)+";font : bold;");
+    ui->label5->setStyleSheet("color:"+QString(color)+";font : bold;");
     QFileInfoList list = image->entryInfoList();
     for(int i=0; i< list.size(); ++i){
         QFileInfo fileInfo = list.at(i);

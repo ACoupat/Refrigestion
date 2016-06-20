@@ -59,7 +59,6 @@ private:
     FenetreAjoutRecette* fenAR;
     QGridLayout *grilleIngredients;
     QGridLayout *grilleRecettes;
-    //QTimeEdit* timerMinuteur;
     QTimer* tempMinuteur;
     QTimer * tempMin;
 
@@ -80,6 +79,7 @@ public slots:
     void ouvrirFenArModif(Recette* recette);
     void modifierContenuPostit();
     void updateHeure();
+    void triage(int);
     void triAlphabetique();
     void triDatePeremption();
     void triCategorie();
