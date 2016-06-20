@@ -1,9 +1,7 @@
-Carotte;18.06.2016;1;;0;Images/Contenu/Carrotte.png;
-er;18.06.2016;1;;0;Images/Contenu/Aile de poulet.png;
-er;18.06.2016;1;;0;Images/Contenu/Aspic.jpg;
-Cédric Welty;29.06.2016;1;;0;Images/Contenu/Poulet entier.png;
-Tomate;27.06.2016;6;kg;2;Images/Contenu/Tomate.png;
-Hachis Parmentier;20.06.2016;1;;8;Images/Contenu/tacos.jpg;
-df;19.06.2016;1;;0;Images/Contenu/Donut.png;
-fdg;19.06.2016;1;;0;Images/Contenu/Eclair.png;
-df;19.06.2016;1;;0;Images/Contenu/Lait.png;
+Lait;27.06.2016;2;L;1;Images/Contenu/Lait.png;
+Carottes;27.06.2016;4;;2;Images/Contenu/Carrotte.png;
+Ketchup;27.07.2016;1;;0;Images/Contenu/Ketchup.png;
+Oeufs;22.06.2016;6;;0;Images/Contenu/Oeuf.png;
+Poulet rôti;19.06.2016;1;;8;Images/Contenu/Poulet roti.png;
+Fraises;25.06.2016;500;g;3;Images/Contenu/Fraise.png;
+Boeuf;21.06.2016;200;g;4;Images/Contenu/Viande de boeuf.png;

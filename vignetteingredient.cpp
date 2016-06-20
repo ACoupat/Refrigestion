@@ -107,7 +107,7 @@ void VignetteIngredient::verifierPeremption()
                             "QLabel{font:16px;color: black;}"
                             "QLabel#labelRestant{font-weight: bold;color:orange;}");
         if(diff == 1)
-            ui->labelRestant->setText(QString::number(diff) + " jour restant");
+            ui->labelRestant->setText("Périme demain");
         else
             ui->labelRestant->setText(QString::number(diff) + " jours restants");
     }

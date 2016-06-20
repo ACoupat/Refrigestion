@@ -71,6 +71,7 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(sb_quantite->sizePolicy().hasHeightForWidth());
         sb_quantite->setSizePolicy(sizePolicy);
+        sb_quantite->setMaximum(999.99);
         sb_quantite->setValue(1);
 
         horizontalLayout->addWidget(sb_quantite);
