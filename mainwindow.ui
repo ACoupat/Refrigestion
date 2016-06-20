@@ -90,6 +90,9 @@ color : white;
          <property name="text">
           <string>Tri alphabétique</string>
          </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item row="3" column="0">
@@ -169,8 +172,8 @@ color : white;
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>352</width>
-             <height>440</height>
+             <width>350</width>
+             <height>446</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_4">
@@ -208,8 +211,8 @@ color : white;
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>352</width>
-             <height>440</height>
+             <width>350</width>
+             <height>446</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_7">
@@ -239,7 +242,7 @@ color : white;
      <x>0</x>
      <y>0</y>
      <width>775</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

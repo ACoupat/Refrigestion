@@ -52,6 +52,7 @@ private:
     QList<VignetteRecette*> vignettesRecettes;
     int screenWidth;
     int screenHeight;
+    int tri;
     FenetreAjoutIngredient* fenAI;
     FenetreAjoutRecette* fenAR;
     QGridLayout *grilleIngredients;
@@ -61,7 +62,6 @@ private:
     void creerVignettesIngredientDemarrage();
     void creerVignettesRecettesDemarrage();
     void creerPostit();
-    void creerListeIngredientDateLimite();
 
 
 public slots:

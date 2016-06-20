@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->showFullScreen();
     ui->widgets->setFixedWidth(screenWidth * TAILLE_GROUPE_WIDGETS);
     int tab = (screenWidth * TAILLE_GROUPE_WIDGETS *4)/2 - 14;
+    tri = 1;
     ui->tabWidget->setStyleSheet("QTabBar::tab { height: 20px; width: "+ QString::number(tab) + "px; }");
     ui->tabWidget->setElideMode(Qt::ElideRight);
 
@@ -38,7 +39,6 @@ MainWindow::MainWindow(QWidget *parent) :
     creerVignettesRecettesDemarrage();
     GestionDeFichiers::creerRecette("recette.rfg");
     creerPostit();
-    creerListeIngredientDateLimite();
     connect(ui->textEdit_Postit, SIGNAL(textChanged()), this, SLOT(modifierContenuPostit()));
     updateHeure();
     QTimer *timer = new QTimer(this);
@@ -92,6 +92,17 @@ void MainWindow::ajoutIngredient()
         grilleIngredients->addWidget(newVignetteIngredient, ingredients.size() / NB_COLONNE_MAX, ingredients.size() % NB_COLONNE_MAX);
         vignettesIngredients << newVignetteIngredient;
         ingredients << nouvelIngredient;
+        switch(tri)
+        {
+            case 1:
+                triAlphabetique();
+                break;
+            case 2:
+                triDatePeremption();
+                break;
+            case 3:
+                triCategorie();
+        }
     }
 }
 void MainWindow::modifRecette(QString nomModif)
@@ -169,6 +180,7 @@ void MainWindow::ajoutRecette()
 void MainWindow::creerVignettesIngredientDemarrage()
 {
     QList<Ingredient*> listIng = GestionDeFichiers::listeIngredientsFichier();
+
     if (listIng.size() != 0)
     {
         foreach (Ingredient* ing, listIng)
@@ -180,6 +192,7 @@ void MainWindow::creerVignettesIngredientDemarrage()
         }
 
     }
+    triAlphabetique();
 
 }
 
@@ -304,26 +317,6 @@ QList<Ingredient*> MainWindow::getIngredients()
     return this->ingredients;
 }
 
-void MainWindow::creerListeIngredientDateLimite()
-{
-    /*ui->listViewAlimentDateLimite->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    QList<Ingredient*> listeIngredient = getIngredients();
-    QStringListModel * model = new QStringListModel();
-    QStringList listeAConsommer;
-    QFont fontAConsommer("MS Shell Dlg 2",12);
-    foreach(Ingredient * ing, listeIngredient)
-    {
-        QDate datePeremption = ing->getDate();
-        if(QDate::currentDate().daysTo(datePeremption) < 4 && QDate::currentDate().daysTo(datePeremption) > -2)
-        {
-            listeAConsommer << ing->getNom();
-        }
-    }
-    model->setStringList(listeAConsommer);
-    ui->listViewAlimentDateLimite->setFont(fontAConsommer);
-    ui->listViewAlimentDateLimite->setModel(model);*/
-}
-
 void MainWindow::updateHeure()
 {
     ui->lcdNumberHeure->setDigitCount(8);
@@ -354,18 +347,21 @@ bool MainWindow::categoryLessThan(Ingredient *ing1,Ingredient *ing2)
 
 void MainWindow::triAlphabetique()
 {
+    tri = 1;
     qSort(ingredients.begin(), ingredients.end(), nameLessThan);
     updateVignettes();
 }
 
 void MainWindow::triDatePeremption()
 {
+    tri = 2;
     qSort(ingredients.begin(), ingredients.end(), dateLessThan);
     updateVignettes();
 }
 
 void MainWindow::triCategorie()
 {
+    tri = 3;
     qSort(ingredients.begin(), ingredients.end(), categoryLessThan);
     updateVignettes();
 }
