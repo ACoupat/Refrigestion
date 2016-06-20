@@ -32,6 +32,10 @@ void VignetteRecette::initLabels()
 {
     ui->labelNom->setText(recette->getNom());
     ui->labelDureePrep->setText((recette->getDureePreparation()));
+    if(recette->isRealisable())
+        ui->labelRealisable->setText("Oui ! :D");
+    else
+        ui->labelRealisable->setText("Non ! :(");
     ui->labelImage->setStyleSheet("QLabel#labelImage{ border-image: url("+recette->getCheminImage()+") 0 0 0 0 stretch stretch; }" );
     repaint();
 }
