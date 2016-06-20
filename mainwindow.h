@@ -77,6 +77,7 @@ public slots:
     void triDatePeremption();
     void triCategorie();
     void actualiserVignettesRecettes();
+    void actualiserAffichageType(int);
 };
 
 #endif // MAINWINDOW_H

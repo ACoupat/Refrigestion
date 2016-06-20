@@ -40,7 +40,7 @@
          </property>
         </spacer>
        </item>
-       <item row="5" column="0">
+       <item row="6" column="0">
         <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -52,6 +52,16 @@
           </size>
          </property>
         </spacer>
+       </item>
+       <item row="9" column="0">
+        <widget class="QLabel" name="label_Postit">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="0">
+        <widget class="QTextEdit" name="textEdit_Postit"/>
        </item>
        <item row="0" column="0">
         <widget class="QLCDNumber" name="lcdNumberHeure">
@@ -72,18 +82,28 @@ color : white;
          </property>
         </widget>
        </item>
+       <item row="7" column="0">
+        <widget class="QCalendarWidget" name="calendarWidget"/>
+       </item>
        <item row="8" column="0">
-        <widget class="QLabel" name="label_Postit">
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="4" column="0">
+        <widget class="QRadioButton" name="rb_tri_categorie">
          <property name="text">
-          <string/>
+          <string>Tri par catégorie d'aliment</string>
          </property>
         </widget>
-       </item>
-       <item row="9" column="0">
-        <widget class="QTextEdit" name="textEdit_Postit"/>
-       </item>
-       <item row="6" column="0">
-        <widget class="QCalendarWidget" name="calendarWidget"/>
        </item>
        <item row="2" column="0">
         <widget class="QRadioButton" name="rb_tri_alphabet">
@@ -102,25 +122,94 @@ color : white;
          </property>
         </widget>
        </item>
-       <item row="4" column="0">
-        <widget class="QRadioButton" name="rb_tri_categorie">
-         <property name="text">
-          <string>Tri par catégorie d'aliment</string>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="0">
-        <spacer name="verticalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>10</height>
-          </size>
-         </property>
-        </spacer>
+       <item row="5" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>Afficher :</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="cb_afficher_type">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <item>
+            <property name="text">
+             <string>Tout</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Autre</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Boisson</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Légume</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Fruit</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Viande</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Poisson</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Fromage</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Entrée</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Plat</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Dessert</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>50</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>

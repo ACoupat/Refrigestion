@@ -26,9 +26,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->boutonAjoutRecette->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
     ui->boutonAjoutRecette->setLayoutDirection(Qt::RightToLeft);
     connect(ui->boutonAjoutRecette, SIGNAL(clicked(bool)), this, SLOT(ouvrirFenetreAjoutRecette()));
-    connect(ui->rb_tri_alphabet, SIGNAL(clicked(bool)), this, SLOT(triAlphabetique()));
-    connect(ui->rb_tri_date, SIGNAL(clicked(bool)), this, SLOT(triDatePeremption()));
-    connect(ui->rb_tri_categorie, SIGNAL(clicked(bool)), this, SLOT(triCategorie()));
+    connect(ui->rb_tri_alphabet, SIGNAL(toggled(bool)), this, SLOT(triAlphabetique()));
+    connect(ui->rb_tri_date, SIGNAL(toggled(bool)), this, SLOT(triDatePeremption()));
+    connect(ui->rb_tri_categorie, SIGNAL(toggled(bool)), this, SLOT(triCategorie()));
+    connect(ui->cb_afficher_type, SIGNAL(currentIndexChanged(int)), this, SLOT(actualiserAffichageType(int)));
     fenAR = new FenetreAjoutRecette(this);
     fenAI = new FenetreAjoutIngredient(this);
     grilleIngredients = new QGridLayout();
@@ -317,26 +318,6 @@ QList<Ingredient*> MainWindow::getIngredients()
     return this->ingredients;
 }
 
-void MainWindow::creerListeIngredientDateLimite()
-{
-    /*ui->listViewAlimentDateLimite->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    QList<Ingredient*> listeIngredient = getIngredients();
-    QStringListModel * model = new QStringListModel();
-    QStringList listeAConsommer;
-    QFont fontAConsommer("MS Shell Dlg 2",12);
-    foreach(Ingredient * ing, listeIngredient)
-    {
-        QDate datePeremption = ing->getDate();
-        if(QDate::currentDate().daysTo(datePeremption) < 4 && QDate::currentDate().daysTo(datePeremption) > -2)
-        {
-            listeAConsommer << ing->getNom();
-        }
-    }
-    model->setStringList(listeAConsommer);
-    ui->listViewAlimentDateLimite->setFont(fontAConsommer);
-    ui->listViewAlimentDateLimite->setModel(model);*/
-}
-
 void MainWindow::actualiserVignettesRecettes()
 {
     foreach(VignetteRecette* vr, vignettesRecettes)
@@ -394,6 +375,32 @@ void MainWindow::triCategorie()
     updateVignettes();
 }
 
+void MainWindow::actualiserAffichageType(int type)
+{
+    foreach(Ingredient *ingredient, ingredients)
+    {
+        if(type == 0 || ingredient->getType() == (type - 1))
+        {
+            ingredient->setAffiche(true);
+        }
+        else
+        {
+            ingredient->setAffiche(false);
+        }
+    }
+    if(type == 0)
+    {
+        ui->rb_tri_categorie->setDisabled(false);
+
+    }
+    else
+    {
+        ui->rb_tri_categorie->setDisabled(true);
+        ui->rb_tri_alphabet->setChecked(true);
+    }
+    updateVignettes();
+}
+
 void MainWindow::updateVignettes()
 {
     foreach(VignetteIngredient *vignette, vignettesIngredients) vignette->deleteLater();
@@ -404,8 +411,11 @@ void MainWindow::updateVignettes()
 
     foreach(Ingredient *ingredient, ingredients)
     {
-        VignetteIngredient *newVignetteIngredient = new VignetteIngredient(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX, ingredient, this);
-        grilleIngredients->addWidget(newVignetteIngredient, vignettesIngredients.size() / NB_COLONNE_MAX, vignettesIngredients.size() % NB_COLONNE_MAX);
-        vignettesIngredients << newVignetteIngredient;
+        if(ingredient->getAffiche())
+        {
+            VignetteIngredient *newVignetteIngredient = new VignetteIngredient(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX, ingredient, this);
+            grilleIngredients->addWidget(newVignetteIngredient, vignettesIngredients.size() / NB_COLONNE_MAX, vignettesIngredients.size() % NB_COLONNE_MAX);
+            vignettesIngredients << newVignetteIngredient;
+        }
     }
 }

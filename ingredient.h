@@ -27,6 +27,8 @@ public:
     QString getTypeColor();
     QString getTypeColorLettre();
     QString toStringDetail();
+    bool getAffiche();
+    void setAffiche(bool affiche);
 
 
 private:
@@ -36,6 +38,7 @@ private:
     QDate datePeremption;
     QString cheminImage;
     int type;
+    bool affiche;
 };
 
 #endif // INGREDIENT_H

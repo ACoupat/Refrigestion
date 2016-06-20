@@ -8,6 +8,7 @@ Ingredient::Ingredient(QString nom, int type, double quantite, QString unite, QD
     this->unite = unite;
     this->quantite = quantite;
     this->cheminImage = cheminImage;
+    affiche = true;
 }
 
 Ingredient::Ingredient(QString strFichier)
@@ -93,6 +94,16 @@ QString Ingredient::getCheminImage()
 int Ingredient::getType()
 {
     return type;
+}
+
+bool Ingredient::getAffiche()
+{
+    return affiche;
+}
+
+void Ingredient::setAffiche(bool affiche)
+{
+    this->affiche = affiche;
 }
 
 QString Ingredient::getTypeColor() {
