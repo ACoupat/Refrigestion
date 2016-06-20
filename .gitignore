@@ -44,3 +44,11 @@ release/moc_mainwindow.cpp
 release/moc_fenetredetailrecette.cpp
 release/moc_fenetreajoutrecette.cpp
 release/moc_fenetreajoutingredient.cpp
+debug/moc_fenetreajoutingredient.cpp
+debug/moc_fenetreajoutrecette.cpp
+debug/moc_vignetterecette.cpp
+debug/moc_fenetredetailrecette.cpp
+debug/moc_mainwindow.cpp
+debug/moc_vignetteingredient.cpp
+ui_fenetreajoutingredient.h
+ui_fenetredetailrecette.h
