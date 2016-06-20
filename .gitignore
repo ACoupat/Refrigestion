@@ -37,3 +37,10 @@ ui_fenetreajoutrecette.h
 ui_vignetterecette.h
 ui_vignetteingredient.h
 *.user
+release/qrc_ressources.cpp
+release/moc_vignetterecette.cpp
+release/moc_vignetteingredient.cpp
+release/moc_mainwindow.cpp
+release/moc_fenetredetailrecette.cpp
+release/moc_fenetreajoutrecette.cpp
+release/moc_fenetreajoutingredient.cpp
