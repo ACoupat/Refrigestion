@@ -87,23 +87,23 @@ color : white;
         <widget class="QCalendarWidget" name="calendarWidget"/>
        </item>
        <item row="2" column="0">
-        <widget class="QRadioButton" name="radioButton">
+        <widget class="QRadioButton" name="rb_tri_alphabet">
          <property name="text">
           <string>Tri alphabétique</string>
          </property>
         </widget>
        </item>
        <item row="3" column="0">
-        <widget class="QRadioButton" name="radioButton_2">
+        <widget class="QRadioButton" name="rb_tri_date">
          <property name="text">
           <string>Tri par date de péremption</string>
          </property>
         </widget>
        </item>
        <item row="4" column="0">
-        <widget class="QRadioButton" name="radioButton_3">
+        <widget class="QRadioButton" name="rb_tri_categorie">
          <property name="text">
-          <string>Tri par type d'aliment</string>
+          <string>Tri par catégorie d'aliment</string>
          </property>
         </widget>
        </item>

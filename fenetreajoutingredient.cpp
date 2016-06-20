@@ -11,7 +11,7 @@ FenetreAjoutIngredient::FenetreAjoutIngredient(QWidget *parent) :
     this->setWindowFlags(Qt::SplashScreen);
     this->setModal(true);
     this->setWindowTitle("Ajouter un ingrédient");
-    ui->de_date->setDateTime(QDateTime::currentDateTime().addDays(7));
+    ui->de_date->setDateTime(QDateTime::currentDateTime().addDays(3));
     QDir *image = new QDir("Images/Contenu");
     image->setFilter(QDir::Files);
     image->setSorting(QDir::Name);

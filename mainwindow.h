@@ -54,6 +54,7 @@ private:
     QGridLayout *grilleIngredients;
     QGridLayout *grilleRecettes;
 
+    void updateVignettes();
     void creerVignettesIngredientDemarrage();
     void creerVignettesRecettesDemarrage();
     void creerPostit();
@@ -69,7 +70,9 @@ public slots:
     void ouvrirFenArModif(Recette* recette);
     void modifierContenuPostit();
     void updateHeure();
-
+    void triAlphabetique();
+    void triDatePeremption();
+    void triCategorie();
 };
 
 #endif // MAINWINDOW_H

@@ -25,6 +25,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->boutonAjoutRecette->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
     ui->boutonAjoutRecette->setLayoutDirection(Qt::RightToLeft);
     connect(ui->boutonAjoutRecette, SIGNAL(clicked(bool)), this, SLOT(ouvrirFenetreAjoutRecette()));
+    connect(ui->rb_tri_alphabet, SIGNAL(clicked(bool)), this, SLOT(triAlphabetique()));
+    connect(ui->rb_tri_date, SIGNAL(clicked(bool)), this, SLOT(triDatePeremption()));
+    connect(ui->rb_tri_categorie, SIGNAL(clicked(bool)), this, SLOT(triCategorie()));
     fenAR = new FenetreAjoutRecette(this);
     fenAI = new FenetreAjoutIngredient(this);
     grilleIngredients = new QGridLayout();
@@ -45,8 +48,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lcdNumberHeure->setFixedHeight(30);
     ui->lcdNumberHeure->setSegmentStyle(QLCDNumber::Flat);
     ui->widgets->layout()->setAlignment(ui->lcdNumberHeure,Qt::AlignHCenter);
-
-
 }
 
 MainWindow::~MainWindow()
@@ -212,19 +213,8 @@ bool MainWindow::supprimerVignetteIngredient(VignetteIngredient *vignette)
     if(msgBox.exec() == 0)
     {
         ingredients.removeOne(vignette->getIngredient());
+        updateVignettes();
 
-        foreach(VignetteIngredient *vignette, vignettesIngredients) vignette->deleteLater();
-        vignettesIngredients.clear();
-        delete grilleIngredients;
-        grilleIngredients = new QGridLayout();
-        ui->verticalLayout->addLayout(grilleIngredients);
-
-        foreach(Ingredient *ingredient, ingredients)
-        {
-            VignetteIngredient *newVignetteIngredient = new VignetteIngredient(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX, ingredient, this);
-            grilleIngredients->addWidget(newVignetteIngredient, vignettesIngredients.size() / NB_COLONNE_MAX, vignettesIngredients.size() % NB_COLONNE_MAX);
-            vignettesIngredients << newVignetteIngredient;
-        }
     }
     else
     {
@@ -344,5 +334,36 @@ void MainWindow::updateHeure()
         {
             vignetteIngredient->verifierPeremption();
         }
+    }
+}
+
+void MainWindow::triAlphabetique()
+{
+    //qSort(ingredients.begin(), ingredients.end(), Ingredient::nameLessThan);
+}
+
+void MainWindow::triDatePeremption()
+{
+    //qSort(ingredients.begin(), ingredients.end(), Ingredient::dateLessThan);
+}
+
+void MainWindow::triCategorie()
+{
+    //qSort(ingredients.begin(), ingredients.end(), Ingredient::categoryLessThan);
+}
+
+void MainWindow::updateVignettes()
+{
+    foreach(VignetteIngredient *vignette, vignettesIngredients) vignette->deleteLater();
+    vignettesIngredients.clear();
+    delete grilleIngredients;
+    grilleIngredients = new QGridLayout();
+    ui->verticalLayout->addLayout(grilleIngredients);
+
+    foreach(Ingredient *ingredient, ingredients)
+    {
+        VignetteIngredient *newVignetteIngredient = new VignetteIngredient(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX, ingredient, this);
+        grilleIngredients->addWidget(newVignetteIngredient, vignettesIngredients.size() / NB_COLONNE_MAX, vignettesIngredients.size() % NB_COLONNE_MAX);
+        vignettesIngredients << newVignetteIngredient;
     }
 }
