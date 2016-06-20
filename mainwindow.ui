@@ -232,7 +232,7 @@ color : white;
        <enum>QTabWidget::Triangular</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <property name="iconSize">
        <size>
@@ -290,6 +290,88 @@ color : white;
         <string>Recettes</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
+        <item row="2" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="chb_faisable">
+            <property name="text">
+             <string>Faisable</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="layoutDirection">
+             <enum>Qt::RightToLeft</enum>
+            </property>
+            <property name="text">
+             <string>Afficher</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="cb_type">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <item>
+             <property name="text">
+              <string>Tout</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Entrée</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Plat</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Dessert</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Autre</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="boutonAjoutRecette">
+            <property name="text">
+             <string>Ajouter une recette</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
         <item row="0" column="0">
          <widget class="QScrollArea" name="scrollArea_2">
           <property name="widgetResizable">
@@ -301,7 +383,7 @@ color : white;
              <x>0</x>
              <y>0</y>
              <width>350</width>
-             <height>446</height>
+             <height>444</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_7">
@@ -310,13 +392,6 @@ color : white;
             </item>
            </layout>
           </widget>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QPushButton" name="boutonAjoutRecette">
-          <property name="text">
-           <string>Ajouter une recette</string>
-          </property>
          </widget>
         </item>
        </layout>

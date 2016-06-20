@@ -29,7 +29,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->rb_tri_alphabet, SIGNAL(toggled(bool)), this, SLOT(triAlphabetique()));
     connect(ui->rb_tri_date, SIGNAL(toggled(bool)), this, SLOT(triDatePeremption()));
     connect(ui->rb_tri_categorie, SIGNAL(toggled(bool)), this, SLOT(triCategorie()));
-    connect(ui->cb_afficher_type, SIGNAL(currentIndexChanged(int)), this, SLOT(actualiserAffichageType(int)));
+    connect(ui->cb_afficher_type, SIGNAL(currentIndexChanged(int)), this, SLOT(actualiserAffichageTypeIngredient(int)));
+    connect(ui->chb_faisable, SIGNAL(stateChanged(int)), this, SLOT(actualiserAffichageRecette(int)));
+    connect(ui->cb_type, SIGNAL(currentTextChanged(QString)), this, SLOT(actualiserAffichageTypeRecette(QString)));
     fenAR = new FenetreAjoutRecette(this);
     fenAI = new FenetreAjoutIngredient(this);
     grilleIngredients = new QGridLayout();
@@ -227,7 +229,7 @@ bool MainWindow::supprimerVignetteIngredient(VignetteIngredient *vignette)
     if(msgBox.exec() == 0)
     {
         ingredients.removeOne(vignette->getIngredient());
-        updateVignettes();
+        updateVignettesIngredients();
 
     }
     else
@@ -257,17 +259,7 @@ bool MainWindow::supprimerVignetteRecette(VignetteRecette *vignette, bool modif)
     {
         GestionDeFichiers::supprimerFichierRecette(vignette->getRecette());
         recettes.removeOne(vignette->getRecette());
-        foreach(VignetteRecette *vignette, vignettesRecettes) vignette->deleteLater();
-        vignettesRecettes.clear();
-        delete grilleRecettes;
-        grilleRecettes = new QGridLayout();
-        ui->verticalLayout_2->addLayout(grilleRecettes);
-        foreach(Recette *recette, recettes)
-        {
-            VignetteRecette *newVignetteRecette = new VignetteRecette(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX, recette, this);
-            grilleRecettes->addWidget(newVignetteRecette, vignettesRecettes.size() / NB_COLONNE_MAX, vignettesRecettes.size() % NB_COLONNE_MAX);
-            vignettesRecettes << newVignetteRecette;
-        }
+        updateVignettesRecettes();
     }
     else
     {
@@ -358,24 +350,24 @@ void MainWindow::triAlphabetique()
 {
     tri = 1;
     qSort(ingredients.begin(), ingredients.end(), nameLessThan);
-    updateVignettes();
+    updateVignettesIngredients();
 }
 
 void MainWindow::triDatePeremption()
 {
     tri = 2;
     qSort(ingredients.begin(), ingredients.end(), dateLessThan);
-    updateVignettes();
+    updateVignettesIngredients();
 }
 
 void MainWindow::triCategorie()
 {
     tri = 3;
     qSort(ingredients.begin(), ingredients.end(), categoryLessThan);
-    updateVignettes();
+    updateVignettesIngredients();
 }
 
-void MainWindow::actualiserAffichageType(int type)
+void MainWindow::actualiserAffichageTypeIngredient(int type)
 {
     foreach(Ingredient *ingredient, ingredients)
     {
@@ -398,10 +390,43 @@ void MainWindow::actualiserAffichageType(int type)
         ui->rb_tri_categorie->setDisabled(true);
         ui->rb_tri_alphabet->setChecked(true);
     }
-    updateVignettes();
+    updateVignettesIngredients();
 }
 
-void MainWindow::updateVignettes()
+void MainWindow::actualiserAffichageTypeRecette(QString type)
+{
+    foreach(Recette *recette, recettes)
+    {
+        if(type == "Tout" || recette->getTypeRecette() == type)
+        {
+            recette->setAffichee(true);
+        }
+        else
+        {
+            recette->setAffichee(false);
+        }
+    }
+    updateVignettesRecettes();
+}
+
+void MainWindow::actualiserAffichageRecette(int faisable)
+{
+    foreach(Recette *recette, recettes)
+    {
+        if(!faisable || recette->isRealisable())
+        {
+            recette->setAffichee(true);
+        }
+        else
+        {
+            recette->setAffichee(false);
+        }
+
+    }
+    updateVignettesRecettes();
+}
+
+void MainWindow::updateVignettesIngredients()
 {
     foreach(VignetteIngredient *vignette, vignettesIngredients) vignette->deleteLater();
     vignettesIngredients.clear();
@@ -416,6 +441,24 @@ void MainWindow::updateVignettes()
             VignetteIngredient *newVignetteIngredient = new VignetteIngredient(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX, ingredient, this);
             grilleIngredients->addWidget(newVignetteIngredient, vignettesIngredients.size() / NB_COLONNE_MAX, vignettesIngredients.size() % NB_COLONNE_MAX);
             vignettesIngredients << newVignetteIngredient;
+        }
+    }
+}
+
+void MainWindow::updateVignettesRecettes()
+{
+    foreach(VignetteRecette *vignette, vignettesRecettes) vignette->deleteLater();
+    vignettesRecettes.clear();
+    delete grilleRecettes;
+    grilleRecettes = new QGridLayout();
+    ui->verticalLayout_2->addLayout(grilleRecettes);
+    foreach(Recette *recette, recettes)
+    {
+        if(recette->getAffichee())
+        {
+            VignetteRecette *newVignetteRecette = new VignetteRecette(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX, recette, this);
+            grilleRecettes->addWidget(newVignetteRecette, vignettesRecettes.size() / NB_COLONNE_MAX, vignettesRecettes.size() % NB_COLONNE_MAX);
+            vignettesRecettes << newVignetteRecette;
         }
     }
 }

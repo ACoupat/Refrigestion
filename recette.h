@@ -20,9 +20,12 @@ public:
     QString getTypeRecette();
     bool aucunIngredient();
     void actualiserRealisable();
+    void setAffichee(bool affichee);
+    bool getAffichee();
     ~Recette();
 private :
     bool checkRealisable();
+    bool affichee;
     QString nom;
     QString dureePreparation;
     QList<Ingredient*> listeIngredients;

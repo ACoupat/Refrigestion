@@ -58,7 +58,8 @@ private:
     QGridLayout *grilleIngredients;
     QGridLayout *grilleRecettes;
 
-    void updateVignettes();
+    void updateVignettesIngredients();
+    void updateVignettesRecettes();
     void creerVignettesIngredientDemarrage();
     void creerVignettesRecettesDemarrage();
     void creerPostit();
@@ -77,7 +78,9 @@ public slots:
     void triDatePeremption();
     void triCategorie();
     void actualiserVignettesRecettes();
-    void actualiserAffichageType(int);
+    void actualiserAffichageTypeIngredient(int);
+    void actualiserAffichageTypeRecette(QString);
+    void actualiserAffichageRecette(int);
 };
 
 #endif // MAINWINDOW_H

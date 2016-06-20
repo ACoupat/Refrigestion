@@ -283,36 +283,6 @@ QWidget#scrollAreaWidgetContents_2
        </item>
        <item>
         <property name="text">
-         <string>Boisson</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Légume</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Fruit</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Viande</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Poisson</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Fromage</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
          <string>Entrée</string>
         </property>
        </item>
