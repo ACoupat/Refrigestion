@@ -11,6 +11,7 @@ VignetteIngredient::VignetteIngredient(int width, Ingredient* ingredient, MainWi
     connect(ui->pushButton, SIGNAL(clicked(bool)), this, SLOT(retraitQuantite()));
     connect(ui->pushButton_2, SIGNAL(clicked(bool)), this, SLOT(ajoutQuantite()));
     connect(ui->sp_quantite, SIGNAL(editingFinished()), this, SLOT(verifierQuantite()));
+    connect(ui->pb_supprimer, SIGNAL(clicked(bool)), this, SLOT(supprimerVignette()));
     this->ingredient = ingredient;
     this->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
     this->setMaximumWidth(width);
@@ -128,6 +129,11 @@ void VignetteIngredient::verifierQuantite()
     ingredient->setQuantite(ui->sp_quantite->value());
     window->reecrireFichier();
     window->actualiserVignettesRecettes();
+}
+
+void VignetteIngredient::supprimerVignette()
+{
+    window->supprimerVignetteIngredient(this);
 }
 
 Ingredient *VignetteIngredient::getIngredient()

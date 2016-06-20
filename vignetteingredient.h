@@ -39,6 +39,7 @@ public slots:
     void ajoutQuantite();
     void retraitQuantite();
     void verifierQuantite();
+    void supprimerVignette();
 };
 
 #endif // VIGNETTEINGREDIENT_H
