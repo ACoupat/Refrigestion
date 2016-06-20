@@ -10,6 +10,11 @@ Recette::Recette(QString nom, QString dureePrep, QList<Ingredient*> listeIng, QS
     this->typeRecette = typeRecette;
     this->nomImage = nomImage;
     this->cheminImage = cheminImage;
+    actualiserRealisable();
+}
+
+void Recette::actualiserRealisable()
+{
     this->realisable = checkRealisable();
 }
 
@@ -82,17 +87,19 @@ bool Recette::checkRealisable()
                 if(QString::compare(ing->getNom(),nomTemp,Qt::CaseInsensitive)==0)
                 {
                     sommeTemp = ajouterQuantites(quantitePossedee,ing->getUnite(),qteTemp.toDouble(),uniteTemp);
+                    qDebug() <<sommeTemp<< quantitePossedee;
                     if(sommeTemp != -1)
                     {
                         quantitePossedee += sommeTemp;
+                        qDebug() <<sommeTemp<< quantitePossedee;
                     }
                 }
             }
             qDebug() << "***********";
             qDebug() << "qp : " << quantitePossedee;
-            qDebug() << "qte : " << ing->getQuantite();
+            qDebug() << "qte : " << convertirQuantite(ing->getQuantite(),ing->getUnite());
             qDebug() << "========================";
-            if(ing->getQuantite() > quantitePossedee)
+            if(convertirQuantite(ing->getQuantite(),ing->getUnite()) > quantitePossedee)
             {
                 fichier.close();
                 return false;
@@ -117,6 +124,16 @@ bool Recette::checkRealisable()
     }
 }
 
+double Recette::convertirQuantite(double qte, QString unite)
+{
+         if(unite == "mL") return qte;
+    else if(unite == "cl") return qte*10;
+    else if(unite == "L") return qte*1000;
+    else if(unite == "kg") return qte*1000;
+    else if(unite == "g") return qte;
+    else if(unite == "") return qte;
+}
+
 /*
  *  Pour additionner les quantités en prenant en comte les unités
  */
@@ -133,7 +150,7 @@ double Recette::ajouterQuantites(double qte1, QString unite1, double qte2, QStri
     else if (unite1 =="cL" && unite2=="cL") return qte1*10 + qte2*10;
     else if ((unite1 =="L" && unite2=="L") || (unite1 =="kg" && unite2=="kg")) return qte1*1000 + qte2*1000;
     else if (unite1 =="L" && unite2=="cL") return qte1*1000 + qte2*10;
-    else if ((unite1 =="L" && unite2=="mL") && (unite1 =="kg" && unite2=="g")) return qte1*1000 + qte2;
+    else if ((unite1 =="L" && unite2=="mL") || (unite1 =="kg" && unite2=="g")) return qte1*1000 + qte2;
     else return -1;
 }
 

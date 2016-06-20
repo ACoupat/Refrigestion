@@ -317,6 +317,34 @@ QList<Ingredient*> MainWindow::getIngredients()
     return this->ingredients;
 }
 
+void MainWindow::creerListeIngredientDateLimite()
+{
+    /*ui->listViewAlimentDateLimite->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    QList<Ingredient*> listeIngredient = getIngredients();
+    QStringListModel * model = new QStringListModel();
+    QStringList listeAConsommer;
+    QFont fontAConsommer("MS Shell Dlg 2",12);
+    foreach(Ingredient * ing, listeIngredient)
+    {
+        QDate datePeremption = ing->getDate();
+        if(QDate::currentDate().daysTo(datePeremption) < 4 && QDate::currentDate().daysTo(datePeremption) > -2)
+        {
+            listeAConsommer << ing->getNom();
+        }
+    }
+    model->setStringList(listeAConsommer);
+    ui->listViewAlimentDateLimite->setFont(fontAConsommer);
+    ui->listViewAlimentDateLimite->setModel(model);*/
+}
+
+void MainWindow::actualiserVignettesRecettes()
+{
+    foreach(VignetteRecette* vr, vignettesRecettes)
+    {
+        vr->actualiserAffichage();
+    }
+}
+
 void MainWindow::updateHeure()
 {
     ui->lcdNumberHeure->setDigitCount(8);

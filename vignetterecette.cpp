@@ -28,14 +28,20 @@ void VignetteRecette::ouvrirModif()
     window->ouvrirFenArModif(this->recette);
 }
 
+void VignetteRecette::actualiserAffichage()
+{
+    recette->actualiserRealisable();
+    initLabels();
+}
+
 void VignetteRecette::initLabels()
 {
     ui->labelNom->setText(recette->getNom());
     ui->labelDureePrep->setText((recette->getDureePreparation()));
     if(recette->isRealisable())
-        ui->labelRealisable->setText("Oui ! :D");
+        ui->labelNom->setStyleSheet("QLabel#labelNom{font-weight: bold;color:green;}");
     else
-        ui->labelRealisable->setText("Non ! :(");
+        ui->labelNom->setStyleSheet("QLabel#labelNom{font-weight: bold;color:red;}");
     ui->labelImage->setStyleSheet("QLabel#labelImage{ border-image: url("+recette->getCheminImage()+") 0 0 0 0 stretch stretch; }" );
     repaint();
 }

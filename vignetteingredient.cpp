@@ -55,6 +55,7 @@ void VignetteIngredient::ajoutQuantite() {
     ingredient->setQuantite(+1);
     ui->label_quantite->setText(QString::number(ingredient->getQuantite()) + " " + ingredient->getUnite());
     window->reecrireFichier();
+    window->actualiserVignettesRecettes();
 }
 
 void VignetteIngredient::retraitQuantite() {
@@ -66,6 +67,7 @@ void VignetteIngredient::retraitQuantite() {
         if(!window->supprimerVignetteIngredient(this)) ingredient->setQuantite(+1);
     }
     window->reecrireFichier();
+    window->actualiserVignettesRecettes();
     ui->label_quantite->setText(QString::number(ingredient->getQuantite()) + " " + ingredient->getUnite());
 }
 

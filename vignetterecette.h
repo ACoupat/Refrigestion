@@ -19,6 +19,7 @@ public:
     explicit VignetteRecette(int width,Recette* recette, MainWindow *parent);
     ~VignetteRecette();
     Recette *getRecette();
+    void actualiserAffichage();
 
 private:
     Recette* recette;
@@ -32,6 +33,7 @@ private:
 
 protected:
     void mousePressEvent ( QMouseEvent * event );
+
 
 private slots:
     void supprimerVignette();

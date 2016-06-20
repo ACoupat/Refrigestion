@@ -19,6 +19,7 @@ public:
     QList<Ingredient *> getListIngredients();
     QString getTypeRecette();
     bool aucunIngredient();
+    void actualiserRealisable();
     ~Recette();
 private :
     bool checkRealisable();
@@ -31,6 +32,7 @@ private :
     QString nomImage;
     bool realisable;
     double ajouterQuantites(double qte1, QString unite1, double qte2, QString unite2);
+    double convertirQuantite(double qte, QString unite);
 };
 
 #endif // RECETTE_H
