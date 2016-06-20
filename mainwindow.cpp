@@ -44,7 +44,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QTimer *timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(updateHeure()));
     timer->start(1000);
-    ui->lcdNumberHeure->setFixedWidth(screenWidth * TAILLE_GROUPE_WIDGETS * 0.80);
+    ui->lcdNumberHeure->setFixedWidth(screenWidth * TAILLE_GROUPE_WIDGETS * 0.50);
     ui->lcdNumberHeure->setFixedHeight(30);
     ui->lcdNumberHeure->setSegmentStyle(QLCDNumber::Flat);
     ui->widgets->layout()->setAlignment(ui->lcdNumberHeure,Qt::AlignHCenter);

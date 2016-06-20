@@ -60,7 +60,6 @@
          </property>
          <property name="styleSheet">
           <string notr="true">QLCDNumber{  
-padding: 1px;  
 background-color : black;
 border-style: solid;  
 border: 2px solid gray;  
