@@ -49,6 +49,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lcdNumberHeure->setFixedHeight(30);
     ui->lcdNumberHeure->setSegmentStyle(QLCDNumber::Flat);
     ui->widgets->layout()->setAlignment(ui->lcdNumberHeure,Qt::AlignHCenter);
+
+    ui->timerMinuteur->setDisplayFormat("HH:mm:ss");
+    //ui->timerMinuteur->setMinimumWidth(screenWidth * TAILLE_GROUPE_WIDGETS * 0.25);
+    connect(ui->buttonMinuteur, SIGNAL(pressed()), this, SLOT(lancerMinuteur()));
+
+    tempMin = new QTimer();
+    tempMinuteur = new QTimer();
+    connect(tempMinuteur, SIGNAL(timeout()),this,SLOT(decrementMinuteur()));
+    connect(tempMin, SIGNAL(timeout()),this,SLOT(finMinuteur()));
+
 }
 
 MainWindow::~MainWindow()
@@ -418,4 +428,39 @@ void MainWindow::updateVignettes()
             vignettesIngredients << newVignetteIngredient;
         }
     }
+}
+
+void MainWindow::lancerMinuteur()
+{
+    if(!(tempMin->isActive()) && ui->timerMinuteur->time().hour() + ui->timerMinuteur->time().minute() + ui->timerMinuteur->time().second() != 0)
+    {
+        ui->timerMinuteur->setDisabled(true);
+        tempMinuteur->start(1000);
+        tempMin->start(ui->timerMinuteur->time().hour() * 3600000 + ui->timerMinuteur->time().minute() * 60000 + ui->timerMinuteur->time().second() * 1000);
+        ui->buttonMinuteur->setText("Arreter");
+    }else if(tempMinuteur->isActive()){
+        tempMin->stop();
+        tempMinuteur->stop();
+        ui->timerMinuteur->setTime(QTime(0,0,0));
+        ui->timerMinuteur->setDisabled(false);
+        ui->buttonMinuteur->setText("Lancer");
+    }
+}
+
+void MainWindow::finMinuteur()
+{
+    tempMin->stop();
+    tempMinuteur->stop();
+    ui->timerMinuteur->setDisabled(false);
+    ui->timerMinuteur->setTime(QTime(0,0,0));
+    ui->buttonMinuteur->setText("Lancer");
+    QMediaPlayer *player = new QMediaPlayer;
+    player->setMedia(QUrl::fromLocalFile("Minuteur.wav"));
+    player->setVolume(100);
+    player->play();
+}
+
+void MainWindow::decrementMinuteur()
+{
+    ui->timerMinuteur->setTime(ui->timerMinuteur->time().addSecs(-1));
 }

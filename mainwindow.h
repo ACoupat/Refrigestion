@@ -13,6 +13,7 @@
 #include <QStringListModel>
 #include <QCalendarWidget>
 #include <QTimer>
+#include <QSound>
 #include <ingredient.h>
 #include <recette.h>
 #include <fenetreajoutingredient.h>
@@ -23,6 +24,7 @@
 #include <QDir>
 #include <vignetterecette.h>
 #include <QLCDNumber>
+#include <QTimeEdit>
 
 
 namespace Ui {
@@ -57,12 +59,16 @@ private:
     FenetreAjoutRecette* fenAR;
     QGridLayout *grilleIngredients;
     QGridLayout *grilleRecettes;
+    //QTimeEdit* timerMinuteur;
+    QTimer* tempMinuteur;
+    QTimer * tempMin;
 
     void updateVignettes();
     void creerVignettesIngredientDemarrage();
     void creerVignettesRecettesDemarrage();
     void creerPostit();
-
+    void creerListeIngredientDateLimite();
+    void updateMinuteur();
 
 public slots:
     void ouvrirFenetreAjoutIngredient();
@@ -78,6 +84,9 @@ public slots:
     void triCategorie();
     void actualiserVignettesRecettes();
     void actualiserAffichageType(int);
+    void finMinuteur();
+    void lancerMinuteur();
+    void decrementMinuteur();
 };
 
 #endif // MAINWINDOW_H
