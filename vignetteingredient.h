@@ -38,6 +38,7 @@ private:
 public slots:
     void ajoutQuantite();
     void retraitQuantite();
+    void verifierQuantite();
 };
 
 #endif // VIGNETTEINGREDIENT_H

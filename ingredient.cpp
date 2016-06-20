@@ -8,6 +8,12 @@ Ingredient::Ingredient(QString nom, int type, double quantite, QString unite, QD
     this->unite = unite;
     this->quantite = quantite;
     this->cheminImage = cheminImage;
+    int temp = quantite;
+    increment = 1;
+    while(temp > 10) {
+        temp /= 10;
+        increment *=10;
+    }
     affiche = true;
 }
 
@@ -61,9 +67,8 @@ QString Ingredient::toStringDetail()
     return str;
 }
 
-void Ingredient::setQuantite(double dQte) {
-    if(quantite + dQte > 0) quantite += dQte;
-    else quantite = 0;
+void Ingredient::setQuantite(double quantite) {
+    this->quantite = quantite;
 }
 
 QString Ingredient::getNom()
@@ -106,7 +111,8 @@ void Ingredient::setAffiche(bool affiche)
     this->affiche = affiche;
 }
 
-QString Ingredient::getTypeColor() {
+QString Ingredient::getTypeColor()
+{
     static const QString colors[] = {"Images/autre.png", // Autre
                                      "Images/boisson.png", // Boisson
                                      "Images/legume.png", // Légume
@@ -120,7 +126,8 @@ QString Ingredient::getTypeColor() {
     return colors[type];
 }
 
-QString Ingredient::getTypeColorLettre() {
+QString Ingredient::getTypeColorLettre()
+{
     static const QString colors[] = {"Images/autreLettre.png", // Autre
                                      "Images/boissonLettre.png", // Boisson
                                      "Images/legumeLettre.png", // Légume
@@ -134,7 +141,10 @@ QString Ingredient::getTypeColorLettre() {
     return colors[type];
 }
 
-
+int Ingredient::getIncrement()
+{
+    return increment;
+}
 
 Ingredient::~Ingredient()
 {

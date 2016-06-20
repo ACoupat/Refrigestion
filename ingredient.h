@@ -28,10 +28,12 @@ public:
     QString getTypeColorLettre();
     QString toStringDetail();
     bool getAffiche();
+    int getIncrement();
     void setAffiche(bool affiche);
 
 
 private:
+    int increment;
     double quantite;
     QString nom;
     QString unite;

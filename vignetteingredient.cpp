@@ -10,6 +10,7 @@ VignetteIngredient::VignetteIngredient(int width, Ingredient* ingredient, MainWi
     window = parent;
     connect(ui->pushButton, SIGNAL(clicked(bool)), this, SLOT(retraitQuantite()));
     connect(ui->pushButton_2, SIGNAL(clicked(bool)), this, SLOT(ajoutQuantite()));
+    connect(ui->sp_quantite, SIGNAL(editingFinished()), this, SLOT(verifierQuantite()));
     this->ingredient = ingredient;
     this->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
     this->setMaximumWidth(width);
@@ -51,30 +52,23 @@ void VignetteIngredient::leaveEvent(QEvent * event)
     QWidget::leaveEvent(event);
 }
 
-void VignetteIngredient::ajoutQuantite() {
-    ingredient->setQuantite(+1);
-    ui->label_quantite->setText(QString::number(ingredient->getQuantite()) + " " + ingredient->getUnite());
-    window->reecrireFichier();
-    window->actualiserVignettesRecettes();
+void VignetteIngredient::ajoutQuantite()
+{
+    ui->sp_quantite->setValue(ingredient->getQuantite() + ingredient->getIncrement());
+    verifierQuantite();
 }
 
-void VignetteIngredient::retraitQuantite() {
-    ingredient->setQuantite(-1);
-
-
-    if(ingredient->getQuantite() == 0)
-    {
-        if(!window->supprimerVignetteIngredient(this)) ingredient->setQuantite(+1);
-    }
-    window->reecrireFichier();
-    window->actualiserVignettesRecettes();
-    ui->label_quantite->setText(QString::number(ingredient->getQuantite()) + " " + ingredient->getUnite());
+void VignetteIngredient::retraitQuantite()
+{
+    ui->sp_quantite->setValue(ingredient->getQuantite() - ingredient->getIncrement());
+    verifierQuantite();
 }
 
 void VignetteIngredient::initLabels()
 {
     if(ingredient->getQuantite()==0) ingredient->setQuantite(1);
-    ui->label_quantite->setText(QString::number(ingredient->getQuantite()) + " " + ingredient->getUnite());
+    ui->sp_quantite->setValue(ingredient->getQuantite());
+    ui->label_unite->setText(ingredient->getUnite());
     ui->label_nom->setText(ingredient->getNom());
     ui->labelImage->setStyleSheet("QLabel#labelImage{ border-image: url("+ingredient->getCheminImage()+") 0 0 0 0 stretch stretch; }");
 }
@@ -120,6 +114,20 @@ void VignetteIngredient::verifierPeremption()
         ui->labelRestant->setText(QString::number(diff) + " jours restants");
     }
 
+}
+
+void VignetteIngredient::verifierQuantite()
+{
+    if(ui->sp_quantite->value() <= 0)
+    {
+        if(!window->supprimerVignetteIngredient(this))
+        {
+            ui->sp_quantite->setValue(ingredient->getQuantite());
+        }
+    }
+    ingredient->setQuantite(ui->sp_quantite->value());
+    window->reecrireFichier();
+    window->actualiserVignettesRecettes();
 }
 
 Ingredient *VignetteIngredient::getIngredient()
