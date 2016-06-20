@@ -40,6 +40,9 @@ public:
     bool supprimerVignetteIngredient(VignetteIngredient* vi);
     bool supprimerVignetteRecette(VignetteRecette * vr, bool modif);
     void reecrireFichier();
+    static bool nameLessThan(Ingredient *ing1, Ingredient *ing2);
+    static bool categoryLessThan(Ingredient *ing1, Ingredient *ing2);
+    static bool dateLessThan(Ingredient *ing1, Ingredient *ing2);
 
 private:
     Ui::MainWindow *ui;

@@ -27,9 +27,7 @@ public:
     QString getTypeColor();
     QString getTypeColorLettre();
     QString toStringDetail();
-    bool nameLessThan(Ingredient *ing1, Ingredient *ing2);
-    bool categoryLessThan(Ingredient *ing1, Ingredient *ing2);
-    bool dateLessThan(Ingredient *ing1, Ingredient *ing2);
+
 
 private:
     double quantite;

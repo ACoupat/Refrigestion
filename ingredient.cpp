@@ -123,20 +123,7 @@ QString Ingredient::getTypeColorLettre() {
     return colors[type];
 }
 
-bool Ingredient::nameLessThan(Ingredient *ing1, Ingredient *ing2)
-{
-    return ing1->getNom() < ing2->getNom();
-}
 
-bool Ingredient::dateLessThan(Ingredient *ing1, Ingredient *ing2)
-{
-    return ing1->getDate() < ing2->getDate();
-}
-
-bool Ingredient::categoryLessThan(Ingredient *ing1, Ingredient *ing2)
-{
-    return ing1->getType() < ing2->getType();
-}
 
 Ingredient::~Ingredient()
 {

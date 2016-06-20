@@ -337,19 +337,37 @@ void MainWindow::updateHeure()
     }
 }
 
+bool MainWindow::nameLessThan(Ingredient *ing1,Ingredient *ing2)
+{
+    return ing1->getNom() < ing2->getNom();
+}
+
+bool MainWindow::dateLessThan(Ingredient *ing1,Ingredient *ing2)
+{
+    return ing1->getDate() < ing2->getDate();
+}
+
+bool MainWindow::categoryLessThan(Ingredient *ing1,Ingredient *ing2)
+{
+    return ing1->getType() < ing2->getType();
+}
+
 void MainWindow::triAlphabetique()
 {
-    //qSort(ingredients.begin(), ingredients.end(), Ingredient::nameLessThan);
+    qSort(ingredients.begin(), ingredients.end(), nameLessThan);
+    updateVignettes();
 }
 
 void MainWindow::triDatePeremption()
 {
-    //qSort(ingredients.begin(), ingredients.end(), Ingredient::dateLessThan);
+    qSort(ingredients.begin(), ingredients.end(), dateLessThan);
+    updateVignettes();
 }
 
 void MainWindow::triCategorie()
 {
-    //qSort(ingredients.begin(), ingredients.end(), Ingredient::categoryLessThan);
+    qSort(ingredients.begin(), ingredients.end(), categoryLessThan);
+    updateVignettes();
 }
 
 void MainWindow::updateVignettes()
