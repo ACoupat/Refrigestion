@@ -455,7 +455,6 @@ void MainWindow::updateVignettesIngredients()
     }
 }
 
-<<<<<<< HEAD
 void MainWindow::updateVignettesRecettes()
 {
     foreach(VignetteRecette *vignette, vignettesRecettes) vignette->deleteLater();
@@ -473,7 +472,7 @@ void MainWindow::updateVignettesRecettes()
         }
     }
 }
-=======
+
 void MainWindow::lancerMinuteur()
 {
     if(!(tempMin->isActive()) && ui->timerMinuteur->time().hour() + ui->timerMinuteur->time().minute() + ui->timerMinuteur->time().second() != 0)
@@ -508,4 +507,3 @@ void MainWindow::decrementMinuteur()
 {
     ui->timerMinuteur->setTime(ui->timerMinuteur->time().addSecs(-1));
 }
->>>>>>> origin/master

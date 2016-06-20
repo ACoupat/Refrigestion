@@ -27,18 +27,12 @@
        <string/>
       </property>
       <layout class="QGridLayout" name="gridLayout_5">
-       <item row="1" column="0">
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
+       <item row="11" column="0">
+        <widget class="QLabel" name="label_Postit">
+         <property name="text">
+          <string/>
          </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>50</height>
-          </size>
-         </property>
-        </spacer>
+        </widget>
        </item>
        <item row="6" column="0">
         <spacer name="verticalSpacer_2">
@@ -53,14 +47,20 @@
          </property>
         </spacer>
        </item>
-       <item row="9" column="0">
-        <widget class="QLabel" name="label_Postit">
-         <property name="text">
-          <string/>
+       <item row="1" column="0">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
          </property>
-        </widget>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>50</height>
+          </size>
+         </property>
+        </spacer>
        </item>
-       <item row="10" column="0">
+       <item row="12" column="0">
         <widget class="QTextEdit" name="textEdit_Postit"/>
        </item>
        <item row="0" column="0">
@@ -82,10 +82,10 @@ color : white;
          </property>
         </widget>
        </item>
-       <item row="7" column="0">
+       <item row="9" column="0">
         <widget class="QCalendarWidget" name="calendarWidget"/>
        </item>
-       <item row="8" column="0">
+       <item row="10" column="0">
         <spacer name="verticalSpacer_3">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -211,6 +211,33 @@ color : white;
          </item>
         </layout>
        </item>
+       <item row="7" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QTimeEdit" name="timerMinuteur"/>
+         </item>
+         <item>
+          <widget class="QPushButton" name="buttonMinuteur">
+           <property name="text">
+            <string>Lancer</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="8" column="0">
+        <spacer name="verticalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
       </layout>
      </widget>
     </item>
@@ -261,7 +288,7 @@ color : white;
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>350</width>
+             <width>352</width>
              <height>446</height>
             </rect>
            </property>
@@ -290,8 +317,30 @@ color : white;
         <string>Recettes</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="2" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item row="0" column="0">
+         <widget class="QScrollArea" name="scrollArea_2">
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents_2">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>352</width>
+             <height>444</height>
+            </rect>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_7">
+            <item row="0" column="0">
+             <layout class="QVBoxLayout" name="verticalLayout_2"/>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
            <spacer name="horizontalSpacer_2">
             <property name="orientation">
@@ -308,30 +357,27 @@ color : white;
           <item>
            <widget class="QCheckBox" name="chb_faisable">
             <property name="text">
-             <string>Faisable</string>
+             <string>Réalisable</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QLabel" name="label_2">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="layoutDirection">
-             <enum>Qt::RightToLeft</enum>
-            </property>
             <property name="text">
-             <string>Afficher</string>
+             <string>Afficher :</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QComboBox" name="cb_type">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -372,158 +418,8 @@ color : white;
           </item>
          </layout>
         </item>
-        <item row="0" column="0">
-         <widget class="QScrollArea" name="scrollArea_2">
-          <property name="widgetResizable">
-           <bool>true</bool>
-          </property>
-          <widget class="QWidget" name="scrollAreaWidgetContents_2">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>0</y>
-             <width>350</width>
-             <height>444</height>
-            </rect>
-           </property>
-           <layout class="QGridLayout" name="gridLayout_7">
-            <item row="0" column="0">
-             <layout class="QVBoxLayout" name="verticalLayout_2"/>
-            </item>
-           </layout>
-          </widget>
-         </widget>
-        </item>
        </layout>
       </widget>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QGroupBox" name="widgets">
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_5">
-       <item row="5" column="0">
-        <spacer name="verticalSpacer_4">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="1" column="0">
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>50</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="8" column="0">
-        <spacer name="verticalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>50</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="0">
-        <widget class="QLCDNumber" name="lcdNumberHeure">
-         <property name="autoFillBackground">
-          <bool>false</bool>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLCDNumber{  
-padding: 1px;  
-background-color : black;
-border-style: solid;  
-border: 2px solid gray;  
-border-radius: 8px;  
-color : white;
-} </string>
-         </property>
-         <property name="smallDecimalPoint">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="12" column="0">
-        <widget class="QLabel" name="label_Postit">
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item row="13" column="0">
-        <widget class="QTextEdit" name="textEdit_Postit"/>
-       </item>
-       <item row="10" column="0">
-        <widget class="QCalendarWidget" name="calendarWidget"/>
-       </item>
-       <item row="2" column="0">
-        <widget class="QRadioButton" name="rb_tri_alphabet">
-         <property name="text">
-          <string>Tri alphabétique</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QRadioButton" name="rb_tri_date">
-         <property name="text">
-          <string>Tri par date de péremption</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QRadioButton" name="rb_tri_categorie">
-         <property name="text">
-          <string>Tri par catégorie d'aliment</string>
-         </property>
-        </widget>
-       </item>
-       <item row="11" column="0">
-        <spacer name="verticalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>10</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="6" column="0">
-        <widget class="QTimeEdit" name="timerMinuteur"/>
-       </item>
-       <item row="7" column="0">
-        <widget class="QPushButton" name="buttonMinuteur">
-         <property name="text">
-          <string>Lancer</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
      </widget>
     </item>
    </layout>

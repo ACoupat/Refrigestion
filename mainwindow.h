@@ -13,7 +13,7 @@
 #include <QStringListModel>
 #include <QCalendarWidget>
 #include <QTimer>
-#include <QSound>
+#include <QMediaPlayer>
 #include <ingredient.h>
 #include <recette.h>
 #include <fenetreajoutingredient.h>
@@ -84,16 +84,12 @@ public slots:
     void triDatePeremption();
     void triCategorie();
     void actualiserVignettesRecettes();
-<<<<<<< HEAD
     void actualiserAffichageTypeIngredient(int);
     void actualiserAffichageTypeRecette(QString);
     void actualiserAffichageRecette(int);
-=======
-    void actualiserAffichageType(int);
     void finMinuteur();
     void lancerMinuteur();
     void decrementMinuteur();
->>>>>>> origin/master
 };
 
 #endif // MAINWINDOW_H
