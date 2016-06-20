@@ -313,7 +313,7 @@ QList<Ingredient*> MainWindow::getIngredients()
 
 void MainWindow::creerListeIngredientDateLimite()
 {
-    ui->listViewAlimentDateLimite->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    /*ui->listViewAlimentDateLimite->setEditTriggers(QAbstractItemView::NoEditTriggers);
     QList<Ingredient*> listeIngredient = getIngredients();
     QStringListModel * model = new QStringListModel();
     QStringList listeAConsommer;
@@ -328,7 +328,7 @@ void MainWindow::creerListeIngredientDateLimite()
     }
     model->setStringList(listeAConsommer);
     ui->listViewAlimentDateLimite->setFont(fontAConsommer);
-    ui->listViewAlimentDateLimite->setModel(model);
+    ui->listViewAlimentDateLimite->setModel(model);*/
 }
 
 void MainWindow::updateHeure()
