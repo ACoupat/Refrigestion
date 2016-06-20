@@ -33,11 +33,12 @@ bool Recette::checkRealisable()
     if(fichier.open(QIODevice::ReadOnly))
     {
         QTextStream flux(&fichier);
-
+         qDebug() << "=== Recette : " << nom << "===";
         foreach(Ingredient* ing, listeIngredients)
         {
             quantitePossedee = 0;
-            //qDebug() << "=== Ingredient : " << ing->getNom() << "===";
+            qDebug() << "=== Ingredient : " << ing->getNom() << "===";
+            flux.seek(0);
             while(!flux.atEnd())
             {
                 nomTemp="";
@@ -79,16 +80,16 @@ bool Recette::checkRealisable()
                     i++;
                     c = strTemp[i];
                 }
-                //qDebug() << "Fin de l'acquisition : ";
-                //qDebug() << "nom      : " << nomTemp;
-                //qDebug() << "unite    : " << uniteTemp;
-                //qDebug() << "quantite : " << qteTemp;
+                qDebug() << "Fin de l'acquisition : ";
+                qDebug() << "nom      : " << nomTemp;
+                qDebug() << "unite    : " << uniteTemp;
+                qDebug() << "quantite : " << qteTemp;
 
                 //Vérifier si le nom est le même
                 if(QString::compare(ing->getNom(),nomTemp,Qt::CaseInsensitive)==0)
                 {
                     sommeTemp = ajouterQuantites(quantitePossedee,ing->getUnite(),qteTemp.toDouble(),uniteTemp);
-                    //qDebug() <<sommeTemp<< quantitePossedee;
+                    qDebug() <<sommeTemp<< quantitePossedee;
                     if(sommeTemp != -1)
                     {
                         quantitePossedee += sommeTemp;
@@ -96,10 +97,10 @@ bool Recette::checkRealisable()
                     }
                 }
             }
-            //qDebug() << "***********";
-            //qDebug() << "qp : " << quantitePossedee;
-            //qDebug() << "qte : " << convertirQuantite(ing->getQuantite(),ing->getUnite());
-            //qDebug() << "========================";
+            qDebug() << "***********";
+            qDebug() << "qp : " << quantitePossedee;
+            qDebug() << "qte : " << convertirQuantite(ing->getQuantite(),ing->getUnite());
+            qDebug() << "========================";
             if(convertirQuantite(ing->getQuantite(),ing->getUnite()) > quantitePossedee)
             {
                 fichier.close();
@@ -107,13 +108,13 @@ bool Recette::checkRealisable()
             }
             else
             {
-                //qDebug() << "compteur : " << compteurOk;
+                qDebug() << "compteur : " << compteurOk;
                 compteurOk++;
             }
         }
         if(compteurOk == listeIngredients.size())
         {
-            //qDebug() << "Bilboquet it's ok ! (" << nom;
+            qDebug() << "Bilboquet it's ok ! (" << nom;
             fichier.close();
             return true;
         }

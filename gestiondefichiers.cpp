@@ -82,9 +82,6 @@ QString GestionDeFichiers::creerStringRecette(Recette* recette)
     ligne += "\n"+ recette->getDureePreparation();
     ligne += "\n"+ recette->getTypeRecette()+"\n;\n";
 
-    int nbIngredients = recette->getListIngredients().size();
-    for(int i = 0; i<nbIngredients; i++)
-
     foreach(Ingredient* ing, recette->getListIngredients())
     {
         ligne += creerLigneIngredient(ing)+"\n";
@@ -293,8 +290,7 @@ int GestionDeFichiers::modifierQuantiteIngredient(Ingredient* ing)
         while(!flux.atEnd())
         {
         QString ligne = flux.readLine();
-        //mauvaise détection de la ligne
-        if(ligne.compare(ligneIng)== -1)//si c'est la même
+        if(ligne.compare(ligneIng)== -1)
         {
             contenuTemp += ligneIng +"\n";
         }

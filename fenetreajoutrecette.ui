@@ -75,7 +75,17 @@ QWidget#scrollAreaWidgetContents_2
            <item row="0" column="0">
             <layout class="QGridLayout" name="grilleIngredients">
              <item row="1" column="1">
-              <widget class="QDoubleSpinBox" name="sb_ing1"/>
+              <widget class="QDoubleSpinBox" name="sb_ing1">
+               <property name="minimum">
+                <double>0.010000000000000</double>
+               </property>
+               <property name="maximum">
+                <double>5000.000000000000000</double>
+               </property>
+               <property name="value">
+                <double>1.000000000000000</double>
+               </property>
+              </widget>
              </item>
              <item row="1" column="2">
               <widget class="QComboBox" name="cb_ing1">
@@ -175,11 +185,21 @@ QWidget#scrollAreaWidgetContents_2
                </item>
               </widget>
              </item>
-             <item row="2" column="1">
-              <widget class="QDoubleSpinBox" name="sb_ing2"/>
-             </item>
              <item row="2" column="0">
               <widget class="QLineEdit" name="le_ing2"/>
+             </item>
+             <item row="2" column="1">
+              <widget class="QDoubleSpinBox" name="sb_ing2">
+               <property name="minimum">
+                <double>0.010000000000000</double>
+               </property>
+               <property name="maximum">
+                <double>5000.000000000000000</double>
+               </property>
+               <property name="value">
+                <double>1.000000000000000</double>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>

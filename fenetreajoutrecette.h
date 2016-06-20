@@ -10,6 +10,7 @@
 #include <QComboBox>
 #include <QDoubleSpinBox>
 #include <ingredient.h>
+#include <QMessageBox>
 
 class MainWindow;
 

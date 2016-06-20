@@ -41,7 +41,29 @@ Recette* FenetreAjoutRecette::creerRecette()
 void FenetreAjoutRecette::ajoutModifRecette()
 {
     if(ui->okButton->text() == "Modifier")
-        window -> modifRecette(nomModif);
+    {
+        QMessageBox msgBox;
+        QPushButton *yesButton = msgBox.addButton(trUtf8("Oui"), QMessageBox::NoRole);
+        QPushButton *noButton = msgBox.addButton(trUtf8("Non"), QMessageBox::NoRole);
+        msgBox.setDefaultButton(noButton);
+        msgBox.setWindowFlags(Qt::Popup);
+
+        msgBox.setText("Vous êtes sur le point de modifier cette recette.\nConfirmer ?");
+        if(msgBox.exec() == 0)
+        {
+            if(pasDingredients())
+            {
+                QMessageBox msgBox;
+                msgBox.setWindowFlags(Qt::Popup);
+                msgBox.setText("Erreur. Veuillez renseigner au moins un ingrédient.");
+                msgBox.exec();
+            }
+            else
+            {
+                window -> modifRecette(nomModif);
+            }
+        }
+    }
     else
         window->ajoutRecette();
 }
@@ -93,6 +115,12 @@ void FenetreAjoutRecette::ajouterLigneTableIng()
     cb->addItem(QIcon(),"g",QVariant());
     cb->addItem(QIcon(),"kg",QVariant());
     cb->setMinimumWidth(45);
+
+    sb->setMaximum(5000);
+    sb->setMinimum(0.01);
+    sb->setSingleStep(1);
+    sb->setValue(1);
+
     ui->grilleIngredients->addWidget(le,ui->grilleIngredients->rowCount()+1,0,Qt::AlignLeft);
     ui->grilleIngredients->addWidget(sb,ui->grilleIngredients->rowCount()-1,1,Qt::AlignLeft);
     ui->grilleIngredients->addWidget(cb,ui->grilleIngredients->rowCount()-1,2,Qt::AlignCenter);
@@ -120,8 +148,6 @@ QList<Ingredient*> FenetreAjoutRecette::creerListeIngredients()
 
 bool FenetreAjoutRecette::pasDingredients()
 {
-    int nbRows = ui->grilleIngredients->rowCount()-1;
-
     foreach(QLineEdit* le, le_list)
     {
         if(le->text()!= "" && le->text() != NULL)

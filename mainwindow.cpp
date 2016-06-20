@@ -125,7 +125,6 @@ void MainWindow::modifRecette(QString nomModif)
             if(vr->getRecette()->getNom() == nomModif)
             {
                 supprimerVignetteRecette(vr,true);
-
             }
         }
         //Ajout de la recette
@@ -178,7 +177,6 @@ void MainWindow::ajoutRecette()
     }
     else
     {
-
        Recette* nouvelleRecette = fenAR->creerRecette();
        fenAR->close();
        fenAR = new FenetreAjoutRecette(this);
@@ -186,8 +184,8 @@ void MainWindow::ajoutRecette()
        grilleRecettes->addWidget(newVignetteRecette, recettes.size() / NB_COLONNE_MAX, recettes.size() % NB_COLONNE_MAX);
        vignettesRecettes << newVignetteRecette;
        recettes << nouvelleRecette;
+       actualiserVignettesRecettes();
     }
-
 }
 
 void MainWindow::creerVignettesIngredientDemarrage()
@@ -203,7 +201,6 @@ void MainWindow::creerVignettesIngredientDemarrage()
             vignettesIngredients << newVignetteIngredient;
             ingredients << ing;
         }
-
     }
     triAlphabetique();
 
@@ -252,30 +249,12 @@ bool MainWindow::supprimerVignetteIngredient(VignetteIngredient *vignette)
 
 bool MainWindow::supprimerVignetteRecette(VignetteRecette *vignette, bool modif)
 {
-    QMessageBox msgBox;
-    msgBox.setWindowFlags(Qt::Popup);
-    if(modif)
-    {
-        msgBox.setText("Vous êtes sur le point de modifier cette recette.\nConfirmer ?");
-    }
-    else
-    {
-        msgBox.setText("Vous êtes sur le point de supprimer définitivement cette recette.\nConfirmer ?");
-    }
-    QPushButton *yesButton = msgBox.addButton(trUtf8("Oui"), QMessageBox::YesRole);
-    QPushButton *noButton = msgBox.addButton(trUtf8("Non"), QMessageBox::NoRole);
-    msgBox.setDefaultButton(noButton);
-    if(msgBox.exec() == 0)
-    {
+
         GestionDeFichiers::supprimerFichierRecette(vignette->getRecette());
         recettes.removeOne(vignette->getRecette());
         updateVignettesRecettes();
-    }
-    else
-    {
-        return false;
-    }
-    return true;
+
+        return true;
 }
 
 void MainWindow::reecrireFichier()
