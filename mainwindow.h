@@ -22,6 +22,7 @@
 #include <gestiondefichiers.h>
 #include <QDir>
 #include <vignetterecette.h>
+#include <QLCDNumber>
 
 
 namespace Ui {
