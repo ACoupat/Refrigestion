@@ -124,6 +124,7 @@ bool Recette::checkRealisable()
             return false;
         }
     }
+    return false;
 }
 
 double Recette::convertirQuantite(double qte, QString unite)
@@ -136,7 +137,7 @@ double Recette::convertirQuantite(double qte, QString unite)
     else if(unite == "kg") return qte*1000;
     else if(unite == "g") return qte;
     else if(unite == "" || unite == " ") return qte;
-
+    return qte;
 }
 
 /*

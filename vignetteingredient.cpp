@@ -75,7 +75,7 @@ void VignetteIngredient::initLabels()
 }
 
 //Utile pour que l'affichage se fasse correctement
-void VignetteIngredient::paintEvent(QPaintEvent *pe)
+void VignetteIngredient::paintEvent(QPaintEvent*)
 {
     QStyleOption o;
     o.initFrom(this);

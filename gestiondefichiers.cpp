@@ -66,6 +66,7 @@ int GestionDeFichiers::ajoutFichier(Recette* recette, Ingredient* ing)
     {
         return 1;
     }
+    return 0;
 }
 
 QString GestionDeFichiers::creerLigneIngredient(Ingredient *ing)
@@ -262,7 +263,7 @@ QList<Ingredient*> GestionDeFichiers::listeIngredientsFichier()
      return listIng;
 }
 
-int GestionDeFichiers::reecrireFichier(QList<Ingredient*> listIng)
+void GestionDeFichiers::reecrireFichier(QList<Ingredient*> listIng)
 {
     QFile fichier("listeIngredients.rfg");
     if(fichier.open(QIODevice::WriteOnly | QIODevice::Truncate))
@@ -289,26 +290,27 @@ int GestionDeFichiers::modifierQuantiteIngredient(Ingredient* ing)
     {
         while(!flux.atEnd())
         {
-        QString ligne = flux.readLine();
-        if(ligne.compare(ligneIng)== -1)
-        {
-            contenuTemp += ligneIng +"\n";
+            QString ligne = flux.readLine();
+            if(ligne.compare(ligneIng)== -1)
+            {
+                contenuTemp += ligneIng +"\n";
+            }
+            else
+            {
+                contenuTemp += ligne +"\n";
+            }
         }
-        else
+        fichier.close();
+        if(fichier.open(QIODevice::WriteOnly | QIODevice::Truncate))
         {
-            contenuTemp += ligne +"\n";
+           flux << contenuTemp;
+           fichier.close();
+           return 0;
         }
-    }
-    fichier.close();
-    if(fichier.open(QIODevice::WriteOnly | QIODevice::Truncate))
-    {
-       flux << contenuTemp;
-       fichier.close();
-       return 0;
-    }
 
-    return 1;
+        return 1;
     }
+    return 0;
 }
 bool GestionDeFichiers::supprimerFichierRecette(Recette* recette)
 {

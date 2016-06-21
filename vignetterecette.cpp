@@ -48,14 +48,14 @@ void VignetteRecette::initLabels()
 }
 
 //Utile pour que l'affichage se fasse correctement
-void VignetteRecette::paintEvent(QPaintEvent *pe) {
+void VignetteRecette::paintEvent(QPaintEvent *) {
     QStyleOption o;
     o.initFrom(this);
     QPainter p(this);
     style()->drawPrimitive(QStyle::PE_Widget, &o, &p, this);
 }
 
-void VignetteRecette::mousePressEvent ( QMouseEvent * event )
+void VignetteRecette::mousePressEvent ( QMouseEvent *)
 {
     fenetreDetailRecette* fenDR = new fenetreDetailRecette(recette);
     fenDR->show();

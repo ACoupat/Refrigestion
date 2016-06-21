@@ -18,7 +18,7 @@ public:
     static QList<Ingredient*> listeIngredientsFichier();
     static int supprimerIngredient(Ingredient* ing);
     static int modifierQuantiteIngredient(Ingredient* ing);
-    static int reecrireFichier(QList<Ingredient*> listIng);
+    static void reecrireFichier(QList<Ingredient*> listIng);
     static bool etudeFaisabilite(Recette* );
     static bool supprimerFichierRecette(Recette*);
     static bool recetteExisteDeja(QString nomFichier);
