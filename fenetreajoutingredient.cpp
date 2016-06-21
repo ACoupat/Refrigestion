@@ -22,11 +22,21 @@ FenetreAjoutIngredient::FenetreAjoutIngredient(QWidget *parent) :
     ui->label4->setStyleSheet("color:"+QString(color)+";font : bold;");
     ui->label5->setStyleSheet("color:"+QString(color)+";font : bold;");
     QFileInfoList list = image->entryInfoList();
-    for(int i=0; i< list.size(); ++i){
-        QFileInfo fileInfo = list.at(i);
-        ui->cb_image->addItem(fileInfo.fileName().split(".").at(0),fileInfo.filePath());
+    int i=0;
+    QFileInfo fileInfo;
+    do
+    {
+        fileInfo = list.at(i);
+        i++;
+    } while(fileInfo.fileName().split(".").at(0)!="Autre");
+    ui->cb_image->addItem(fileInfo.fileName().split(".").at(0),fileInfo.filePath());
+    for(i=0; i< list.size(); ++i){
+        fileInfo = list.at(i);
+        if(fileInfo.fileName().split(".").at(0)!="Autre")
+        {
+            ui->cb_image->addItem(fileInfo.fileName().split(".").at(0),fileInfo.filePath());
+        }
     }
-
     connect(ui->okButton,SIGNAL(clicked()),parent,SLOT(ajoutIngredient()));
     connect(ui->cancelButton,SIGNAL(clicked()),this,SLOT(close()));
 }

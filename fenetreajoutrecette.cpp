@@ -30,9 +30,20 @@ FenetreAjoutRecette::FenetreAjoutRecette(MainWindow *parent):
     image->setSorting(QDir::Name);
 
     QFileInfoList list = image->entryInfoList();
-    for(int i=0; i< list.size(); ++i){
-        QFileInfo fileInfo = list.at(i);
-        ui->cb_image->addItem(fileInfo.fileName().split(".").at(0),fileInfo.filePath());
+    QFileInfo fileInfo;
+    int i=0;
+    do
+    {
+        fileInfo = list.at(i);
+        i++;
+    } while(fileInfo.fileName().split(".").at(0)!="Autre");
+    ui->cb_image->addItem(fileInfo.fileName().split(".").at(0),fileInfo.filePath());
+    for(i=0; i< list.size(); ++i){
+        fileInfo = list.at(i);
+        if(fileInfo.fileName().split(".").at(0)!="Autre")
+        {
+            ui->cb_image->addItem(fileInfo.fileName().split(".").at(0),fileInfo.filePath());
+        }
     }
 
     connect(ui->okButton,SIGNAL(clicked()),this,SLOT(ajoutModifRecette()));
