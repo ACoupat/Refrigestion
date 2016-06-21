@@ -62,7 +62,7 @@ void VignetteRecette::mousePressEvent ( QMouseEvent * event )
 
 void VignetteRecette::supprimerVignette()
 {
-    window->supprimerVignetteRecette(this,false);
+    window->supprimerVignetteRecette(this);
 }
 
 Recette *VignetteRecette::getRecette()

@@ -40,11 +40,9 @@ public:
     ~MainWindow();
     QList<Ingredient*> getIngredients();
     bool supprimerVignetteIngredient(VignetteIngredient* vi);
-    bool supprimerVignetteRecette(VignetteRecette * vr, bool modif);
+    void supprimerVignetteRecette(VignetteRecette * vr);
     void reecrireFichier();
-    static bool nameLessThan(Ingredient *ing1, Ingredient *ing2);
-    static bool categoryLessThan(Ingredient *ing1, Ingredient *ing2);
-    static bool dateLessThan(Ingredient *ing1, Ingredient *ing2);
+
 
 private:
     Ui::MainWindow *ui;
@@ -69,13 +67,19 @@ private:
     void creerPostit();
     void creerListeIngredientDateLimite();
     void updateMinuteur();
+    void triAlphabetiqueRecettes();
+    static bool nameLessThan(Ingredient *ing1, Ingredient *ing2);
+    static bool categoryLessThan(Ingredient *ing1, Ingredient *ing2);
+    static bool dateLessThan(Ingredient *ing1, Ingredient *ing2);
+    static bool nameRecetteLessThan(Recette *rec1, Recette *rec2);
+
 
 public slots:
     void ouvrirFenetreAjoutIngredient();
     void ajoutIngredient();
     void ouvrirFenetreAjoutRecette();
     void ajoutRecette();
-    void modifRecette(QString nomModif);
+    void modifRecette(Recette *recette);
     void ouvrirFenArModif(Recette* recette);
     void modifierContenuPostit();
     void updateHeure();
@@ -85,8 +89,7 @@ public slots:
     void triCategorie();
     void actualiserVignettesRecettes();
     void actualiserAffichageTypeIngredient(int);
-    void actualiserAffichageTypeRecette(QString);
-    void actualiserAffichageRecette(int);
+    void actualiserAffichageRecette();
     void finMinuteur();
     void lancerMinuteur();
     void decrementMinuteur();

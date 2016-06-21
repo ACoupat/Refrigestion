@@ -28,8 +28,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->boutonAjoutRecette, SIGNAL(clicked(bool)), this, SLOT(ouvrirFenetreAjoutRecette()));
     connect(ui->trieBox, SIGNAL(currentIndexChanged(int)),this,SLOT(triage(int)));
     connect(ui->cb_afficher_type, SIGNAL(currentIndexChanged(int)), this, SLOT(actualiserAffichageTypeIngredient(int)));
-    connect(ui->chb_faisable, SIGNAL(stateChanged(int)), this, SLOT(actualiserAffichageRecette(int)));
-    connect(ui->cb_type, SIGNAL(currentTextChanged(QString)), this, SLOT(actualiserAffichageTypeRecette(QString)));
+    connect(ui->chb_faisable, SIGNAL(stateChanged(int)), this, SLOT(actualiserAffichageRecette()));
+    connect(ui->cb_type, SIGNAL(currentTextChanged(QString)), this, SLOT(actualiserAffichageRecette()));
     fenAR = new FenetreAjoutRecette(this);
     fenAI = new FenetreAjoutIngredient(this);
     grilleIngredients = new QGridLayout();
@@ -118,15 +118,9 @@ void MainWindow::ajoutIngredient()
         }
     }
 }
-void MainWindow::modifRecette(QString nomModif)
+void MainWindow::modifRecette(Recette *recette)
 {
-        foreach(VignetteRecette* vr, vignettesRecettes)
-        {
-            if(vr->getRecette()->getNom() == nomModif)
-            {
-                supprimerVignetteRecette(vr,true);
-            }
-        }
+        recettes.removeOne(recette);
         //Ajout de la recette
         QString nomEntre =  fenAR->getNomEntre();
 
@@ -149,10 +143,12 @@ void MainWindow::modifRecette(QString nomModif)
         {
            Recette* nouvelleRecette = fenAR->creerRecette();
            fenAR->close();
-           VignetteRecette *newVignetteRecette = new VignetteRecette(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX,nouvelleRecette,this);
+           /*VignetteRecette *newVignetteRecette = new VignetteRecette(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX,nouvelleRecette,this);
            grilleRecettes->addWidget(newVignetteRecette, recettes.size() / NB_COLONNE_MAX, recettes.size() % NB_COLONNE_MAX);
-           vignettesRecettes << newVignetteRecette;
+           vignettesRecettes << newVignetteRecette;*/
            recettes << nouvelleRecette;
+           actualiserAffichageRecette();
+           updateVignettesRecettes();
         }
 }
 
@@ -180,11 +176,9 @@ void MainWindow::ajoutRecette()
        Recette* nouvelleRecette = fenAR->creerRecette();
        fenAR->close();
        fenAR = new FenetreAjoutRecette(this);
-       VignetteRecette *newVignetteRecette = new VignetteRecette(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX,nouvelleRecette,this);
-       grilleRecettes->addWidget(newVignetteRecette, recettes.size() / NB_COLONNE_MAX, recettes.size() % NB_COLONNE_MAX);
-       vignettesRecettes << newVignetteRecette;
        recettes << nouvelleRecette;
-       actualiserVignettesRecettes();
+       actualiserAffichageRecette();
+       updateVignettesRecettes();
     }
 }
 
@@ -217,11 +211,9 @@ void MainWindow::creerVignettesRecettesDemarrage()
         foreach(QString chemin, listeRep)
         {
             Recette* nouvelleRecette = GestionDeFichiers::creerRecette(chemin);
-            VignetteRecette *newVignetteRecette = new VignetteRecette(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX,nouvelleRecette,this);
-            grilleRecettes->addWidget(newVignetteRecette, recettes.size() / NB_COLONNE_MAX, recettes.size() % NB_COLONNE_MAX);
-            vignettesRecettes << newVignetteRecette;
             recettes << nouvelleRecette;
         }
+        updateVignettesRecettes();
     }
 }
 
@@ -230,7 +222,7 @@ bool MainWindow::supprimerVignetteIngredient(VignetteIngredient *vignette)
     QMessageBox msgBox;
     msgBox.setWindowFlags(Qt::Popup);
     msgBox.setText("Vous êtes sur le point de supprimer définitivement cet ingrédient.\nConfirmer ?");
-    QPushButton *yesButton = msgBox.addButton(trUtf8("Oui"), QMessageBox::YesRole);
+    msgBox.addButton(trUtf8("Oui"), QMessageBox::YesRole);
     QPushButton *noButton = msgBox.addButton(trUtf8("Non"), QMessageBox::NoRole);
     msgBox.setDefaultButton(noButton);
     if(msgBox.exec() == 0)
@@ -247,14 +239,20 @@ bool MainWindow::supprimerVignetteIngredient(VignetteIngredient *vignette)
     return true;
 }
 
-bool MainWindow::supprimerVignetteRecette(VignetteRecette *vignette, bool modif)
+void MainWindow::supprimerVignetteRecette(VignetteRecette *vignette)
 {
-
+    QMessageBox msgBox;
+    msgBox.setWindowFlags(Qt::Popup);
+    msgBox.setText("Vous êtes sur le point de supprimer définitivement cette recette.\nConfirmer ?");
+    msgBox.addButton(trUtf8("Oui"), QMessageBox::YesRole);
+    QPushButton *noButton = msgBox.addButton(trUtf8("Non"), QMessageBox::NoRole);
+    msgBox.setDefaultButton(noButton);
+    if(msgBox.exec() == 0)
+    {
         GestionDeFichiers::supprimerFichierRecette(vignette->getRecette());
         recettes.removeOne(vignette->getRecette());
         updateVignettesRecettes();
-
-        return true;
+    }
 }
 
 void MainWindow::reecrireFichier()
@@ -335,6 +333,11 @@ bool MainWindow::categoryLessThan(Ingredient *ing1,Ingredient *ing2)
     return ing1->getType() < ing2->getType();
 }
 
+bool MainWindow::nameRecetteLessThan(Recette *rec1, Recette *rec2)
+{
+    return rec1->getNom() < rec2->getNom();
+}
+
 void MainWindow::triAlphabetique()
 {
     tri = 1;
@@ -354,6 +357,11 @@ void MainWindow::triCategorie()
     tri = 3;
     qSort(ingredients.begin(), ingredients.end(), categoryLessThan);
     updateVignettesIngredients();
+}
+
+void MainWindow::triAlphabetiqueRecettes()
+{
+    qSort(recettes.begin(), recettes.end(), nameRecetteLessThan);
 }
 
 void MainWindow::triage(int i){
@@ -387,35 +395,24 @@ void MainWindow::actualiserAffichageTypeIngredient(int type)
     updateVignettesIngredients();
 }
 
-void MainWindow::actualiserAffichageTypeRecette(QString type)
+void MainWindow::actualiserAffichageRecette()
 {
     foreach(Recette *recette, recettes)
     {
-        if(type == "Tout" || recette->getTypeRecette() == type)
+        if((ui->cb_type->currentText() == "Tout" || recette->getTypeRecette() == ui->cb_type->currentText()))
         {
-            recette->setAffichee(true);
+            if(ui->chb_faisable->isChecked() && !recette->isRealisable()) {
+                recette->setAffichee(false);
+            }
+            else
+            {
+                recette->setAffichee(true);
+            }
         }
         else
         {
             recette->setAffichee(false);
         }
-    }
-    updateVignettesRecettes();
-}
-
-void MainWindow::actualiserAffichageRecette(int faisable)
-{
-    foreach(Recette *recette, recettes)
-    {
-        if(!faisable || recette->isRealisable())
-        {
-            recette->setAffichee(true);
-        }
-        else
-        {
-            recette->setAffichee(false);
-        }
-
     }
     updateVignettesRecettes();
 }
@@ -441,6 +438,7 @@ void MainWindow::updateVignettesIngredients()
 
 void MainWindow::updateVignettesRecettes()
 {
+    triAlphabetiqueRecettes();
     foreach(VignetteRecette *vignette, vignettesRecettes) vignette->deleteLater();
     vignettesRecettes.clear();
     delete grilleRecettes;

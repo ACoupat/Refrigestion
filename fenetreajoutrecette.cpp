@@ -52,7 +52,7 @@ void FenetreAjoutRecette::ajoutModifRecette()
     if(ui->okButton->text() == "Modifier")
     {
         QMessageBox msgBox;
-        QPushButton *yesButton = msgBox.addButton(trUtf8("Oui"), QMessageBox::NoRole);
+        msgBox.addButton(trUtf8("Oui"), QMessageBox::NoRole);
         QPushButton *noButton = msgBox.addButton(trUtf8("Non"), QMessageBox::NoRole);
         msgBox.setDefaultButton(noButton);
         msgBox.setWindowFlags(Qt::Popup);
@@ -69,12 +69,14 @@ void FenetreAjoutRecette::ajoutModifRecette()
             }
             else
             {
-                window -> modifRecette(nomModif);
+                window -> modifRecette(recette);
             }
         }
     }
     else
+    {
         window->ajoutRecette();
+    }
 }
 
 QString FenetreAjoutRecette::getFenAREtat()
@@ -85,7 +87,7 @@ QString FenetreAjoutRecette::getFenAREtat()
 void FenetreAjoutRecette::setContenu(Recette * recette)
 {
     ui->le_nom->setText(recette->getNom());
-    nomModif = recette->getNom();
+    this->recette = recette;
     ui->cb_type->setCurrentText(recette->getTypeRecette());
     ui->te_etapes->setText(recette->getEtapesPreparation());
     //ui->te_duree->setText(recette->getDureePreparation());

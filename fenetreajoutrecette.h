@@ -37,7 +37,7 @@ private:
     QList<QLineEdit*> le_list;
     QList<QComboBox*> cb_list;
     QList<QDoubleSpinBox*> sb_list;
-    QString nomModif;
+    Recette *recette;
     MainWindow* window;
 
 private slots:
