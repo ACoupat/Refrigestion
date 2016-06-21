@@ -178,11 +178,7 @@ void MainWindow::ajoutRecette()
        fenAR->close();
        fenAR = new FenetreAjoutRecette(this);
        recettes << nouvelleRecette;
-<<<<<<< HEAD
        actualiserAffichageRecette();
-=======
-       //actualiserVignettesRecettes();
->>>>>>> 4b8163682b0ba09034de5b95eb08cad01d711023
        updateVignettesRecettes();
     }
 }
