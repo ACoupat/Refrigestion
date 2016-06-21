@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <QDebug>
 #include <iostream>
 #include <QFile>
 #include <recette.h>

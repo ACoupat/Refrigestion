@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include <ingredient.h>
-#include <QDebug>
 #include <QPainter>
 #include <gestiondefichiers.h>
 #include <QGraphicsDropShadowEffect>

@@ -5,7 +5,6 @@
 #include <recette.h>
 #include <gestiondefichiers.h>
 #include <QAbstractItemModel>
-#include <QDebug>
 #include <QLineEdit>
 #include <QComboBox>
 #include <QDoubleSpinBox>

@@ -1,6 +1,5 @@
 #include "fenetreajoutingredient.h"
 #include "ui_fenetreajoutingredient.h"
-#include <QDebug>
 #include <gestiondefichiers.h>
 
 static const char color[] = "#FF4500";

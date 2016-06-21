@@ -31,7 +31,6 @@
     </qresource>
     <qresource prefix="/Images/Contenu">
         <file>Images/Contenu/Aile de poulet.png</file>
-        <file>Images/Contenu/Aspic.jpg</file>
         <file>Images/Contenu/Baguette.png</file>
         <file>Images/Contenu/Banane.png</file>
         <file>Images/Contenu/Beurre.png</file>

@@ -8,7 +8,6 @@
 #include <QList>
 #include <QDialog>
 #include <QPushButton>
-#include <QDebug>
 #include <QFontDatabase>
 #include <QStringListModel>
 #include <QCalendarWidget>

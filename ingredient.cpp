@@ -1,5 +1,4 @@
 #include "ingredient.h"
-#include <QDebug>
 Ingredient::Ingredient(QString nom, int type, double quantite, QString unite, QDate datePeremption, QString cheminImage)
 {
     this->nom = nom;

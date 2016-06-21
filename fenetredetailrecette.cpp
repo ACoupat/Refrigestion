@@ -1,6 +1,5 @@
 #include "fenetredetailrecette.h"
 #include "ui_fenetredetailrecette.h"
-#include <QDebug>
 
 static const char color[] = "#FF4500";
 

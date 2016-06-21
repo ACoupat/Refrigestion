@@ -1,6 +1,5 @@
 #include "vignetterecette.h"
 #include "ui_vignetterecette.h"
-#include <QDebug>
 #include <mainwindow.h>
 VignetteRecette::VignetteRecette(int width, Recette* recette, MainWindow *parent) :
     QWidget(parent),
