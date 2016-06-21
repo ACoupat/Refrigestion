@@ -116,6 +116,7 @@ void MainWindow::ajoutIngredient()
             case 3:
                 triCategorie();
         }
+        updateVignettesRecettes();
     }
 }
 void MainWindow::modifRecette(QString nomModif)
@@ -184,7 +185,8 @@ void MainWindow::ajoutRecette()
        grilleRecettes->addWidget(newVignetteRecette, recettes.size() / NB_COLONNE_MAX, recettes.size() % NB_COLONNE_MAX);
        vignettesRecettes << newVignetteRecette;
        recettes << nouvelleRecette;
-       actualiserVignettesRecettes();
+       //actualiserVignettesRecettes();
+       updateVignettesRecettes();
     }
 }
 
@@ -237,6 +239,7 @@ bool MainWindow::supprimerVignetteIngredient(VignetteIngredient *vignette)
     {
         ingredients.removeOne(vignette->getIngredient());
         updateVignettesIngredients();
+        updateVignettesRecettes();
 
     }
     else
