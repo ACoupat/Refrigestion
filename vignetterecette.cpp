@@ -38,6 +38,7 @@ void VignetteRecette::initLabels()
 {
     ui->labelNom->setText(recette->getNom());
     ui->labelDureePrep->setText((recette->getDureePreparation()));
+    recette->actualiserRealisable();
     if(recette->isRealisable())
         ui->labelNom->setStyleSheet("QLabel#labelNom{font-weight: bold;color:green;}");
     else
