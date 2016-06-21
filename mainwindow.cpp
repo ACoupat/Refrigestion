@@ -121,36 +121,10 @@ void MainWindow::ajoutIngredient()
 }
 void MainWindow::modifRecette(Recette *recette)
 {
-        recettes.removeOne(recette);
-        //Ajout de la recette
-        QString nomEntre =  fenAR->getNomEntre();
-
-        if(!GestionDeFichiers::nomEstConforme(nomEntre))
-        {
-            QMessageBox msgBox;
-            msgBox.setWindowFlags(Qt::Popup);
-            msgBox.setText("Erreur. Le nom de la recette est non conforme ou la recette existe déjà.");
-            fenAR->show();
-            msgBox.exec();
-        }
-        else if(fenAR->pasDingredients())
-        {
-            QMessageBox msgBox;
-            msgBox.setWindowFlags(Qt::Popup);
-            msgBox.setText("Erreur. Veuillez renseigner au moins un ingrédient.");
-            msgBox.exec();
-        }
-        else
-        {
-           Recette* nouvelleRecette = fenAR->creerRecette();
-           fenAR->close();
-           /*VignetteRecette *newVignetteRecette = new VignetteRecette(screenWidth * TAILLE_GRILLE / NB_COLONNE_MAX,nouvelleRecette,this);
-           grilleRecettes->addWidget(newVignetteRecette, recettes.size() / NB_COLONNE_MAX, recettes.size() % NB_COLONNE_MAX);
-           vignettesRecettes << newVignetteRecette;*/
-           recettes << nouvelleRecette;
-           actualiserAffichageRecette();
-           updateVignettesRecettes();
-        }
+    GestionDeFichiers::supprimerFichierRecette(recette);
+    recettes.removeOne(recette);
+    //Ajout de la recette
+    ajoutRecette();
 }
 
 void MainWindow::ajoutRecette()
@@ -176,7 +150,6 @@ void MainWindow::ajoutRecette()
     {
        Recette* nouvelleRecette = fenAR->creerRecette();
        fenAR->close();
-       fenAR = new FenetreAjoutRecette(this);
        recettes << nouvelleRecette;
        actualiserAffichageRecette();
        updateVignettesRecettes();
