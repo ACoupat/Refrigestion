@@ -270,11 +270,11 @@ void MainWindow::creerPostit()
     QFile fichierPostit("postit.rfg");
     fichierPostit.open(QIODevice::ReadOnly);
     QString contenuPostit = fichierPostit.readAll();
-    ui->label_Postit->setFixedSize(screenWidth * TAILLE_GROUPE_WIDGETS-10,screenWidth * TAILLE_GROUPE_WIDGETS-10);
+    ui->label_Postit->setFixedSize(screenWidth * TAILLE_GROUPE_WIDGETS*0.97,screenWidth * TAILLE_GROUPE_WIDGETS*0.97);
     ui->label_Postit->setStyleSheet("QLabel#label_Postit{ border-image: url(Images/ZcPostIt.png) 0 0 0 0 stretch stretch; }");
     ui->label_Postit->setLayout(grillePostit);
 
-    ui->textEdit_Postit->setFixedSize(screenWidth * TAILLE_GROUPE_WIDGETS -45,screenWidth * TAILLE_GROUPE_WIDGETS -150);
+    ui->textEdit_Postit->setFixedSize(screenWidth * TAILLE_GROUPE_WIDGETS *0.86,screenWidth * TAILLE_GROUPE_WIDGETS *0.53);
     ui->textEdit_Postit->setStyleSheet("background-color: transparent;");
     ui->textEdit_Postit->setFrameShape(QFrame::NoFrame);
     ui->textEdit_Postit->setFont(fontPostit);
