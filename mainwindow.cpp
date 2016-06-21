@@ -393,7 +393,15 @@ void MainWindow::actualiserAffichageTypeIngredient(int type)
             ingredient->setAffiche(false);
         }
     }
-    ui->trieBox->setCurrentIndex(0);
+    if(type == 0 && ui->trieBox->itemText(2) == "") {
+        ui->trieBox->addItem("Catégorie d'aliment");
+    }
+    else
+    {
+        ui->trieBox->setCurrentIndex(0);
+        ui->trieBox->removeItem(2);
+    }
+
     updateVignettesIngredients();
 }
 
